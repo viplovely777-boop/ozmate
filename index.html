@@ -1,0 +1,2332 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OzMate — 브리즈번 한인 No.1 커뮤니티</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ═══ VARIABLES ═══ */
+:root{
+  --gold:#FFB800;--sky:#009DC4;--red:#E8392A;--green:#00843D;
+  --dark:#1A1A2E;--sand:#F5E6C8;
+  --bg:#F2F0EB;--card:#fff;--text:#1A1A2E;--muted:#6B7280;
+  --border:#E5E7EB;--inp:#fff;
+  /* AD COLORS */
+  --ad-top:#FFF8E1;--ad-side:#EFF6FF;--ad-native:#F0FDF4;
+}
+[data-theme="dark"]{
+  --bg:#0d0f1a;--card:#161928;--text:#e8eaf0;--muted:#8892a4;
+  --border:#252840;--inp:#1e2135;--sand:#2a2010;
+  --ad-top:#1e1a00;--ad-side:#0a1428;--ad-native:#001a0a;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans KR','Nunito',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;transition:background .2s,color .2s;}
+
+/* ═══ AD COMPONENTS ═══ */
+/* 1. TOP BANNER — 헤더 바로 아래 풀 배너 */
+.ad-top-banner{background:var(--ad-top);border-bottom:2px solid var(--gold);padding:0;overflow:hidden;position:relative;}
+.ad-top-inner{max-width:1260px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:8px 20px;gap:12px;}
+.ad-top-slot{flex:1;height:72px;background:linear-gradient(135deg,#FFB800,#FF8C00);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s;overflow:hidden;position:relative;}
+.ad-top-slot:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(255,184,0,.35);}
+.ad-top-slot .ad-label{position:absolute;top:4px;left:6px;font-size:9px;font-weight:800;background:rgba(0,0,0,.25);color:#fff;padding:1px 5px;border-radius:4px;letter-spacing:.5px;}
+.ad-top-content{display:flex;align-items:center;gap:10px;padding:0 16px;}
+.ad-top-content .ad-ic{font-size:28px;}
+.ad-top-content .ad-txt{color:#fff;}
+.ad-top-content .ad-txt strong{display:block;font-size:14px;font-weight:900;}
+.ad-top-content .ad-txt span{font-size:11px;opacity:.85;}
+.ad-top-tag{background:rgba(255,255,255,.25);color:#fff;font-size:10px;font-weight:800;padding:3px 9px;border-radius:100px;white-space:nowrap;}
+
+/* 2. SPONSOR LINKS — 게시판 상단 12개 업체 */
+.sponsor-bar{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:14px;}
+.sponsor-bar-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.sponsor-bar-title{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.5px;}
+.sponsor-links{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;}
+.sponsor-link{background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:7px 6px;text-align:center;cursor:pointer;transition:.2s;position:relative;}
+.sponsor-link:hover{border-color:var(--gold);background:var(--sand);}
+.sponsor-link .sl-ic{font-size:18px;margin-bottom:3px;}
+.sponsor-link .sl-nm{font-size:10px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sponsor-link .sl-cat{font-size:9px;color:var(--muted);}
+
+/* 3. SIDEBAR AD SLOTS */
+.ad-sidebar-banner{background:var(--ad-side);border:1.5px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:14px;cursor:pointer;transition:.2s;position:relative;}
+.ad-sidebar-banner:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.1);}
+.ad-sidebar-banner .ad-label{position:absolute;top:6px;left:8px;font-size:9px;font-weight:800;background:rgba(0,0,0,.18);color:#fff;padding:1px 6px;border-radius:4px;}
+.asb-img{width:100%;height:110px;display:flex;align-items:center;justify-content:center;font-size:36px;}
+.asb-body{padding:10px 12px;}
+.asb-title{font-size:13px;font-weight:800;color:var(--text);margin-bottom:3px;}
+.asb-sub{font-size:11px;color:var(--muted);}
+
+/* 4. NATIVE ADS in feed */
+.ad-native{background:var(--ad-native);border:1.5px solid #bbf7d0;border-radius:12px;padding:14px;margin-bottom:10px;cursor:pointer;transition:.2s;position:relative;}
+[data-theme="dark"] .ad-native{border-color:#1a3a28;}
+.ad-native:hover{border-color:var(--green);box-shadow:0 4px 14px rgba(0,132,61,.12);}
+.ad-native .ad-label{position:absolute;top:8px;right:10px;font-size:9px;font-weight:800;background:rgba(0,132,61,.15);color:var(--green);padding:2px 7px;border-radius:100px;}
+.adn-inner{display:flex;gap:12px;align-items:center;}
+.adn-ic{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.adn-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:3px;}
+.adn-sub{font-size:12px;color:var(--muted);line-height:1.5;}
+.adn-cta{display:inline-block;margin-top:7px;background:var(--green);color:#fff;font-size:11px;font-weight:800;padding:4px 12px;border-radius:100px;}
+
+/* 5. YELLOW PAGES (업소록) */
+.yp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}
+.yp-card{background:var(--card);border-radius:13px;padding:18px;border:1.5px solid var(--border);cursor:pointer;transition:.2s;position:relative;overflow:hidden;}
+.yp-card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 8px 24px rgba(255,184,0,.15);}
+.yp-card.featured{border-color:var(--gold);background:linear-gradient(135deg,#fffef0,#fff);}
+[data-theme="dark"] .yp-card.featured{background:linear-gradient(135deg,#1e1a00,#161928);}
+.yp-card.featured::before{content:'⭐ 추천';position:absolute;top:10px;right:10px;background:var(--gold);color:var(--dark);font-size:9px;font-weight:900;padding:2px 8px;border-radius:100px;}
+.yp-logo{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:12px;border:1.5px solid var(--border);}
+.yp-name{font-size:15px;font-weight:800;margin-bottom:4px;color:var(--text);}
+.yp-cat{font-size:11px;font-weight:700;color:var(--gold);margin-bottom:6px;}
+.yp-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:10px;}
+.yp-meta{display:flex;gap:8px;flex-wrap:wrap;}
+.yp-tag{font-size:10px;padding:2px 8px;background:var(--sand);border-radius:100px;color:#8B6914;font-weight:600;}
+.yp-foot{display:flex;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid var(--border);}
+.yp-btn{flex:1;padding:7px;background:var(--gold);color:var(--dark);font-weight:800;font-size:11px;border:none;border-radius:7px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:.2s;text-align:center;}
+.yp-btn:hover{background:#ffc933;}
+.yp-btn.outline{background:transparent;border:1.5px solid var(--border);color:var(--text);}
+.yp-btn.outline:hover{border-color:var(--gold);color:var(--gold);}
+
+/* 6. YP CATEGORY FILTERS */
+.yp-cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;}
+.yp-cat-btn{padding:7px 14px;border-radius:100px;font-size:12px;font-weight:700;border:1.5px solid var(--border);background:var(--card);cursor:pointer;color:var(--text);font-family:'Noto Sans KR',sans-serif;transition:.2s;}
+.yp-cat-btn:hover,.yp-cat-btn.active{background:var(--gold);border-color:var(--gold);color:var(--dark);}
+
+/* ═══ HEADER ═══ */
+header{background:var(--dark);position:sticky;top:0;z-index:300;border-bottom:3px solid var(--gold);}
+.hdr{max-width:1260px;margin:0 auto;padding:0 20px;display:flex;align-items:center;height:60px;gap:12px;}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;cursor:pointer;flex-shrink:0;}
+.logo-ic{width:34px;height:34px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.logo-tx{font-family:'Nunito',sans-serif;font-weight:900;font-size:18px;color:#fff;}
+.logo-tx span{color:var(--gold);}
+.logo-sub{font-size:9px;color:rgba(255,255,255,.4);font-weight:700;letter-spacing:.5px;margin-top:-2px;}
+nav{display:flex;gap:1px;flex:1;}
+nav button{background:none;border:none;color:rgba(255,255,255,.6);font-size:12px;font-weight:700;padding:6px 10px;border-radius:6px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:.2s;white-space:nowrap;}
+nav button:hover,nav button.active{color:#fff;background:rgba(255,255,255,.12);}
+.hdr-r{display:flex;gap:7px;align-items:center;flex-shrink:0;}
+.hdr-search{position:relative;}
+.hdr-search input{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.12);border-radius:7px;padding:6px 10px 6px 30px;font-size:12px;color:#fff;font-family:'Noto Sans KR',sans-serif;outline:none;width:180px;transition:.3s;}
+.hdr-search input::placeholder{color:rgba(255,255,255,.35);}
+.hdr-search input:focus{border-color:var(--gold);width:230px;background:rgba(255,255,255,.14);}
+.hdr-search .si{position:absolute;left:9px;top:50%;transform:translateY(-50%);font-size:13px;pointer-events:none;}
+.sdrop{position:absolute;top:calc(100% + 7px);left:0;right:0;background:var(--card);border:1.5px solid var(--border);border-radius:9px;box-shadow:0 8px 24px rgba(0,0,0,.14);z-index:200;display:none;max-height:260px;overflow-y:auto;}
+.sdrop.show{display:block;}
+.sd-item{padding:9px 13px;cursor:pointer;border-bottom:1px solid var(--border);transition:.15s;}
+.sd-item:last-child{border-bottom:none;}
+.sd-item:hover{background:var(--sand);}
+.sd-t{font-size:12px;font-weight:700;color:var(--text);}
+.sd-s{font-size:10px;color:var(--muted);margin-top:1px;}
+.btn{padding:6px 13px;border-radius:7px;font-weight:700;font-size:12px;cursor:pointer;border:none;transition:.2s;font-family:'Noto Sans KR',sans-serif;}
+.btn-ghost{background:transparent;color:rgba(255,255,255,.75);border:1.5px solid rgba(255,255,255,.25);}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);}
+.btn-gold{background:var(--gold);color:var(--dark);}
+.btn-gold:hover{background:#ffc933;transform:translateY(-1px);}
+.dm-btn,.notif-btn{background:rgba(255,255,255,.08);border:none;border-radius:7px;width:34px;height:34px;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:.2s;}
+.dm-btn:hover,.notif-btn:hover{background:rgba(255,255,255,.18);}
+.notif-btn{position:relative;}
+.nbadge{position:absolute;top:-2px;right:-2px;background:var(--red);color:#fff;font-size:8px;font-weight:900;width:15px;height:15px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.user-chip{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border-radius:100px;padding:4px 11px 4px 4px;cursor:pointer;transition:.2s;}
+.user-chip:hover{background:rgba(255,255,255,.18);}
+.user-chip .av{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:10px;color:#fff;}
+.user-chip span{font-size:12px;font-weight:700;color:#fff;}
+.np{position:absolute;top:calc(100% + 8px);right:0;width:280px;background:var(--card);border:1.5px solid var(--border);border-radius:11px;box-shadow:0 8px 28px rgba(0,0,0,.18);z-index:400;display:none;}
+.np.show{display:block;}
+.np-hd{padding:12px 14px;border-bottom:1px solid var(--border);font-weight:800;font-size:13px;display:flex;justify-content:space-between;align-items:center;color:var(--text);}
+.np-item{padding:10px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:.15s;}
+.np-item:hover{background:var(--bg);}
+.np-item:last-child{border-bottom:none;}
+.np-item.unread{border-left:3px solid var(--gold);}
+.np-tx{font-size:12px;font-weight:600;color:var(--text);margin-bottom:2px;}
+.np-tm{font-size:10px;color:var(--muted);}
+
+/* ═══ PAGES ═══ */
+.page{display:none;}.page.active{display:block;}
+
+/* ═══ HERO ═══ */
+.hero{background:var(--dark);padding:44px 20px 0;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;width:440px;height:440px;background:radial-gradient(circle,rgba(255,184,0,.14) 0%,transparent 70%);top:-130px;right:-60px;pointer-events:none;}
+.hero-in{max-width:1260px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center;}
+.hero-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(255,184,0,.15);border:1px solid rgba(255,184,0,.3);color:var(--gold);font-size:10px;font-weight:700;padding:4px 10px;border-radius:100px;margin-bottom:14px;}
+.hero h1{font-family:'Nunito',sans-serif;font-size:40px;font-weight:900;color:#fff;line-height:1.1;margin-bottom:11px;}
+.hero h1 em{font-style:normal;color:var(--gold);}
+.hero p{color:rgba(255,255,255,.58);font-size:13px;line-height:1.7;margin-bottom:22px;}
+.hero-cta{display:flex;gap:9px;flex-wrap:wrap;}
+.btn-lg{padding:10px 22px;font-size:13px;border-radius:10px;}
+.btn-olw{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.35);font-weight:700;font-size:13px;cursor:pointer;border-radius:10px;padding:10px 22px;transition:.2s;font-family:'Noto Sans KR',sans-serif;}
+.btn-olw:hover{border-color:#fff;background:rgba(255,255,255,.07);}
+.hero-stats{display:flex;gap:24px;margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,.09);}
+.stn{font-family:'Nunito',sans-serif;font-size:23px;font-weight:900;color:var(--gold);}
+.stl{font-size:10px;color:rgba(255,255,255,.45);margin-top:1px;}
+.hero-vis{position:relative;}
+.hero-skyline-wrap{position:relative;width:100%;}
+.hero-svg{width:100%;height:auto;border-radius:16px;display:block;filter:drop-shadow(0 8px 32px rgba(0,0,0,.4));}
+
+/* Floating cards on hero */
+.hv-card{position:absolute;background:rgba(255,255,255,.07);backdrop-filter:blur(12px);border:1px solid rgba(255,184,0,.22);border-radius:12px;padding:11px 15px;color:#fff;}
+.hvc-top{font-size:10px;font-weight:700;color:rgba(255,255,255,.6);margin-bottom:4px;display:flex;align-items:center;gap:5px;}
+.hvc-main{font-family:'Nunito',sans-serif;font-size:28px;font-weight:900;line-height:1;margin-bottom:2px;}
+.hvc-sub{font-size:10px;color:rgba(255,255,255,.55);}
+.hvc-title{font-size:11px;font-weight:700;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:160px;}
+
+.hv-weather{top:12px;right:8px;min-width:120px;animation:flt 3s ease-in-out infinite;}
+.hv-live{bottom:60px;left:8px;min-width:110px;animation:flt 3.5s ease-in-out infinite 0.5s;}
+.hv-post{bottom:60px;right:8px;min-width:170px;animation:flt 4s ease-in-out infinite 1s;}
+
+@keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+/* old skyline/wcard no longer used */
+.skyline,.wcard{display:none;}
+
+/* ═══ QUICK ACCESS BAR ═══ */
+.quick-bar{background:var(--dark);border-top:1px solid rgba(255,255,255,.08);padding:10px 0;}
+.quick-in{max-width:1260px;margin:0 auto;padding:0 20px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;}
+.quick-in::-webkit-scrollbar{display:none;}
+.q-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:100px;cursor:pointer;white-space:nowrap;transition:.2s;flex-shrink:0;}
+.q-btn:hover{background:rgba(255,184,0,.15);border-color:var(--gold);}
+.q-btn span{font-size:14px;}
+.q-btn p{font-size:11px;font-weight:700;color:rgba(255,255,255,.7);}
+
+/* ═══ CATS ═══ */
+.cats{max-width:1260px;margin:26px auto 0;padding:0 20px;}
+.sec-t{font-family:'Nunito',sans-serif;font-size:18px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:6px;color:var(--text);}
+.cat-g{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;}
+.cat-c{background:var(--card);border-radius:12px;padding:14px 8px;text-align:center;cursor:pointer;border:2px solid transparent;transition:.2s;}
+.cat-c:hover,.cat-c.active{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 6px 16px rgba(255,184,0,.16);}
+.cat-ic{font-size:22px;margin-bottom:5px;}
+.cat-nm{font-size:11px;font-weight:700;color:var(--text);}
+.cat-ct{font-size:10px;color:var(--muted);margin-top:1px;}
+
+/* ═══ MAIN LAYOUT ═══ */
+.main{max-width:1260px;margin:22px auto;padding:0 20px;display:grid;grid-template-columns:1fr 290px;gap:18px;}
+
+/* ═══ POSTS ═══ */
+.posts-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.tabs{display:flex;background:var(--card);border-radius:7px;padding:3px;gap:2px;border:1px solid var(--border);}
+.tab{padding:5px 11px;border-radius:5px;font-size:11px;font-weight:700;cursor:pointer;color:var(--muted);border:none;background:transparent;transition:.2s;font-family:'Noto Sans KR',sans-serif;}
+.tab.active{background:var(--dark);color:#fff;}
+.write-box{background:var(--card);border-radius:12px;padding:11px;margin-bottom:11px;border:1.5px solid var(--border);display:flex;align-items:center;gap:8px;}
+.w-inp{flex:1;border:1.5px solid var(--border);border-radius:7px;padding:7px 12px;font-size:12px;font-family:'Noto Sans KR',sans-serif;outline:none;transition:.2s;cursor:pointer;background:var(--inp);color:var(--text);}
+.w-inp:focus{border-color:var(--gold);}
+.post-card{background:var(--card);border-radius:12px;padding:15px;margin-bottom:8px;border:1.5px solid var(--border);transition:.2s;cursor:pointer;animation:fdup .4s ease-out forwards;opacity:0;}
+@keyframes fdup{from{transform:translateY(12px);opacity:0}to{transform:translateY(0);opacity:1}}
+.post-card:hover{border-color:var(--gold);box-shadow:0 4px 14px rgba(255,184,0,.12);transform:translateY(-2px);}
+.post-meta{display:flex;align-items:center;gap:7px;margin-bottom:8px;}
+.av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;color:#fff;flex-shrink:0;}
+.au-nm{font-size:12px;font-weight:700;color:var(--text);}
+.au-tm{font-size:10px;color:var(--muted);}
+.pbadge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:100px;}
+.p-title{font-size:14px;font-weight:700;margin-bottom:5px;line-height:1.4;color:var(--text);}
+.p-prev{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:9px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.p-tags{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px;}
+.tag{font-size:10px;padding:2px 7px;background:var(--sand);border-radius:100px;color:#8B6914;font-weight:600;}
+.p-foot{display:flex;align-items:center;gap:9px;padding-top:8px;border-top:1px solid var(--border);}
+.p-act{display:flex;align-items:center;gap:3px;font-size:11px;color:var(--muted);cursor:pointer;border:none;background:none;font-family:'Noto Sans KR',sans-serif;transition:.2s;padding:3px 5px;border-radius:5px;}
+.p-act:hover{color:var(--gold);background:rgba(255,184,0,.09);}
+.p-act.liked{color:var(--red);}
+
+/* ═══ COMMENTS ═══ */
+.cmts{margin-top:13px;padding-top:13px;border-top:2px solid var(--border);}
+.cmt-box{display:flex;gap:7px;margin-bottom:11px;}
+.cmt-inp{flex:1;border:1.5px solid var(--border);border-radius:7px;padding:7px 11px;font-size:12px;font-family:'Noto Sans KR',sans-serif;outline:none;transition:.2s;background:var(--inp);color:var(--text);}
+.cmt-inp:focus{border-color:var(--gold);}
+.cmt-item{display:flex;gap:7px;margin-bottom:10px;animation:fdup .3s ease-out;}
+.cmt-body{flex:1;background:var(--bg);border-radius:8px;padding:8px 11px;}
+.cmt-author{font-size:11px;font-weight:700;margin-bottom:3px;color:var(--text);}
+.cmt-text{font-size:12px;line-height:1.5;color:var(--text);}
+.cmt-time{font-size:10px;color:var(--muted);margin-top:3px;}
+.cmt-lk{float:right;font-size:10px;cursor:pointer;color:var(--muted);}
+.cmt-lk:hover{color:var(--red);}
+
+/* ═══ SIDEBAR ═══ */
+.sidebar{display:flex;flex-direction:column;gap:14px;}
+.widget{background:var(--card);border-radius:12px;padding:14px;border:1.5px solid var(--border);}
+.w-t{font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;margin-bottom:11px;display:flex;align-items:center;gap:5px;color:var(--text);}
+.live-dot{width:6px;height:6px;background:#22C55E;border-radius:50%;animation:pulse 1.5s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+.mem-item{display:flex;align-items:center;gap:7px;padding:5px 0;border-bottom:1px solid var(--border);}
+.mem-item:last-child{border-bottom:none;}
+.mem-nm{font-size:12px;font-weight:600;color:var(--text);}
+.mem-lc{font-size:10px;color:var(--muted);}
+.on-b{font-size:9px;background:#DCFCE7;color:#166534;padding:2px 6px;border-radius:100px;font-weight:700;}
+.ev-item{padding:9px;border-radius:7px;background:var(--bg);margin-bottom:6px;cursor:pointer;transition:.2s;}
+.ev-item:hover{background:var(--sand);}
+.ev-dt{font-size:9px;font-weight:700;color:var(--sky);margin-bottom:2px;}
+.ev-nm{font-size:12px;font-weight:700;margin-bottom:1px;color:var(--text);}
+.ev-lc{font-size:10px;color:var(--muted);}
+.w-wx{background:linear-gradient(135deg,var(--sky),#0070A0);color:#fff;}
+.w-wx .w-t{color:#fff;}
+.wg{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.wci{background:rgba(255,255,255,.14);border-radius:7px;padding:9px;}
+.wcc{font-size:9px;font-weight:700;opacity:.8;margin-bottom:2px;}
+.wct{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;}
+.wcic{font-size:14px;float:right;margin-top:-20px;}
+.wcd{font-size:9px;opacity:.7;}
+.pop-list{list-style:none;}
+.pop-item{display:flex;align-items:center;gap:7px;padding:5px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:.2s;font-size:11px;color:var(--text);}
+.pop-item:hover{color:var(--gold);}
+.pop-item:last-child{border-bottom:none;}
+.rnk{font-family:'Nunito',sans-serif;font-weight:900;font-size:15px;color:var(--border);width:18px;}
+.rnk.top{color:var(--gold);}
+.pop-txt{flex:1;font-weight:600;}
+.pop-vw{font-size:10px;color:var(--muted);}
+
+/* ═══ JOBS ═══ */
+.jobs-wrap{max-width:1260px;margin:26px auto;padding:0 20px;}
+.jobs-srch{background:var(--card);border-radius:14px;padding:20px;margin-bottom:18px;border:1.5px solid var(--border);}
+.jobs-srch h2{font-family:'Nunito',sans-serif;font-size:20px;font-weight:900;margin-bottom:12px;color:var(--text);}
+.srch-row{display:flex;gap:8px;flex-wrap:wrap;}
+.s-inp{flex:1;min-width:160px;border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;font-size:12px;font-family:'Noto Sans KR',sans-serif;outline:none;transition:.2s;background:var(--inp);color:var(--text);}
+.s-inp:focus{border-color:var(--gold);}
+.s-sel{border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;font-size:12px;font-family:'Noto Sans KR',sans-serif;outline:none;background:var(--inp);color:var(--text);cursor:pointer;transition:.2s;}
+.s-sel:focus{border-color:var(--gold);}
+.jobs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px;}
+.job-card{background:var(--card);border-radius:12px;padding:16px;border:1.5px solid var(--border);transition:.2s;cursor:pointer;}
+.job-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 6px 20px rgba(255,184,0,.12);}
+.job-hdr{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;}
+.job-logo{width:42px;height:42px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.job-co{font-size:10px;color:var(--muted);margin-bottom:2px;}
+.job-title{font-size:13px;font-weight:700;line-height:1.3;color:var(--text);}
+.job-tags{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:9px;}
+.job-tag{font-size:10px;padding:2px 7px;border-radius:100px;font-weight:600;}
+.jt-type{background:#EFF6FF;color:#1D4ED8;}
+.jt-loc{background:#F0FDF4;color:#166534;}
+.jt-sal{background:#FFFBEB;color:#92400E;}
+.job-desc{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.job-foot{display:flex;align-items:center;justify-content:space-between;padding-top:9px;border-top:1px solid var(--border);}
+.job-posted{font-size:10px;color:var(--muted);}
+.btn-apply{padding:5px 12px;background:var(--gold);color:var(--dark);font-weight:800;font-size:10px;border:none;border-radius:6px;cursor:pointer;transition:.2s;font-family:'Noto Sans KR',sans-serif;}
+.btn-apply:hover{background:#ffc933;}
+
+/* ═══ MAP ═══ */
+.map-wrap{max-width:1260px;margin:26px auto;padding:0 20px;}
+.map-layout{display:grid;grid-template-columns:280px 1fr;gap:16px;align-items:start;}
+.map-box{background:var(--card);border-radius:14px;overflow:hidden;border:1.5px solid var(--border);position:relative;}
+.map-canvas{width:100%;height:460px;background:linear-gradient(160deg,#d4edda,#c8e6f0,#fef9e7);position:relative;overflow:hidden;}
+.map-tooltip{position:absolute;background:var(--dark);color:#fff;padding:9px 12px;border-radius:8px;font-size:11px;pointer-events:none;z-index:10;min-width:148px;border:1px solid rgba(255,184,0,.3);display:none;line-height:1.6;}
+.map-tooltip.show{display:block;}
+.meet-li{display:flex;align-items:center;gap:8px;padding:8px;border-radius:8px;background:var(--bg);margin-bottom:6px;cursor:pointer;transition:.2s;border:1.5px solid transparent;}
+.meet-li:hover,.meet-li.sel{background:var(--sand);border-color:var(--gold);}
+.meet-date-b{background:var(--gold);color:var(--dark);font-size:9px;font-weight:800;padding:3px 6px;border-radius:5px;min-width:36px;text-align:center;}
+.meet-inf{flex:1;}
+.meet-nm{font-size:12px;font-weight:700;margin-bottom:1px;color:var(--text);}
+.meet-lc{font-size:10px;color:var(--muted);}
+.meet-cnt{font-size:10px;background:#EFF6FF;color:#1D4ED8;padding:2px 6px;border-radius:100px;font-weight:700;}
+.map-legend{display:flex;gap:10px;flex-wrap:wrap;padding:10px 14px;border-top:1px solid var(--border);font-size:10px;align-items:center;color:var(--text);}
+.leg-i{display:flex;align-items:center;gap:3px;font-weight:700;}
+.leg-d{width:8px;height:8px;border-radius:50%;}
+
+/* ═══ DETAIL ═══ */
+.det-wrap{max-width:1260px;margin:22px auto;padding:0 20px;display:grid;grid-template-columns:1fr 290px;gap:18px;}
+.det-card{background:var(--card);border-radius:14px;padding:24px;border:1.5px solid var(--border);}
+.det-back{background:none;border:none;color:var(--sky);font-weight:700;font-size:12px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;margin-bottom:13px;display:flex;align-items:center;gap:3px;padding:0;}
+.det-back:hover{color:var(--gold);}
+.det-title{font-size:20px;font-weight:900;margin-bottom:10px;line-height:1.3;color:var(--text);}
+.det-body{font-size:13px;line-height:1.85;color:var(--text);margin-bottom:16px;white-space:pre-line;}
+.det-acts{display:flex;gap:8px;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:16px;}
+.det-btn{display:flex;align-items:center;gap:4px;padding:6px 12px;border-radius:7px;border:1.5px solid var(--border);background:var(--card);font-size:11px;font-weight:700;cursor:pointer;transition:.2s;font-family:'Noto Sans KR',sans-serif;color:var(--text);}
+.det-btn:hover{border-color:var(--gold);color:var(--gold);}
+.det-btn.liked{color:var(--red);border-color:var(--red);}
+
+/* ═══ PROFILE ═══ */
+.profile-wrap{max-width:860px;margin:28px auto;padding:0 20px;}
+.profile-hero{background:var(--dark);border-radius:14px;padding:28px;margin-bottom:16px;display:flex;align-items:center;gap:20px;position:relative;overflow:hidden;}
+.profile-hero::before{content:'';position:absolute;width:260px;height:260px;background:radial-gradient(circle,rgba(255,184,0,.15),transparent 70%);top:-80px;right:-40px;}
+.profile-av{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:28px;color:#fff;border:3px solid var(--gold);flex-shrink:0;}
+.profile-name{font-family:'Nunito',sans-serif;font-size:22px;font-weight:900;color:#fff;margin-bottom:3px;}
+.profile-sub{font-size:12px;color:rgba(255,255,255,.55);margin-bottom:11px;}
+.profile-stats{display:flex;gap:22px;}
+.ps-n{font-family:'Nunito',sans-serif;font-size:18px;font-weight:900;color:var(--gold);}
+.ps-l{font-size:10px;color:rgba(255,255,255,.45);}
+.p-edit{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.25);color:#fff;font-weight:700;font-size:12px;padding:7px 16px;border-radius:8px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:.2s;}
+.p-edit:hover{background:rgba(255,255,255,.18);}
+.ptabs{display:flex;background:var(--card);border-radius:10px;border:1.5px solid var(--border);padding:3px;margin-bottom:14px;}
+.ptab{flex:1;text-align:center;padding:7px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;color:var(--muted);border:none;background:transparent;transition:.2s;font-family:'Noto Sans KR',sans-serif;}
+.ptab.active{background:var(--dark);color:#fff;}
+.badges-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px;}
+.badge-i{background:var(--sand);border-radius:100px;padding:5px 12px;font-size:11px;font-weight:700;color:#8B6914;display:flex;align-items:center;gap:4px;}
+
+/* ═══ INFO PAGE ═══ */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin-top:18px;}
+.info-card{background:var(--card);border-radius:12px;padding:18px;border:1.5px solid var(--border);cursor:pointer;transition:.2s;}
+.info-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 5px 16px rgba(255,184,0,.12);}
+.ic-icon{font-size:30px;margin-bottom:9px;}
+.ic-title{font-size:14px;font-weight:800;margin-bottom:5px;color:var(--text);}
+.ic-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+.ic-tag{display:inline-block;font-size:10px;background:var(--sand);color:#8B6914;padding:2px 7px;border-radius:100px;font-weight:700;margin-top:7px;}
+
+/* ═══ AD PAGE (광고 안내) ═══ */
+.adpage-wrap{max-width:960px;margin:28px auto;padding:0 20px;}
+.adpage-hero{background:linear-gradient(135deg,var(--dark),#2d1a4e);border-radius:16px;padding:36px;text-align:center;margin-bottom:24px;position:relative;overflow:hidden;}
+.adpage-hero::before{content:'';position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(255,184,0,.18),transparent 70%);top:-150px;left:50%;transform:translateX(-50%);}
+.adpage-hero h2{font-family:'Nunito',sans-serif;font-size:32px;font-weight:900;color:#fff;margin-bottom:8px;}
+.adpage-hero p{color:rgba(255,255,255,.6);font-size:14px;line-height:1.7;}
+.ad-packages{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px;}
+.ad-pkg{background:var(--card);border-radius:14px;padding:22px;border:1.5px solid var(--border);transition:.2s;text-align:center;}
+.ad-pkg:hover{border-color:var(--gold);transform:translateY(-3px);}
+.ad-pkg.popular{border-color:var(--gold);background:linear-gradient(135deg,#fffef0,var(--card));}
+[data-theme="dark"] .ad-pkg.popular{background:linear-gradient(135deg,#1e1a00,var(--card));}
+.ad-pkg.popular::before{content:'인기';display:block;background:var(--gold);color:var(--dark);font-size:10px;font-weight:900;padding:2px 10px;border-radius:100px;width:fit-content;margin:0 auto 10px;}
+.pkg-name{font-size:16px;font-weight:900;color:var(--text);margin-bottom:6px;}
+.pkg-price{font-family:'Nunito',sans-serif;font-size:28px;font-weight:900;color:var(--gold);margin-bottom:4px;}
+.pkg-period{font-size:11px;color:var(--muted);margin-bottom:14px;}
+.pkg-features{list-style:none;text-align:left;margin-bottom:18px;}
+.pkg-features li{font-size:12px;color:var(--text);padding:4px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:7px;}
+.pkg-features li:last-child{border-bottom:none;}
+.pkg-btn{width:100%;padding:10px;background:var(--gold);color:var(--dark);font-weight:800;font-size:13px;border:none;border-radius:9px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:.2s;}
+.pkg-btn:hover{background:#ffc933;}
+.ad-slots-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+.ad-slot-card{background:var(--card);border-radius:12px;padding:18px;border:1.5px solid var(--border);}
+.asc-title{font-size:14px;font-weight:800;color:var(--text);margin-bottom:6px;display:flex;align-items:center;gap:7px;}
+.asc-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:10px;}
+.asc-price{font-size:18px;font-weight:900;color:var(--gold);font-family:'Nunito',sans-serif;}
+.asc-sub{font-size:10px;color:var(--muted);}
+
+/* ═══ MODALS ═══ */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);z-index:500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
+.overlay.open{opacity:1;pointer-events:all;}
+.modal{background:var(--card);border-radius:16px;width:460px;max-width:95vw;padding:24px;transform:scale(.95) translateY(16px);transition:.3s;max-height:90vh;overflow-y:auto;}
+.overlay.open .modal{transform:scale(1) translateY(0);}
+.md-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+.md-t{font-family:'Nunito',sans-serif;font-size:18px;font-weight:900;color:var(--text);}
+.cls-btn{width:26px;height:26px;border-radius:50%;border:none;background:var(--border);cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;transition:.2s;color:var(--text);}
+.cls-btn:hover{background:var(--dark);color:#fff;}
+.fg{margin-bottom:12px;}
+.fl{font-size:11px;font-weight:700;margin-bottom:4px;display:block;color:var(--text);}
+.fi,.fta,.fse{width:100%;border:1.5px solid var(--border);border-radius:7px;padding:8px 11px;font-size:12px;font-family:'Noto Sans KR',sans-serif;outline:none;transition:.2s;background:var(--inp);color:var(--text);}
+.fi:focus,.fta:focus,.fse:focus{border-color:var(--gold);}
+.fta{resize:vertical;min-height:90px;}
+.cat-sel-g{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;}
+.csi{border:1.5px solid var(--border);border-radius:7px;padding:7px;text-align:center;cursor:pointer;font-size:11px;font-weight:700;transition:.2s;color:var(--text);}
+.csi.sel{border-color:var(--gold);background:rgba(255,184,0,.1);color:#8B6914;}
+.sub-btn{width:100%;padding:11px;background:var(--gold);color:var(--dark);font-weight:800;font-size:13px;border:none;border-radius:9px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:.2s;margin-top:4px;}
+.sub-btn:hover{background:#ffc933;transform:translateY(-1px);}
+.or-div{text-align:center;margin:10px 0;font-size:11px;color:var(--muted);position:relative;}
+.or-div::before,.or-div::after{content:'';position:absolute;top:50%;width:40%;height:1px;background:var(--border);}
+.or-div::before{left:0}.or-div::after{right:0}
+.social-btns{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.s-btn{padding:8px;border-radius:7px;font-size:12px;font-weight:700;border:1.5px solid var(--border);background:var(--card);cursor:pointer;transition:.2s;font-family:'Noto Sans KR',sans-serif;display:flex;align-items:center;justify-content:center;gap:5px;color:var(--text);}
+.s-btn:hover{border-color:var(--gold);}
+.sw-auth{text-align:center;margin-top:11px;font-size:11px;color:var(--muted);}
+.sw-auth a{color:var(--sky);font-weight:700;cursor:pointer;}
+
+/* ═══ TOAST ═══ */
+.toast{position:fixed;bottom:20px;right:20px;background:var(--dark);color:#fff;padding:10px 16px;border-radius:9px;font-size:12px;font-weight:600;border-left:4px solid var(--gold);transform:translateX(220%);transition:transform .3s;z-index:9999;max-width:260px;}
+.toast.show{transform:translateX(0);}
+
+/* ═══ MOBILE NAV ═══ */
+.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--dark);border-top:2px solid var(--gold);z-index:200;padding:7px 0 max(7px,env(safe-area-inset-bottom));}
+.mobile-nav-inner{display:flex;justify-content:space-around;}
+.mn-btn{display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;color:rgba(255,255,255,.45);font-size:10px;font-weight:700;cursor:pointer;font-family:'Noto Sans KR',sans-serif;padding:3px 8px;border-radius:7px;transition:.2s;}
+.mn-btn .mn-ic{font-size:18px;}
+.mn-btn.active,.mn-btn:hover{color:var(--gold);}
+
+/* ═══ FOOTER ═══ */
+footer{background:var(--dark);padding:36px 20px 80px;margin-top:48px;}
+.footer-in{max-width:1260px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px;}
+.fb-brand .logo-tx{font-family:'Nunito',sans-serif;font-weight:900;font-size:20px;color:#fff;margin-bottom:7px;}
+.fb-brand p{font-size:12px;color:rgba(255,255,255,.4);line-height:1.7;margin-bottom:14px;}
+.fsoc{display:flex;gap:7px;}
+.fsoc-btn{width:32px;height:32px;background:rgba(255,255,255,.08);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:.2s;}
+.fsoc-btn:hover{background:var(--gold);}
+.fc h4{font-size:12px;font-weight:800;color:#fff;margin-bottom:10px;}
+.fc a{display:block;font-size:11px;color:rgba(255,255,255,.4);text-decoration:none;margin-bottom:6px;transition:.2s;cursor:pointer;}
+.fc a:hover{color:var(--gold);}
+.footer-bottom{max-width:1260px;margin:24px auto 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:9px;}
+.footer-bottom p{font-size:11px;color:rgba(255,255,255,.3);}
+.footer-bottom strong{color:var(--gold);}
+.app-badges{display:flex;gap:7px;}
+.app-b{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:5px 11px;font-size:10px;font-weight:700;color:rgba(255,255,255,.5);cursor:pointer;transition:.2s;}
+.app-b:hover{border-color:var(--gold);color:var(--gold);}
+
+/* ═══ RESPONSIVE — TABLET (900px) ═══ */
+@media(max-width:900px){
+  /* Layout */
+  .hero-in,.main,.map-layout,.det-wrap{grid-template-columns:1fr;}
+  .hero-vis{display:block !important;}
+  .hero-skyline-wrap{margin-top:20px;}
+  .hero-svg{border-radius:12px;}
+  .hv-card{padding:8px 11px;}
+  .hvc-main{font-size:22px;}
+  .hvc-title{max-width:130px;font-size:10px;}
+  .hv-post{display:none;}
+  .sidebar{display:none;}
+  nav{display:none;}
+  .hdr-search{display:none;}
+  .mobile-nav{display:block;}
+  body{padding-bottom:70px;}
+
+  /* Header */
+  .hdr{height:56px;padding:0 14px;gap:8px;}
+  .logo-sub{display:none;}
+  .logo-tx{font-size:17px;}
+  .logo-ic{width:30px;height:30px;font-size:14px;}
+  .dm-btn,.notif-btn{width:32px;height:32px;font-size:14px;}
+  .btn{padding:6px 11px;font-size:11px;}
+
+  /* Hero */
+  .hero{padding:32px 16px 0;}
+  .hero h1{font-size:30px;}
+  .hero p{font-size:13px;}
+  .hero-stats{gap:18px;}
+  .stn{font-size:20px;}
+
+  /* Quick bar */
+  .quick-bar{padding:8px 0;}
+  .q-btn{padding:6px 11px;}
+  .q-btn p{font-size:10px;}
+
+  /* Categories */
+  .cats{padding:0 14px;margin-top:20px;}
+  .cat-g{grid-template-columns:repeat(3,1fr);gap:7px;}
+  .cat-c{padding:12px 6px;}
+  .cat-ic{font-size:20px;}
+  .cat-nm{font-size:11px;}
+
+  /* Main layout */
+  .main{padding:0 14px;margin:16px auto;}
+
+  /* Sponsor bar */
+  .sponsor-links{grid-template-columns:repeat(4,1fr);}
+
+  /* Posts */
+  .write-box{padding:10px;}
+  .post-card{padding:13px;}
+  .p-title{font-size:14px;}
+
+  /* Jobs */
+  .jobs-wrap{padding:0 14px;margin:20px auto;}
+  .jobs-grid,.yp-grid{grid-template-columns:1fr;}
+  .srch-row{flex-direction:column;}
+  .s-inp,.s-sel{width:100%;}
+
+  /* Ad top banner — 모바일에서 1개만 노출 */
+  .ad-top-inner{flex-direction:column;gap:7px;padding:8px 14px;}
+  .ad-top-slot:not(:first-child){display:none;}
+  .ad-top-slot{height:60px;}
+
+  /* Ad packages */
+  .ad-packages,.ad-slots-grid{grid-template-columns:1fr;}
+
+  /* Footer */
+  .footer-in{grid-template-columns:1fr 1fr;gap:20px;}
+  .fb-brand{grid-column:1/-1;}
+  footer{padding:28px 14px 80px;}
+
+  /* Profile */
+  .profile-wrap{padding:0 14px;}
+  .profile-hero{flex-direction:column;text-align:center;padding:22px 16px;}
+  .profile-stats{justify-content:center;}
+  .p-edit{margin-top:12px;}
+
+  /* Map */
+  .map-wrap{padding:0 14px;}
+  .map-canvas{height:340px;}
+
+  /* Detail */
+  .det-wrap{padding:0 14px;}
+  .det-card{padding:18px;}
+  .det-title{font-size:17px;}
+
+  /* Adpage */
+  .adpage-wrap{padding:0 14px;}
+  .adpage-hero{padding:24px 16px;}
+  .adpage-hero h2{font-size:24px;}
+
+  /* Modal */
+  .modal{padding:20px 16px;}
+  .cat-sel-g{grid-template-columns:repeat(2,1fr);}
+
+  /* Info grid */
+  .info-grid{grid-template-columns:1fr;}
+}
+
+/* ═══ RESPONSIVE — MOBILE (480px) ═══ */
+@media(max-width:480px){
+  /* Header — 아이콘만 */
+  .hdr{height:52px;padding:0 12px;}
+  .btn-ghost{display:none;}
+  .btn-gold{padding:6px 10px;font-size:11px;}
+
+  /* Hero */
+  .hero{padding:24px 14px 0;}
+  .hero h1{font-size:26px;}
+  .hero-badge{font-size:10px;}
+  .hero-stats{gap:14px;}
+  .stn{font-size:18px;}
+  .stl{font-size:9px;}
+  .btn-lg{padding:10px 18px;font-size:13px;}
+  .btn-olw{padding:10px 18px;font-size:13px;}
+
+  /* Quick bar */
+  .q-btn{padding:5px 9px;}
+  .q-btn span{font-size:16px;}
+  .q-btn p{font-size:9px;}
+
+  /* Categories */
+  .cat-g{grid-template-columns:repeat(3,1fr);gap:6px;}
+  .cat-c{padding:10px 4px;}
+  .cat-ic{font-size:18px;margin-bottom:4px;}
+  .cat-nm{font-size:10px;}
+  .cat-ct{display:none;}
+
+  /* Sponsor links */
+  .sponsor-links{grid-template-columns:repeat(3,1fr);}
+  .sl-cat{display:none;}
+
+  /* Posts */
+  .tabs{display:none;}
+  .post-card{padding:12px;}
+  .p-title{font-size:13px;}
+  .p-prev{-webkit-line-clamp:2;font-size:12px;}
+  .p-tags{display:none;}
+  .p-act{font-size:11px;padding:3px 4px;}
+
+  /* Write box */
+  .write-box{padding:9px;}
+  .w-inp{font-size:12px;padding:7px 10px;}
+
+  /* Jobs */
+  .job-card{padding:14px;}
+  .job-title{font-size:13px;}
+  .job-desc{display:none;}
+
+  /* Yellow pages */
+  .yp-card{padding:14px;}
+  .yp-name{font-size:14px;}
+  .yp-cats{gap:6px;}
+  .yp-cat-btn{padding:6px 10px;font-size:11px;}
+
+  /* Ad top — 더 작게 */
+  .ad-top-content .ad-ic{font-size:22px;}
+  .ad-top-content .ad-txt strong{font-size:13px;}
+  .ad-top-tag{display:none;}
+
+  /* Native ad */
+  .adn-ic{width:40px;height:40px;font-size:20px;}
+  .adn-title{font-size:13px;}
+  .adn-sub{font-size:11px;}
+
+  /* Sidebar ad */
+  .asb-img{height:80px;font-size:28px;}
+  .asb-title{font-size:12px;}
+  .asb-sub{font-size:11px;}
+
+  /* Modal */
+  .modal{padding:18px 14px;border-radius:14px;}
+  .md-t{font-size:16px;}
+  .cat-sel-g{grid-template-columns:repeat(2,1fr);}
+
+  /* Footer */
+  .footer-in{grid-template-columns:1fr;}
+  .fc{display:none;}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:8px;}
+  .app-badges{flex-wrap:wrap;}
+
+  /* Profile */
+  .profile-av{width:60px;height:60px;font-size:24px;}
+  .profile-name{font-size:18px;}
+  .ptabs{gap:0;}
+  .ptab{font-size:11px;padding:6px;}
+  .badges-row{gap:5px;}
+  .badge-i{font-size:10px;padding:4px 9px;}
+
+  /* Detail */
+  .det-card{padding:14px;}
+  .det-title{font-size:16px;}
+  .det-body{font-size:13px;}
+  .det-acts{flex-wrap:wrap;gap:6px;}
+  .det-btn{padding:5px 10px;font-size:11px;}
+
+  /* Comments */
+  .cmt-box{flex-wrap:wrap;}
+  .cmt-inp{font-size:12px;}
+
+  /* Map */
+  .map-canvas{height:280px;}
+  .meet-li{padding:7px;}
+  .meet-nm{font-size:11px;}
+
+  /* Ad page */
+  .adpage-hero h2{font-size:20px;}
+  .pkg-price{font-size:24px;}
+
+  /* Mobile nav */
+  .mn-btn{padding:2px 6px;}
+  .mn-btn .mn-ic{font-size:17px;}
+  .mn-btn{font-size:9px;}
+
+  /* Toast */
+  .toast{bottom:80px;right:12px;left:12px;max-width:100%;font-size:12px;}
+}
+
+/* ═══ TOUCH IMPROVEMENTS ═══ */
+@media(hover:none){
+  /* 터치 기기에서 탭 영역 크게 */
+  .cat-c{min-height:80px;}
+  .p-act{min-height:36px;min-width:44px;}
+  .btn,.btn-gold,.btn-ghost,.sub-btn,.btn-apply{min-height:44px;}
+  .yp-btn{min-height:40px;}
+  .tab{min-height:36px;}
+  .mn-btn{min-height:44px;}
+  .q-btn{min-height:44px;}
+  nav button{min-height:44px;}
+  .ev-item{min-height:56px;}
+  .meet-li{min-height:52px;}
+  .pop-item{min-height:40px;}
+  .sponsor-link{min-height:64px;}
+  .sd-item{min-height:48px;}
+
+  /* hover 효과 제거 (터치 기기 깜빡임 방지) */
+  .post-card:hover,.cat-c:hover,.job-card:hover,.yp-card:hover{transform:none;box-shadow:none;}
+
+  /* active 상태로 대체 */
+  .post-card:active{border-color:var(--gold);background:var(--sand);}
+  .cat-c:active{border-color:var(--gold);}
+  .job-card:active{border-color:var(--gold);}
+  .yp-card:active{border-color:var(--gold);}
+  .btn-gold:active{background:#e6a500;}
+  .q-btn:active{background:rgba(255,184,0,.2);}
+}
+
+/* ═══ MOBILE BOTTOM SHEET MODAL ═══ */
+@media(max-width:480px){
+  .overlay{align-items:flex-end;}
+  .modal{
+    width:100%;
+    max-width:100%;
+    border-radius:20px 20px 0 0;
+    transform:translateY(100%);
+    max-height:92vh;
+    padding-bottom:max(20px,env(safe-area-inset-bottom));
+  }
+  .overlay.open .modal{transform:translateY(0);}
+  /* 상단 드래그 핸들 */
+  .modal::before{
+    content:'';display:block;width:40px;height:4px;
+    background:var(--border);border-radius:100px;
+    margin:0 auto 16px;
+  }
+}
+
+/* ═══ SAFE AREA (노치 대응) ═══ */
+@supports(padding:max(0px)){
+  .mobile-nav{padding-bottom:max(8px,env(safe-area-inset-bottom));}
+  body{padding-bottom:max(70px, calc(60px + env(safe-area-inset-bottom)));}
+}
+
+/* ═══ SCROLL BEHAVIOR ═══ */
+html{scroll-behavior:smooth;}
+@media(max-width:900px){
+  .quick-in{-webkit-overflow-scrolling:touch;}
+  .yp-cats{-webkit-overflow-scrolling:touch;overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px;}
+  .yp-cats::-webkit-scrollbar{display:none;}
+  .quick-in::-webkit-scrollbar{display:none;}
+}
+
+/* ═══ PULL TO REFRESH INDICATOR (UX) ═══ */
+@media(max-width:900px){
+  .post-card{-webkit-tap-highlight-color:rgba(255,184,0,.1);}
+  .cat-c{-webkit-tap-highlight-color:rgba(255,184,0,.1);}
+  a,button{-webkit-tap-highlight-color:rgba(255,184,0,.08);}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <div class="hdr">
+    <div class="logo" onclick="navTo('home',null)">
+      <div class="logo-ic">🦘</div>
+      <div><span class="logo-tx">Oz<span>Mate</span></span><div class="logo-sub">브리즈번 한인 No.1</div></div>
+    </div>
+    <nav>
+      <button class="active" onclick="navTo('home',this)">🏠 홈</button>
+      <button onclick="navTo('community',this)">💬 커뮤니티</button>
+      <button onclick="navTo('yellowpage',this)">📒 업소록</button>
+      <button onclick="navTo('jobs',this)">💼 일자리</button>
+      <button onclick="navTo('map',this)">🗺 모임지도</button>
+      <button onclick="navTo('info',this)">📋 정보</button>
+      <button onclick="navTo('adpage',this)" style="color:var(--gold)">📣 광고문의</button>
+    </nav>
+    <div class="hdr-r" id="hdrR">
+      <div class="hdr-search">
+        <span class="si">🔍</span>
+        <input type="text" placeholder="업소, 게시글 검색..." id="gSearch" oninput="doSearch(this.value)" onfocus="showSDrop()" onblur="setTimeout(hideSDrop,200)">
+        <div class="sdrop" id="sDrop"></div>
+      </div>
+      <button class="dm-btn" id="dmBtn" onclick="toggleDark()">🌙</button>
+      <div style="position:relative">
+        <button class="notif-btn" id="nBtn" onclick="toggleNp()">🔔<span class="nbadge" id="nBadge">3</span></button>
+        <div class="np" id="npPanel">
+          <div class="np-hd">알림 <button onclick="markAllRead()" style="font-size:10px;font-weight:700;color:var(--sky);background:none;border:none;cursor:pointer;">모두 읽음</button></div>
+          <div id="npList"></div>
+        </div>
+      </div>
+      <button class="btn btn-ghost" onclick="openMd('lgMd')">로그인</button>
+      <button class="btn btn-gold" onclick="openMd('rgMd')">회원가입</button>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ MOBILE SEARCH BAR ═══ -->
+<div class="mobile-search-bar">
+  <div class="mobile-search-wrap">
+    <span class="si">🔍</span>
+    <input type="text" placeholder="업소, 게시글 검색..." id="mSearch" oninput="doSearch(this.value)" onfocus="showMSDrop()" onblur="setTimeout(hideMSDrop,200)">
+    <div class="mobile-sdrop" id="msDrop"></div>
+  </div>
+</div>
+
+<!-- ═══ TOP BANNER AD ═══ -->
+<div class="ad-top-banner" id="topBanner">
+  <div class="ad-top-inner">
+    <div class="ad-top-slot" onclick="showToast('이민법인 OzLaw 광고 클릭 📱')">
+      <span class="ad-label">광고</span>
+      <div class="ad-top-content">
+        <span class="ad-ic">⚖️</span>
+        <div class="ad-txt"><strong>OzLaw 이민법인</strong><span>비자·영주권 전문 · 무료상담</span></div>
+      </div>
+      <span class="ad-top-tag">02-1234-5678</span>
+    </div>
+    <div class="ad-top-slot" style="background:linear-gradient(135deg,#009DC4,#0070A0)" onclick="showToast('에듀브리즈번 광고 클릭 📚')">
+      <span class="ad-label">광고</span>
+      <div class="ad-top-content">
+        <span class="ad-ic">📚</span>
+        <div class="ad-txt"><strong>에듀브리즈번</strong><span>IELTS·영어 전문 어학원</span></div>
+      </div>
+      <span class="ad-top-tag">City CBD 위치</span>
+    </div>
+    <div class="ad-top-slot" style="background:linear-gradient(135deg,#00843D,#005a28)" onclick="showToast('OzFarm 워킹홀리데이 광고 클릭 🌾')">
+      <span class="ad-label">광고</span>
+      <div class="ad-top-content">
+        <span class="ad-ic">🌾</span>
+        <div class="ad-txt"><strong>OzFarm 세컨비자</strong><span>농장 취업 100% 성공보장</span></div>
+      </div>
+      <span class="ad-top-tag">세컨비자 가능</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ QUICK ACCESS ═══ -->
+<div class="quick-bar">
+  <div class="quick-in">
+    <div class="q-btn" onclick="navTo('yellowpage',null)"><span>📒</span><p>업소록</p></div>
+    <div class="q-btn" onclick="showToast('오일쉐어 게시판 📍')"><span>🚗</span><p>오일쉐어</p></div>
+    <div class="q-btn" onclick="showToast('중고거래 게시판 🛒')"><span>🛍️</span><p>중고거래</p></div>
+    <div class="q-btn" onclick="showToast('쉐어하우스 게시판 🏠')"><span>🏠</span><p>쉐어하우스</p></div>
+    <div class="q-btn" onclick="navTo('jobs',null)"><span>💼</span><p>구인구직</p></div>
+    <div class="q-btn" onclick="showToast('부동산 게시판 🏡')"><span>🏡</span><p>부동산</p></div>
+    <div class="q-btn" onclick="showToast('학원/과외 게시판 📖')"><span>📖</span><p>학원/과외</p></div>
+    <div class="q-btn" onclick="showToast('동호회 게시판 ⚽')"><span>⚽</span><p>동호회</p></div>
+    <div class="q-btn" onclick="showToast('교민뉴스 게시판 📰')"><span>📰</span><p>교민뉴스</p></div>
+    <div class="q-btn" onclick="showToast('종교소식 게시판 ✝️')"><span>✝️</span><p>종교소식</p></div>
+    <div class="q-btn" onclick="showToast('SunTube 🎬')"><span>🎬</span><p>SunTube</p></div>
+    <div class="q-btn" onclick="navTo('adpage',null)" style="border-color:rgba(255,184,0,.4)"><span>📣</span><p style="color:var(--gold)">광고문의</p></div>
+  </div>
+</div>
+
+<!-- ═══ HOME ═══ -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-in">
+      <div>
+        <div class="hero-badge">🌏 브리즈번·퀸즐랜드 한인 No.1</div>
+        <h1>브리즈번에서<br>함께 살아가는<br><em>우리들의 공간</em></h1>
+        <p>브리즈번, 골드코스트, 선샤인코스트, 케언즈까지<br>퀸즐랜드 전 지역 한인들이 모이는 커뮤니티</p>
+        <div class="hero-cta">
+          <button class="btn btn-gold btn-lg" onclick="ckLogin(openPostMd)">지금 글쓰기 🚀</button>
+          <button class="btn-olw" onclick="navTo('yellowpage',null)">📒 업소록 보기</button>
+        </div>
+        <div class="hero-stats">
+          <div><div class="stn" id="sc1">0</div><div class="stl">회원수</div></div>
+          <div><div class="stn" id="sc2">0</div><div class="stl">게시글</div></div>
+          <div><div class="stn" id="sc3">0</div><div class="stl">등록업소</div></div>
+          <div><div class="stn" id="sc4">0</div><div class="stl">지금 접속</div></div>
+        </div>
+      </div>
+      <div class="hero-vis">
+        <!-- Brisbane Skyline SVG -->
+        <div class="hero-skyline-wrap">
+          <svg class="hero-svg" viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg">
+            <!-- Sky gradient -->
+            <defs>
+              <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#0d0528"/>
+                <stop offset="60%" stop-color="#3a1060"/>
+                <stop offset="100%" stop-color="#c0440a"/>
+              </linearGradient>
+              <linearGradient id="riverGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1a4a6e"/>
+                <stop offset="100%" stop-color="#0d2a40"/>
+              </linearGradient>
+              <linearGradient id="bldGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgba(255,255,255,0.18)"/>
+                <stop offset="100%" stop-color="rgba(255,255,255,0.06)"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Sky -->
+            <rect width="480" height="280" fill="url(#skyGrad)"/>
+
+            <!-- Stars -->
+            <circle cx="30" cy="20" r="1.2" fill="rgba(255,240,200,.7)"/>
+            <circle cx="80" cy="35" r="0.8" fill="rgba(255,240,200,.5)"/>
+            <circle cx="140" cy="15" r="1.0" fill="rgba(255,240,200,.6)"/>
+            <circle cx="200" cy="28" r="0.7" fill="rgba(255,240,200,.4)"/>
+            <circle cx="260" cy="12" r="1.2" fill="rgba(255,240,200,.7)"/>
+            <circle cx="320" cy="30" r="0.9" fill="rgba(255,240,200,.5)"/>
+            <circle cx="400" cy="18" r="1.0" fill="rgba(255,240,200,.6)"/>
+            <circle cx="450" cy="40" r="0.7" fill="rgba(255,240,200,.4)"/>
+            <circle cx="60" cy="55" r="0.6" fill="rgba(255,240,200,.3)"/>
+            <circle cx="360" cy="50" r="0.8" fill="rgba(255,240,200,.4)"/>
+
+            <!-- Moon -->
+            <circle cx="420" cy="38" r="18" fill="#FFF5CC"/>
+            <circle cx="428" cy="32" r="14" fill="#3a1060"/>
+
+            <!-- Horizon glow -->
+            <ellipse cx="240" cy="200" rx="200" ry="30" fill="rgba(255,120,40,0.25)"/>
+
+            <!-- BUILDINGS — Brisbane CBD Skyline -->
+            <!-- Far background buildings (lighter) -->
+            <rect x="20" y="155" width="22" height="50" fill="rgba(255,255,255,0.06)" rx="2"/>
+            <rect x="45" y="140" width="18" height="65" fill="rgba(255,255,255,0.07)" rx="2"/>
+            <rect x="430" y="148" width="20" height="57" fill="rgba(255,255,255,0.06)" rx="2"/>
+            <rect x="452" y="135" width="16" height="70" fill="rgba(255,255,255,0.07)" rx="2"/>
+
+            <!-- Main buildings -->
+            <!-- 1 (far left) -->
+            <rect x="60" y="148" width="28" height="57" fill="url(#bldGrad)" rx="2"/>
+            <rect x="62" y="152" width="5" height="4" fill="rgba(255,184,0,.3)"/>
+            <rect x="70" y="152" width="5" height="4" fill="rgba(255,184,0,.3)"/>
+            <rect x="62" y="160" width="5" height="4" fill="rgba(255,184,0,.2)"/>
+            <rect x="70" y="160" width="5" height="4" fill="rgba(255,184,0,.3)"/>
+
+            <!-- 2 tall slender -->
+            <rect x="96" y="118" width="22" height="87" fill="url(#bldGrad)" rx="2"/>
+            <rect x="96" y="110" width="22" height="10" fill="rgba(255,255,255,.12)" rx="1"/>
+            <rect x="98" y="124" width="4" height="4" fill="rgba(255,184,0,.4)"/>
+            <rect x="106" y="124" width="4" height="4" fill="rgba(255,184,0,.3)"/>
+            <rect x="98" y="133" width="4" height="4" fill="rgba(255,184,0,.3)"/>
+            <rect x="106" y="133" width="4" height="4" fill="rgba(255,184,0,.4)"/>
+            <rect x="98" y="142" width="4" height="4" fill="rgba(255,184,0,.2)"/>
+            <rect x="106" y="142" width="4" height="4" fill="rgba(255,184,0,.3)"/>
+            <!-- antenna -->
+            <line x1="107" y1="110" x2="107" y2="96" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+            <circle cx="107" cy="95" r="2" fill="#FFB800" opacity=".8"/>
+
+            <!-- 3 MAIN TOWER (tallest - One Brisbane) -->
+            <rect x="126" y="88" width="36" height="117" fill="url(#bldGrad)" rx="2"/>
+            <rect x="126" y="78" width="36" height="12" fill="rgba(255,255,255,.14)" rx="1"/>
+            <rect x="129" y="95" width="6" height="5" fill="rgba(255,184,0,.5)"/>
+            <rect x="139" y="95" width="6" height="5" fill="rgba(255,184,0,.4)"/>
+            <rect x="149" y="95" width="6" height="5" fill="rgba(255,184,0,.5)"/>
+            <rect x="129" y="106" width="6" height="5" fill="rgba(255,184,0,.3)"/>
+            <rect x="139" y="106" width="6" height="5" fill="rgba(255,184,0,.5)"/>
+            <rect x="149" y="106" width="6" height="5" fill="rgba(255,184,0,.3)"/>
+            <rect x="129" y="117" width="6" height="5" fill="rgba(255,184,0,.4)"/>
+            <rect x="139" y="117" width="6" height="5" fill="rgba(255,184,0,.3)"/>
+            <rect x="149" y="117" width="6" height="5" fill="rgba(255,184,0,.4)"/>
+            <rect x="129" y="128" width="6" height="5" fill="rgba(255,184,0,.3)"/>
+            <rect x="139" y="128" width="6" height="5" fill="rgba(255,184,0,.4)"/>
+            <rect x="149" y="128" width="6" height="5" fill="rgba(255,184,0,.3)"/>
+            <!-- antenna -->
+            <line x1="144" y1="78" x2="144" y2="60" stroke="rgba(255,255,255,.35)" stroke-width="2"/>
+            <circle cx="144" cy="59" r="2.5" fill="#FFB800"/>
+
+            <!-- 4 stepped building -->
+            <rect x="170" y="108" width="30" height="97" fill="url(#bldGrad)" rx="2"/>
+            <rect x="170" y="100" width="30" height="10" fill="rgba(255,255,255,.1)" rx="1"/>
+            <rect x="172" y="114" width="5" height="4" fill="rgba(255,184,0,.4)"/>
+            <rect x="181" y="114" width="5" height="4" fill="rgba(255,184,0,.3)"/>
+            <rect x="190" y="114" width="5" height="4" fill="rgba(255,184,0,.4)"/>
+            <rect x="172" y="123" width="5" height="4" fill="rgba(255,184,0,.3)"/>
+            <rect x="181" y="123" width="5" height="4" fill="rgba(255,184,0,.4)"/>
+            <rect x="190" y="123" width="5" height="4" fill="rgba(255,184,0,.3)"/>
+
+            <!-- 5 curved (Riparian Plaza style) -->
+            <rect x="208" y="125" width="26" height="80" fill="url(#bldGrad)" rx="3"/>
+            <rect x="208" y="117" width="26" height="10" fill="rgba(255,255,255,.12)" rx="2"/>
+            <rect x="211" y="130" width="4" height="4" fill="rgba(255,184,0,.4)"/>
+            <rect x="220" y="130" width="4" height="4" fill="rgba(255,184,0,.3)"/>
+            <rect x="211" y="140" width="4" height="4" fill="rgba(255,184,0,.3)"/>
+            <rect x="220" y="140" width="4" height="4" fill="rgba(255,184,0,.4)"/>
+
+            <!-- 6 medium -->
+            <rect x="242" y="135" width="24" height="70" fill="url(#bldGrad)" rx="2"/>
+            <rect x="244" y="140" width="4" height="4" fill="rgba(255,184,0,.3)"/>
+            <rect x="252" y="140" width="4" height="4" fill="rgba(255,184,0,.4)"/>
+            <rect x="244" y="150" width="4" height="4" fill="rgba(255,184,0,.4)"/>
+            <rect x="252" y="150" width="4" height="4" fill="rgba(255,184,0,.3)"/>
+
+            <!-- 7 Story Bridge tower hint -->
+            <rect x="274" y="142" width="20" height="63" fill="url(#bldGrad)" rx="2"/>
+
+            <!-- 8 right cluster -->
+            <rect x="302" y="128" width="28" height="77" fill="url(#bldGrad)" rx="2"/>
+            <rect x="302" y="120" width="28" height="10" fill="rgba(255,255,255,.1)" rx="1"/>
+            <rect x="305" y="133" width="5" height="4" fill="rgba(255,184,0,.4)"/>
+            <rect x="315" y="133" width="5" height="4" fill="rgba(255,184,0,.3)"/>
+            <rect x="305" y="143" width="5" height="4" fill="rgba(255,184,0,.3)"/>
+            <rect x="315" y="143" width="5" height="4" fill="rgba(255,184,0,.4)"/>
+
+            <!-- 9 -->
+            <rect x="338" y="138" width="22" height="67" fill="url(#bldGrad)" rx="2"/>
+            <rect x="341" y="143" width="4" height="4" fill="rgba(255,184,0,.3)"/>
+            <rect x="350" y="143" width="4" height="4" fill="rgba(255,184,0,.4)"/>
+
+            <!-- 10 far right -->
+            <rect x="368" y="145" width="26" height="60" fill="url(#bldGrad)" rx="2"/>
+            <rect x="371" y="150" width="4" height="4" fill="rgba(255,184,0,.3)"/>
+            <rect x="380" y="150" width="4" height="4" fill="rgba(255,184,0,.3)"/>
+
+            <!-- Ground / Riverbank -->
+            <rect x="0" y="202" width="480" height="4" fill="rgba(255,120,40,0.3)" rx="2"/>
+
+            <!-- Brisbane River -->
+            <rect x="0" y="206" width="480" height="50" fill="url(#riverGrad)"/>
+            <!-- River reflection -->
+            <rect x="60" y="208" width="3" height="35" fill="rgba(255,184,0,.08)"/>
+            <rect x="107" y="208" width="3" height="40" fill="rgba(255,184,0,.12)"/>
+            <rect x="144" y="208" width="4" height="45" fill="rgba(255,184,0,.1)"/>
+            <rect x="185" y="208" width="3" height="35" fill="rgba(255,184,0,.08)"/>
+            <rect x="220" y="208" width="3" height="30" fill="rgba(255,184,0,.07)"/>
+            <rect x="316" y="208" width="4" height="38" fill="rgba(255,184,0,.09)"/>
+            <!-- River shimmer -->
+            <path d="M0 220 Q120 215 240 222 Q360 229 480 220" stroke="rgba(255,255,255,0.08)" stroke-width="1.5" fill="none"/>
+            <path d="M0 235 Q120 230 240 237 Q360 244 480 235" stroke="rgba(255,255,255,0.05)" stroke-width="1" fill="none"/>
+
+            <!-- Story Bridge (simplified) -->
+            <path d="M290 205 L310 170 L330 205" stroke="rgba(255,184,0,.4)" stroke-width="2" fill="none"/>
+            <line x1="300" y1="175" x2="300" y2="205" stroke="rgba(255,184,0,.25)" stroke-width="1"/>
+            <line x1="320" y1="175" x2="320" y2="205" stroke="rgba(255,184,0,.25)" stroke-width="1"/>
+
+            <!-- South Bank trees hint -->
+            <ellipse cx="50" cy="202" rx="12" ry="8" fill="rgba(0,132,61,0.4)"/>
+            <ellipse cx="75" cy="200" rx="9" ry="7" fill="rgba(0,132,61,0.35)"/>
+            <ellipse cx="430" cy="202" rx="11" ry="7" fill="rgba(0,132,61,0.4)"/>
+            <ellipse cx="455" cy="200" rx="8" ry="6" fill="rgba(0,132,61,0.3)"/>
+
+            <!-- BRISBANE label -->
+            <text x="240" y="252" font-family="Nunito,sans-serif" font-weight="900" font-size="11" fill="rgba(255,255,255,0.25)" text-anchor="middle" letter-spacing="4">BRISBANE</text>
+          </svg>
+
+          <!-- Floating info cards -->
+          <div class="hv-card hv-weather">
+            <div class="hvc-top">🌞 브리즈번 오늘</div>
+            <div class="hvc-main">29°</div>
+            <div class="hvc-sub">맑고 더워요</div>
+          </div>
+
+          <div class="hv-card hv-live">
+            <div class="hvc-top"><span class="live-dot" style="width:6px;height:6px"></span> 지금 접속중</div>
+            <div class="hvc-main" id="liveCount">247</div>
+            <div class="hvc-sub">명이 보고 있어요</div>
+          </div>
+
+          <div class="hv-card hv-post">
+            <div class="hvc-top">🔥 방금 올라온 글</div>
+            <div class="hvc-title">파트너비자 승인 후기 10개월...</div>
+            <div class="hvc-sub">조회 2,841 · 댓글 43</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cats">
+    <div class="sec-t">📌 카테고리</div>
+    <div class="cat-g">
+      <div class="cat-c active" onclick="filterPosts('all',this)"><div class="cat-ic">🏠</div><div class="cat-nm">전체</div><div class="cat-ct">3,241개</div></div>
+      <div class="cat-c" onclick="filterPosts('visa',this)"><div class="cat-ic">🛂</div><div class="cat-nm">비자/이민</div><div class="cat-ct">592개</div></div>
+      <div class="cat-c" onclick="filterPosts('job',this)"><div class="cat-ic">💼</div><div class="cat-nm">구인구직</div><div class="cat-ct">441개</div></div>
+      <div class="cat-c" onclick="filterPosts('life',this)"><div class="cat-ic">🏡</div><div class="cat-nm">생활정보</div><div class="cat-ct">729개</div></div>
+      <div class="cat-c" onclick="filterPosts('meet',this)"><div class="cat-ic">🤝</div><div class="cat-nm">모임/동호회</div><div class="cat-ct">313개</div></div>
+      <div class="cat-c" onclick="filterPosts('study',this)"><div class="cat-ic">📚</div><div class="cat-nm">어학/공부</div><div class="cat-ct">278개</div></div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div>
+      <!-- SPONSOR LINKS -->
+      <div class="sponsor-bar">
+        <div class="sponsor-bar-hdr">
+          <span class="sponsor-bar-title">⭐ 스폰서 업체 (브리즈번)</span>
+          <span style="font-size:10px;color:var(--sky);cursor:pointer;font-weight:700;" onclick="navTo('adpage',null)">광고 등록하기 →</span>
+        </div>
+        <div class="sponsor-links" id="sponsorLinks"></div>
+      </div>
+
+      <div class="posts-hdr">
+        <div class="sec-t" style="margin:0">💬 커뮤니티 게시판</div>
+        <div class="tabs">
+          <button class="tab active" onclick="swTab('recent',this)">최신</button>
+          <button class="tab" onclick="swTab('hot',this)">인기</button>
+          <button class="tab" onclick="swTab('unanswered',this)">답변대기</button>
+        </div>
+      </div>
+      <div class="write-box">
+        <div class="av" id="writeAv" style="background:var(--gold);color:var(--dark)">나</div>
+        <input class="w-inp" placeholder="무슨 이야기를 나눌까요? ✍️" onclick="ckLogin(openPostMd)" readonly>
+        <button class="btn btn-gold" onclick="ckLogin(openPostMd)">올리기</button>
+      </div>
+
+      <!-- POSTS + NATIVE ADS MIX -->
+      <div id="postList"></div>
+    </div>
+
+    <div class="sidebar">
+      <!-- SIDEBAR BANNER AD 1 -->
+      <div class="ad-sidebar-banner" onclick="showToast('한빛부동산 광고 클릭 🏠')">
+        <span class="ad-label">광고</span>
+        <div class="asb-img" style="background:linear-gradient(135deg,#FFB800,#FF8C00)">🏠</div>
+        <div class="asb-body">
+          <div class="asb-title">한빛 부동산</div>
+          <div class="asb-sub">브리즈번 전문 부동산 · 렌트/구매 상담</div>
+        </div>
+      </div>
+
+      <div class="widget w-wx">
+        <div class="w-t">☀️ 퀸즐랜드 날씨</div>
+        <div class="wg">
+          <div class="wci"><div class="wcc">브리즈번</div><div class="wct">29°<span class="wcic">🌞</span></div><div class="wcd">맑음</div></div>
+          <div class="wci"><div class="wcc">골드코스트</div><div class="wct">27°<span class="wcic">🌊</span></div><div class="wcd">맑음</div></div>
+          <div class="wci"><div class="wcc">선샤인코스트</div><div class="wct">26°<span class="wcic">☀️</span></div><div class="wcd">맑음</div></div>
+          <div class="wci"><div class="wcc">케언즈</div><div class="wct">31°<span class="wcic">🌧</span></div><div class="wcd">소나기</div></div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR BANNER AD 2 -->
+      <div class="ad-sidebar-banner" onclick="showToast('김박사 회계사무소 광고 클릭 💼')">
+        <span class="ad-label">광고</span>
+        <div class="asb-img" style="background:linear-gradient(135deg,#009DC4,#0070A0)">💼</div>
+        <div class="asb-body">
+          <div class="asb-title">김박사 세무회계</div>
+          <div class="asb-sub">Tax Return · ABN · 사업자 세무</div>
+        </div>
+      </div>
+
+      <div class="widget"><div class="w-t"><div class="live-dot"></div>지금 접속중</div><div id="onlineList"></div></div>
+      <div class="widget">
+        <div class="w-t">📅 다가오는 모임</div>
+        <div class="ev-item" onclick="navTo('map',null)"><div class="ev-dt">MAR 29 · 토요일</div><div class="ev-nm">🍺 브리즈번 번개모임</div><div class="ev-lc">📍 South Bank · 28명</div></div>
+        <div class="ev-item" onclick="navTo('map',null)"><div class="ev-dt">APR 5 · 토요일</div><div class="ev-nm">🎓 비자 정보 세미나</div><div class="ev-lc">📍 City CBD · 52명</div></div>
+        <div class="ev-item" onclick="navTo('map',null)"><div class="ev-dt">APR 12 · 일요일</div><div class="ev-nm">⛺ Gold Coast 소풍</div><div class="ev-lc">📍 서퍼스파라다이스 · 35명</div></div>
+      </div>
+
+      <!-- SIDEBAR BANNER AD 3 -->
+      <div class="ad-sidebar-banner" onclick="showToast('브리즈번 한식당 광고 클릭 🍜')">
+        <span class="ad-label">광고</span>
+        <div class="asb-img" style="background:linear-gradient(135deg,#00843D,#005a28)">🍜</div>
+        <div class="asb-body">
+          <div class="asb-title">맛나 한식당</div>
+          <div class="asb-sub">Fortitude Valley · 정통 한식</div>
+        </div>
+      </div>
+
+      <div class="widget"><div class="w-t">🔥 인기 게시글</div><ul class="pop-list" id="popularList"></ul></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ COMMUNITY ═══ -->
+<div class="page" id="page-community">
+  <div class="main" style="margin-top:26px">
+    <div>
+      <div class="posts-hdr">
+        <div class="sec-t" style="margin:0">💬 전체 게시판</div>
+        <button class="btn btn-gold" onclick="ckLogin(openPostMd)">✏️ 글쓰기</button>
+      </div>
+      <div class="sponsor-bar" style="margin-bottom:12px">
+        <div class="sponsor-bar-hdr"><span class="sponsor-bar-title">⭐ 스폰서 링크</span><span style="font-size:10px;color:var(--sky);cursor:pointer;font-weight:700" onclick="navTo('adpage',null)">광고 등록 →</span></div>
+        <div class="sponsor-links" id="sponsorLinks2"></div>
+      </div>
+      <div id="commList"></div>
+    </div>
+    <div class="sidebar">
+      <div class="widget">
+        <div class="w-t">📌 카테고리</div>
+        <div style="display:flex;flex-direction:column;gap:5px" id="commCatBtns"></div>
+      </div>
+      <div class="ad-sidebar-banner" onclick="showToast('OzLaw 이민법인 광고 클릭 ⚖️')">
+        <span class="ad-label">광고</span>
+        <div class="asb-img" style="background:linear-gradient(135deg,#8B5CF6,#6d28d9)">⚖️</div>
+        <div class="asb-body"><div class="asb-title">OzLaw 이민법인</div><div class="asb-sub">비자·영주권·시민권 전문</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ YELLOW PAGE (업소록) ═══ -->
+<div class="page" id="page-yellowpage">
+  <div class="jobs-wrap">
+    <div class="jobs-srch">
+      <h2>📒 업소록 — 브리즈번 한인 비즈니스</h2>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:12px">브리즈번 한인 업소 정보를 검색하고 등록하세요. 광고 등록 시 상단 노출!</div>
+      <div class="srch-row">
+        <input class="s-inp" id="ypSearch" placeholder="업소명, 업종 검색..." oninput="renderYP()">
+        <select class="s-sel" id="ypCat" onchange="renderYP()">
+          <option value="">🏪 전체 업종</option>
+          <option>음식점/카페</option><option>이민/비자</option><option>부동산</option>
+          <option>의료/약국</option><option>미용/뷰티</option><option>교육/어학원</option>
+          <option>세무/회계</option><option>자동차</option><option>여행/투어</option><option>기타</option>
+        </select>
+        <select class="s-sel" id="ypArea" onchange="renderYP()">
+          <option value="">📍 전체 지역</option>
+          <option>브리즈번 CBD</option><option>South Brisbane</option><option>Sunnybank</option>
+          <option>골드코스트</option><option>선샤인코스트</option><option>케언즈</option>
+        </select>
+        <button class="btn btn-gold" onclick="ckLogin(()=>showToast('업소 등록 문의: ozmate@email.com 📧'))">+ 내 업소 등록</button>
+      </div>
+    </div>
+    <div class="yp-cats" id="ypCatBtns"></div>
+    <div class="yp-grid" id="ypGrid"></div>
+  </div>
+</div>
+
+<!-- ═══ JOBS ═══ -->
+<div class="page" id="page-jobs">
+  <div class="jobs-wrap">
+    <div class="jobs-srch">
+      <h2>💼 구인구직 — 브리즈번·퀸즐랜드</h2>
+      <div class="srch-row">
+        <input class="s-inp" id="jSearch" placeholder="직종, 회사명 검색..." oninput="renderJobs()">
+        <select class="s-sel" id="jCity" onchange="renderJobs()"><option value="">🌏 전체 지역</option><option>브리즈번</option><option>골드코스트</option><option>선샤인코스트</option><option>케언즈</option><option>기타QLD</option></select>
+        <select class="s-sel" id="jType" onchange="renderJobs()"><option value="">📋 고용형태</option><option>정규직</option><option>파트타임</option><option>캐주얼</option><option>계약직</option></select>
+        <select class="s-sel" id="jField" onchange="renderJobs()"><option value="">🔧 직종</option><option>IT/개발</option><option>요식업</option><option>의료/간호</option><option>교육</option><option>건설</option><option>물류</option></select>
+      </div>
+    </div>
+    <div class="sponsor-bar" style="margin-bottom:16px">
+      <div class="sponsor-bar-hdr"><span class="sponsor-bar-title">⭐ 구인구직 스폰서</span><span style="font-size:10px;color:var(--sky);cursor:pointer;font-weight:700" onclick="navTo('adpage',null)">구인 광고 등록 →</span></div>
+      <div class="sponsor-links" id="sponsorLinks3"></div>
+    </div>
+    <div class="jobs-grid" id="jobsGrid"></div>
+  </div>
+</div>
+
+<!-- ═══ MAP ═══ -->
+<div class="page" id="page-map">
+  <div class="map-wrap">
+    <div class="sec-t">🗺 모임 지도 — 퀸즐랜드 전역</div>
+    <div class="map-layout">
+      <div>
+        <div class="widget" style="padding:13px">
+          <div class="w-t" style="margin-bottom:8px">📍 모임 목록</div>
+          <div id="meetList"></div>
+          <button class="sub-btn" style="margin-top:6px" onclick="ckLogin(()=>showToast('모임 개설 준비중 🛠'))">+ 새 모임 개설</button>
+        </div>
+      </div>
+      <div class="map-box">
+        <div class="map-canvas" id="mapCanvas">
+          <svg style="width:100%;height:100%;position:absolute;top:0;left:0" viewBox="0 0 800 460">
+            <path d="M175,80 L220,58 L285,52 L345,58 L405,48 L465,54 L525,64 L582,78 L622,98 L652,128 L662,158 L652,198 L640,238 L630,268 L642,298 L652,328 L640,358 L618,388 L598,408 L568,418 L538,428 L508,438 L488,448 L468,430 L448,440 L428,430 L408,440 L388,430 L368,440 L348,430 L328,420 L308,410 L288,400 L268,388 L248,368 L228,348 L208,328 L188,308 L178,278 L168,248 L158,218 L153,188 L148,158 L153,128 L158,103 Z" fill="#b8ddc0" stroke="#8fc49a" stroke-width="2" opacity=".9"/>
+            <text x="400" y="230" font-size="11" fill="#5a7a5a" font-family="sans-serif" opacity=".5" text-anchor="middle">QUEENSLAND</text>
+          </svg>
+          <div id="mapPins" style="position:absolute;inset:0"></div>
+          <div class="map-tooltip" id="mapTip"></div>
+        </div>
+        <div class="map-legend">
+          <span style="font-weight:700;font-size:10px">범례:</span>
+          <span class="leg-i"><span class="leg-d" style="background:#E8392A"></span>번개/친목</span>
+          <span class="leg-i"><span class="leg-d" style="background:#009DC4"></span>스터디</span>
+          <span class="leg-i"><span class="leg-d" style="background:#00843D"></span>세미나</span>
+          <span class="leg-i"><span class="leg-d" style="background:#FFB800"></span>스포츠</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ INFO ═══ -->
+<div class="page" id="page-info">
+  <div class="jobs-wrap">
+    <div class="jobs-srch"><h2>📋 브리즈번 생활 정보</h2><p style="color:var(--muted);font-size:12px;margin-top:4px">퀸즐랜드에서 꼭 알아야 할 생활 정보</p></div>
+    <div class="info-grid" id="infoGrid"></div>
+  </div>
+</div>
+
+<!-- ═══ DETAIL ═══ -->
+<div class="page" id="page-detail">
+  <div class="det-wrap">
+    <div class="det-card" id="detContent"></div>
+    <div class="sidebar">
+      <div class="ad-sidebar-banner" onclick="showToast('광고 클릭! 📣')">
+        <span class="ad-label">광고</span>
+        <div class="asb-img" style="background:linear-gradient(135deg,#FFB800,#FF8C00)">🦷</div>
+        <div class="asb-body"><div class="asb-title">선라이즈 치과</div><div class="asb-sub">한국어 가능 · CBD 위치</div></div>
+      </div>
+      <div class="widget"><div class="w-t">📌 비슷한 게시글</div><ul class="pop-list" id="relPosts"></ul></div>
+      <div class="widget"><div class="w-t">🔥 인기 게시글</div><ul class="pop-list" id="relPop"></ul></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PROFILE ═══ -->
+<div class="page" id="page-profile">
+  <div class="profile-wrap">
+    <div class="profile-hero" id="profileHero"></div>
+    <div class="badges-row" id="profileBadges"></div>
+    <div class="ptabs">
+      <button class="ptab active" onclick="swPTab('posts',this)">내 게시글</button>
+      <button class="ptab" onclick="swPTab('comments',this)">댓글</button>
+      <button class="ptab" onclick="swPTab('likes',this)">좋아요</button>
+    </div>
+    <div id="profileContent"></div>
+  </div>
+</div>
+
+<!-- ═══ AD PAGE ═══ -->
+<div class="page" id="page-adpage">
+  <div class="adpage-wrap">
+    <div class="adpage-hero">
+      <h2>📣 OzMate 광고 안내</h2>
+      <p>브리즈번 한인 No.1 커뮤니티에 광고하세요<br>월 <strong style="color:var(--gold)">4만 페이지뷰</strong> · 회원 <strong style="color:var(--gold)">13,000명+</strong> · 일 방문자 <strong style="color:var(--gold)">2,400명+</strong></p>
+    </div>
+
+    <div class="sec-t">💰 광고 패키지</div>
+    <div class="ad-packages">
+      <div class="ad-pkg">
+        <div class="pkg-name">스탠다드</div>
+        <div class="pkg-price">$150<span style="font-size:14px;color:var(--muted)">/월</span></div>
+        <div class="pkg-period">업소록 기본 등록</div>
+        <ul class="pkg-features">
+          <li>✅ 업소록 기본 등록</li>
+          <li>✅ 카테고리 노출</li>
+          <li>✅ 전화번호 표시</li>
+          <li>✅ 지도 핀 표시</li>
+          <li>⬜ 상단 노출 없음</li>
+        </ul>
+        <button class="pkg-btn" onclick="showToast('스탠다드 패키지 문의 📧')">문의하기</button>
+      </div>
+      <div class="ad-pkg popular">
+        <div class="pkg-name">프리미엄</div>
+        <div class="pkg-price">$350<span style="font-size:14px;color:var(--muted)">/월</span></div>
+        <div class="pkg-period">스폰서 링크 + 업소록</div>
+        <ul class="pkg-features">
+          <li>✅ 업소록 상단 추천 노출</li>
+          <li>✅ 스폰서 링크 포함</li>
+          <li>✅ 게시판 상단 12개 슬롯</li>
+          <li>✅ 로고 + 전화번호</li>
+          <li>✅ PC·모바일 동시 노출</li>
+        </ul>
+        <button class="pkg-btn" onclick="showToast('프리미엄 패키지 문의 📧')">문의하기</button>
+      </div>
+      <div class="ad-pkg">
+        <div class="pkg-name">플래티넘</div>
+        <div class="pkg-price">$650<span style="font-size:14px;color:var(--muted)">/월</span></div>
+        <div class="pkg-period">전체 광고 구좌 패키지</div>
+        <ul class="pkg-features">
+          <li>✅ 상단 배너 (풀 배너)</li>
+          <li>✅ 사이드바 배너 광고</li>
+          <li>✅ 스폰서 링크 포함</li>
+          <li>✅ 피드 네이티브 광고</li>
+          <li>✅ 모바일 중앙 고정 배너</li>
+        </ul>
+        <button class="pkg-btn" onclick="showToast('플래티넘 패키지 문의 📧')">문의하기</button>
+      </div>
+    </div>
+
+    <div class="sec-t" style="margin-top:28px">📐 광고 구좌 안내</div>
+    <div class="ad-slots-grid">
+      <div class="ad-slot-card">
+        <div class="asc-title">🏷️ 상단 풀 배너</div>
+        <div class="asc-desc">헤더 바로 아래 전체 폭 배너. 최대 3개 업체 동시 노출. 가장 높은 클릭률.</div>
+        <div class="asc-price">$250<span class="asc-sub">/월 · 슬롯당</span></div>
+      </div>
+      <div class="ad-slot-card">
+        <div class="asc-title">⭐ 스폰서 링크</div>
+        <div class="asc-desc">게시판 상단 12개 슬롯. PC·모바일 동시 노출. 브리즈번/퀸즐랜드 구분.</div>
+        <div class="asc-price">$150<span class="asc-sub">/월 · 슬롯당</span></div>
+      </div>
+      <div class="ad-slot-card">
+        <div class="asc-title">📱 사이드바 배너</div>
+        <div class="asc-desc">우측 사이드바 고정 배너. 스크롤 시 항상 노출. 이미지+텍스트.</div>
+        <div class="asc-price">$200<span class="asc-sub">/월 · 슬롯당</span></div>
+      </div>
+      <div class="ad-slot-card">
+        <div class="asc-title">📰 피드 네이티브 광고</div>
+        <div class="asc-desc">게시글 피드에 자연스럽게 삽입. 거부감 없는 콘텐츠형 광고.</div>
+        <div class="asc-price">$180<span class="asc-sub">/월</span></div>
+      </div>
+    </div>
+
+    <div style="background:var(--card);border-radius:14px;padding:24px;border:1.5px solid var(--border);margin-top:20px;text-align:center;">
+      <div style="font-size:20px;font-weight:900;color:var(--text);margin-bottom:8px">광고 문의</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:16px">지금 바로 문의하시면 첫 달 20% 할인 혜택을 드려요!</div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+        <button class="sub-btn" style="width:auto;padding:11px 28px" onclick="showToast('이메일: ads@ozmate.com.au 📧')">📧 이메일 문의</button>
+        <button class="sub-btn" style="width:auto;padding:11px 28px;background:var(--sky)" onclick="showToast('카카오톡: @ozmate 💛')">💛 카카오 문의</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODALS ═══ -->
+<div class="overlay" id="lgMd" onclick="closeMdBg(event,'lgMd')">
+  <div class="modal">
+    <div class="md-hdr"><div class="md-t">🦘 로그인</div><button class="cls-btn" onclick="closeMd('lgMd')">✕</button></div>
+    <div class="fg"><label class="fl">이메일</label><input class="fi" id="lEmail" placeholder="your@email.com" type="email"></div>
+    <div class="fg"><label class="fl">비밀번호</label><input class="fi" id="lPw" placeholder="••••••••" type="password" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <button class="sub-btn" onclick="doLogin()">로그인</button>
+    <div class="or-div">또는</div>
+    <div class="social-btns">
+      <button class="s-btn" onclick="socialLogin('Google')">🇬 Google</button>
+      <button class="s-btn" onclick="socialLogin('카카오')">💛 카카오</button>
+    </div>
+    <div class="sw-auth">계정 없으세요? <a onclick="toReg()">회원가입</a></div>
+  </div>
+</div>
+
+<div class="overlay" id="rgMd" onclick="closeMdBg(event,'rgMd')">
+  <div class="modal">
+    <div class="md-hdr"><div class="md-t">✨ 회원가입</div><button class="cls-btn" onclick="closeMd('rgMd')">✕</button></div>
+    <div class="fg"><label class="fl">닉네임</label><input class="fi" id="rName" placeholder="브리즈번에서 불릴 닉네임"></div>
+    <div class="fg"><label class="fl">이메일</label><input class="fi" id="rEmail" placeholder="your@email.com" type="email"></div>
+    <div class="fg"><label class="fl">비밀번호 (8자 이상)</label><input class="fi" id="rPw" placeholder="••••••••" type="password"></div>
+    <div class="fg"><label class="fl">거주 지역</label><select class="fi" id="rCity"><option>브리즈번</option><option>골드코스트</option><option>선샤인코스트</option><option>케언즈</option><option>기타 QLD</option></select></div>
+    <div class="fg"><label class="fl">비자 종류</label><select class="fi" id="rVisa"><option>영주권/시민권</option><option>워킹홀리데이(417)</option><option>학생비자(500)</option><option>기술이민(189/190)</option><option>파트너비자(820/801)</option><option>기타</option></select></div>
+    <button class="sub-btn" onclick="doReg()">가입 완료 🎉</button>
+    <div class="sw-auth">이미 계정 있으세요? <a onclick="toLg()">로그인</a></div>
+  </div>
+</div>
+
+<div class="overlay" id="postMd" onclick="closeMdBg(event,'postMd')">
+  <div class="modal" style="width:520px">
+    <div class="md-hdr"><div class="md-t">✏️ 새 글 작성</div><button class="cls-btn" onclick="closeMd('postMd')">✕</button></div>
+    <div class="fg"><label class="fl">카테고리</label>
+      <div class="cat-sel-g">
+        <div class="csi sel" onclick="selCat(this)">🛂 비자/이민</div>
+        <div class="csi" onclick="selCat(this)">💼 구인구직</div>
+        <div class="csi" onclick="selCat(this)">🏡 생활정보</div>
+        <div class="csi" onclick="selCat(this)">🤝 모임</div>
+        <div class="csi" onclick="selCat(this)">📚 어학</div>
+        <div class="csi" onclick="selCat(this)">❓ 질문</div>
+      </div>
+    </div>
+    <div class="fg"><label class="fl">제목</label><input class="fi" id="pTitle" placeholder="제목을 입력해주세요"></div>
+    <div class="fg"><label class="fl">내용</label><textarea class="fta" id="pContent" placeholder="내용을 자유롭게 작성해주세요 🦘"></textarea></div>
+    <div class="fg"><label class="fl">태그 (쉼표로 구분)</label><input class="fi" id="pTags" placeholder="예: 브리즈번, 비자, 꿀팁"></div>
+    <button class="sub-btn" onclick="submitPost()">게시글 올리기 🚀</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ═══ MOBILE NAV ═══ -->
+<div class="mobile-nav">
+  <div class="mobile-nav-inner">
+    <button class="mn-btn active" id="mn-home" onclick="mobileNav('home',this)"><span class="mn-ic">🏠</span>홈</button>
+    <button class="mn-btn" id="mn-community" onclick="mobileNav('community',this)"><span class="mn-ic">💬</span>커뮤니티</button>
+    <button class="mn-btn" id="mn-yellowpage" onclick="mobileNav('yellowpage',this)"><span class="mn-ic">📒</span>업소록</button>
+    <button class="mn-btn" id="mn-jobs" onclick="mobileNav('jobs',this)"><span class="mn-ic">💼</span>일자리</button>
+    <button class="mn-btn" id="mn-profile" onclick="mobileNav('profile',this)"><span class="mn-ic">👤</span>프로필</button>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-in">
+    <div class="fb-brand">
+      <div class="logo-tx">Oz<span style="color:var(--gold)">Mate</span> 🦘</div>
+      <p>브리즈번·퀸즐랜드 한인 No.1 커뮤니티<br>골드코스트, 선샤인코스트, 케언즈까지<br>퀸즐랜드 전 지역 한인들을 위한 공간</p>
+      <div class="fsoc">
+        <div class="fsoc-btn" onclick="showToast('카카오채널 💛')">💛</div>
+        <div class="fsoc-btn" onclick="showToast('인스타그램 📸')">📸</div>
+        <div class="fsoc-btn" onclick="showToast('유튜브 🎬')">🎬</div>
+        <div class="fsoc-btn" onclick="showToast('네이버카페 🟢')">🟢</div>
+      </div>
+    </div>
+    <div class="fc">
+      <h4>커뮤니티</h4>
+      <a onclick="navTo('community',null)">전체 게시판</a>
+      <a onclick="showToast('오일쉐어 게시판 🚗')">오일쉐어</a>
+      <a onclick="showToast('중고거래 게시판 🛒')">중고거래</a>
+      <a onclick="showToast('쉐어하우스 게시판 🏠')">쉐어하우스</a>
+      <a onclick="navTo('map',null)">모임지도</a>
+    </div>
+    <div class="fc">
+      <h4>비즈니스</h4>
+      <a onclick="navTo('yellowpage',null)">업소록</a>
+      <a onclick="navTo('jobs',null)">구인구직</a>
+      <a onclick="navTo('adpage',null)">광고문의</a>
+      <a onclick="showToast('업소 등록 📒')">업소 등록</a>
+    </div>
+    <div class="fc">
+      <h4>도움말</h4>
+      <a onclick="navTo('info',null)">생활 정보</a>
+      <a onclick="showToast('FAQ 준비중 ❓')">FAQ</a>
+      <a onclick="showToast('이용약관 준비중 📋')">이용약관</a>
+      <a onclick="showToast('문의하기 ✉️')">문의하기</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 <strong>OzMate</strong> · ABN 12 345 678 901 · Brisbane, QLD Australia · Made with ❤️</p>
+    <div class="app-badges">
+      <div class="app-b" onclick="showToast('앱스토어 출시 예정 🍎')">🍎 App Store</div>
+      <div class="app-b" onclick="showToast('플레이스토어 출시 예정 🤖')">🤖 Play Store</div>
+    </div>
+  </div>
+</footer>
+
+<script type="module">
+// ═══ SUPABASE ═══
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+const sb = createClient('https://rcfzijqwpajvnvbyvnly.supabase.co', 'sb_publishable_1W1nqtIqNpdOenBTGuzx6w_E4WhchVv');
+
+// ═══ STATE ═══
+let user=null, curFilter='all', likedP=new Set(), likedC=new Set(), dark=false, npOpen=false;
+const AVC=['#E8392A','#009DC4','#00843D','#8B5CF6','#F59E0B','#EC4899'];
+const rC=s=>AVC[s.charCodeAt(0)%AVC.length];
+
+// ═══ NOTIFICATIONS ═══
+let notifs=[
+  {id:1,txt:'내 게시글에 댓글이 달렸어요',time:'5분 전',read:false},
+  {id:2,txt:'비자 관련 새 게시글이 올라왔어요',time:'1시간 전',read:false},
+  {id:3,txt:'브리즈번 번개모임 참가 확인됐어요 🍺',time:'2시간 전',read:false},
+];
+
+function renderNotifs(){
+  const u=notifs.filter(n=>!n.read);
+  const b=document.getElementById('nBadge');
+  if(b){b.textContent=u.length;b.style.display=u.length?'flex':'none';}
+  const list=document.getElementById('npList');
+  if(!list)return;
+  list.innerHTML=notifs.map(n=>`<div class="np-item ${n.read?'':'unread'}" onclick="readN(${n.id})"><div class="np-tx">${n.txt}</div><div class="np-tm">${n.time}</div></div>`).join('');
+}
+function toggleNp(){npOpen=!npOpen;document.getElementById('npPanel').classList.toggle('show',npOpen);}
+function readN(id){const n=notifs.find(x=>x.id===id);if(n)n.read=true;renderNotifs();}
+function markAllRead(){notifs.forEach(n=>n.read=true);renderNotifs();showToast('모두 읽음 ✅');}
+
+document.addEventListener('click',e=>{
+  if(!e.target.closest('#nBtn')&&!e.target.closest('#npPanel')){
+    const p=document.getElementById('npPanel');if(p)p.classList.remove('show');npOpen=false;
+  }
+  if(!e.target.closest('.hdr-search')) hideSDrop();
+});
+
+// ═══ DARK MODE ═══
+function toggleDark(){
+  dark=!dark;
+  document.documentElement.setAttribute('data-theme',dark?'dark':'light');
+  const b=document.getElementById('dmBtn');if(b)b.textContent=dark?'☀️':'🌙';
+  showToast(dark?'다크모드 🌙':'라이트모드 ☀️');
+}
+
+// ═══ SEARCH ═══
+function doSearch(q){
+  if(!q.trim()){hideSDrop();hideMSDrop();return;}
+  if(typeof posts==='undefined'||typeof businesses==='undefined') return;
+  const res=posts.filter(p=>p.title.includes(q)||p.tags.some(t=>t.includes(q))).slice(0,5);
+  const yres=businesses.filter(b=>b.name.includes(q)||b.category.includes(q)).slice(0,3);
+  let html='';
+  if(res.length) res.forEach(p=>{html+=`<div class="sd-item" onclick="openDetail(${p.id});hideSDrop();hideMSDrop()"><div class="sd-t">${p.title}</div><div class="sd-s">게시글 · ${p.badge}</div></div>`;});
+  if(yres.length) yres.forEach(b=>{html+=`<div class="sd-item" onclick="navTo('yellowpage',null);hideSDrop();hideMSDrop()"><div class="sd-t">${b.name}</div><div class="sd-s">업소록 · ${b.category}</div></div>`;});
+  if(!html) html='<div class="sd-item"><div class="sd-s">검색 결과가 없어요</div></div>';
+  // PC 드롭다운
+  const drop=document.getElementById('sDrop');
+  if(drop){drop.innerHTML=html;drop.classList.add('show');}
+  // 모바일 드롭다운
+  const mdrop=document.getElementById('msDrop');
+  if(mdrop){mdrop.innerHTML=html;mdrop.classList.add('show');}
+}
+function showSDrop(){const v=document.getElementById("gSearch")?.value.trim();if(v)document.getElementById("sDrop")?.classList.add("show");}
+function hideSDrop(){document.getElementById("sDrop")?.classList.remove("show");}
+function showMSDrop(){const v=document.getElementById("mSearch")?.value.trim();if(v)document.getElementById("msDrop")?.classList.add("show");}
+function hideMSDrop(){document.getElementById("msDrop")?.classList.remove("show");}
+
+// ═══ DATA ═══
+const posts=[
+  {id:1,cat:'visa',badge:'비자/이민',bc:'#EFF6FF',bt:'#1D4ED8',author:'브리즈번이민자',color:'#009DC4',time:'3분 전',
+   title:'파트너 비자 (820/801) 신청 후기 - 10개월 만에 승인!',
+   body:'드디어 승인 받았습니다!!\n\n서류 준비는 3개월, 파트너십 증명이 핵심이었어요.\n공동 계좌, 여행 사진, 임대 계약서를 최대한 많이 모았습니다.',
+   tags:['파트너비자','820비자','이민'],likes:127,
+   comments:[
+     {id:1,author:'골드코스트새내기',color:'#009DC4',text:'축하드려요!! 케이스 오피서 연락 오셨나요?',time:'1분 전',likes:5},
+     {id:2,author:'이민전문가',color:'#00843D',text:'체크리스트 공유해주실 수 있나요?',time:'2분 전',likes:8}
+   ],views:2841},
+  {id:2,cat:'job',badge:'구인구직',bc:'#F0FDF4',bt:'#166534',author:'브리즈번직장인',color:'#00843D',time:'15분 전',
+   title:'브리즈번 IT 회사 취업 성공! LinkedIn 최적화 방법',
+   body:'6개월 준비 끝에 드디어 브리즈번 IT 기업 입사!\n\n1. LinkedIn 헤드라인 최적화\n2. 현지 네트워킹 이벤트\n3. GitHub 포트폴리오 필수',
+   tags:['IT취업','링크드인','브리즈번'],likes:89,
+   comments:[{id:1,author:'취준생',color:'#8B5CF6',text:'어떤 회사 들어가셨나요?',time:'10분 전',likes:3}],views:1523},
+  {id:3,cat:'life',badge:'생활정보',bc:'#FFFBEB',bt:'#92400E',author:'써니뱅크맘',color:'#FFB800',time:'1시간 전',
+   title:'써니뱅크 한인마트 총정리 2026 업데이트 🛒',
+   body:'써니뱅크 한인마트 완벽 정리!\n\n- H마트 (가장 큰 규모)\n- 이마트 (Garden City 근처)\n- 코리아나 (Fortitude Valley)',
+   tags:['한인마트','써니뱅크','브리즈번'],likes:214,comments:[],views:5213},
+  {id:4,cat:'meet',badge:'모임/동호회',bc:'#FDF4FF',bt:'#7E22CE',author:'골코서퍼',color:'#8B5CF6',time:'2시간 전',
+   title:'[골드코스트] 4월 번개모임 멤버 모집 🍻',
+   body:'골드코스트 새로 오신 분들 환영!\n\n📅 4월 26일 토요일 오후 6시\n📍 서퍼스파라다이스 근처\n👥 현재 15명 예정',
+   tags:['골드코스트','번개모임','친목'],likes:45,
+   comments:[{id:1,author:'GC5년차',color:'#E8392A',text:'참가할게요! 반갑습니다 😊',time:'1시간 전',likes:2}],views:834},
+  {id:5,cat:'study',badge:'어학/공부',bc:'#FFF1F2',bt:'#9F1239',author:'IELTS마스터',color:'#E8392A',time:'3시간 전',
+   title:'IELTS 8.0 달성 - 브리즈번에서 6개월 독학',
+   body:'직장다니며 6개월 준비 Overall 8.0!\n\nL 8.5 / R 9.0 / W 7.0 / S 7.5\n\n사용 자료: Cambridge 교재, IELTS Liz',
+   tags:['IELTS','영어공부','브리즈번'],likes:156,comments:[],views:3218}
+];
+
+// SPONSOR LINKS DATA
+const sponsors=[
+  {ic:'⚖️',nm:'OzLaw 이민',cat:'이민/비자'},
+  {ic:'🏠',nm:'한빛부동산',cat:'부동산'},
+  {ic:'💊',nm:'선라이즈약국',cat:'의료'},
+  {ic:'✂️',nm:'K-헤어샵',cat:'미용'},
+  {ic:'🍜',nm:'맛나한식당',cat:'음식점'},
+  {ic:'📚',nm:'에듀브리즈번',cat:'교육'},
+  {ic:'💼',nm:'김박사세무',cat:'세무'},
+  {ic:'🚗',nm:'한인카서비스',cat:'자동차'},
+  {ic:'✈️',nm:'현대여행사',cat:'여행'},
+  {ic:'🏥',nm:'선라이즈치과',cat:'의료'},
+  {ic:'🌾',nm:'OzFarm',cat:'취업'},
+  {ic:'🎓',nm:'유학원에듀',cat:'교육'},
+];
+
+// BUSINESSES (업소록)
+const businesses=[
+  {id:1,logo:'⚖️',name:'OzLaw 이민법인',category:'이민/비자',area:'브리즈번 CBD',desc:'비자·영주권·시민권 전문. 한국어 상담 가능. 15년 경력.',tags:['비자','영주권','시민권'],phone:'07-1234-5678',featured:true},
+  {id:2,logo:'🍜',name:'맛나 한식당',category:'음식점/카페',area:'Fortitude Valley',desc:'정통 한식 레스토랑. 삼겹살·갈비·순두부 전문. 주차 가능.',tags:['한식','브리즈번','주차가능'],phone:'07-2345-6789',featured:true},
+  {id:3,logo:'✂️',name:'K-헤어 스튜디오',category:'미용/뷰티',area:'South Brisbane',desc:'한국 전문 헤어샵. 펌·염색·커트 전문. 예약 필수.',tags:['헤어','미용','사우스브리즈번'],phone:'07-3456-7890',featured:false},
+  {id:4,logo:'🏠',name:'한빛 부동산',category:'부동산',area:'브리즈번 CBD',desc:'브리즈번 렌트·매매 전문. 한국어 상담. 무료 컨설팅.',tags:['부동산','렌트','매매'],phone:'07-4567-8901',featured:true},
+  {id:5,logo:'📚',name:'에듀브리즈번',category:'교육/어학원',area:'City CBD',desc:'IELTS·영어 전문 어학원. 소규모 클래스. 원어민 강사.',tags:['IELTS','영어','어학원'],phone:'07-5678-9012',featured:false},
+  {id:6,logo:'💼',name:'김박사 세무회계',category:'세무/회계',area:'Sunnybank',desc:'Tax Return·ABN·사업자 세무. 한국어 가능. 15년 경력.',tags:['세무','Tax Return','회계'],phone:'07-6789-0123',featured:false},
+  {id:7,logo:'✈️',name:'현대 여행사',category:'여행/투어',area:'브리즈번 CBD',desc:'퀸즐랜드 데이투어·패키지. 탕갈루마·모턴섬·선샤인코스트.',tags:['여행','투어','관광'],phone:'07-7890-1234',featured:true},
+  {id:8,logo:'🏥',name:'선라이즈 치과',category:'의료/약국',area:'브리즈번 CBD',desc:'한국어 가능 치과. 일반치료·임플란트·미백.',tags:['치과','의료','한국어'],phone:'07-8901-2345',featured:false},
+];
+
+const meetings=[
+  {id:1,name:'브리즈번 한인 번개모임',city:'브리즈번',date:'MAR 29',type:'번개/친목',color:'#E8392A',members:28,x:622,y:200,desc:'South Bank 펍에서 번개!'},
+  {id:2,name:'비자 정보 세미나',city:'브리즈번 CBD',date:'APR 5',type:'세미나',color:'#00843D',members:52,x:630,y:188,desc:'이민법인과 Q&A 세미나'},
+  {id:3,name:'골드코스트 번개',city:'골드코스트',date:'APR 12',type:'번개/친목',color:'#E8392A',members:35,x:640,y:230,desc:'서퍼스파라다이스 번개'},
+  {id:4,name:'케언즈 한인 모임',city:'케언즈',date:'APR 19',type:'번개/친목',color:'#FFB800',members:18,x:540,y:90,desc:'케언즈 한인 정기 모임'},
+  {id:5,name:'IELTS 스터디 그룹',city:'브리즈번',date:'매주 토',type:'스터디',color:'#009DC4',members:12,x:625,y:195,desc:'매주 토요일 Writing'},
+  {id:6,name:'선샤인코스트 소풍',city:'선샤인코스트',date:'APR 26',type:'스포츠',color:'#FFB800',members:22,x:610,y:168,desc:'누사비치 소풍 모임'},
+];
+
+const onlineM=[
+  {name:'써니뱅크맘',loc:'Brisbane Sunnybank',color:'#FFB800'},
+  {name:'브리즈번이민자',loc:'Brisbane CBD',color:'#009DC4'},
+  {name:'골코서퍼',loc:'Gold Coast Surfers',color:'#8B5CF6'},
+  {name:'IT개발자K',loc:'Brisbane South Bank',color:'#00843D'},
+  {name:'케언즈워홀러',loc:'Cairns',color:'#E8392A'},
+];
+
+const popular=[
+  {title:'파트너 비자 승인 후기',views:'5.2만'},
+  {title:'써니뱅크 한인마트 총정리',views:'3.8만'},
+  {title:'IELTS 8.0 독학 공부법',views:'2.9만'},
+  {title:'브리즈번 월세 현실 정리',views:'2.1만'},
+  {title:'Tax Return 셀프 신고법',views:'1.8만'},
+];
+
+const infoCards=[
+  {ic:'🛂',title:'비자 종류 완벽 가이드',desc:'워홀·학생·기술이민·파트너 비자까지 퀸즐랜드 기준 정리.',tag:'비자/이민'},
+  {ic:'🏠',title:'브리즈번 집 구하는 방법',desc:'Domain, REA, 페이스북 그룹. 써니뱅크·사우스브리즈번 추천 지역.',tag:'생활정보'},
+  {ic:'💳',title:'호주 은행 계좌 개설',desc:'CBA, ANZ, Westpac 비교. 브리즈번 CBD 지점 위치.',tag:'생활정보'},
+  {ic:'🚗',title:'QLD 운전면허 취득/교환',desc:'한국 면허 교환 방법과 QLD 필기·실기 안내.',tag:'생활정보'},
+  {ic:'💊',title:'Medicare & 의료 가이드',desc:'브리즈번 한인 의사·약국 위치, Medicare 등록 방법.',tag:'의료/건강'},
+  {ic:'🐨',title:'Tax Return 세금 신고',desc:'myGov, ATO, TFN. 브리즈번 한인 세무사 추천.',tag:'세금/재정'},
+  {ic:'✈️',title:'퀸즐랜드 데이투어 가이드',desc:'탕갈루마·모턴섬·선샤인코스트·누사비치 투어 정보.',tag:'여행/관광'},
+  {ic:'🎓',title:'브리즈번 어학원 추천',desc:'City CBD, 사우스브리즈번 IELTS 전문 어학원 비교.',tag:'어학/교육'},
+  {ic:'✈️',title:'브리즈번 도착 첫 주 체크리스트',desc:'공항 출발부터 첫 1주일 준비 완벽 가이드.',tag:'정착 가이드'},
+];
+
+const jobs=[
+  {id:1,logo:'💻',co:'TechBrisbane Pty Ltd',title:'Frontend Developer',city:'브리즈번',type:'정규직',field:'IT/개발',sal:'$100K-$130K',desc:'React 경험자. 한국어 가능자 우대. 워킹비자 스폰서 가능.',tags:['React','브리즈번','비자스폰'],posted:'2일 전',bg:'#EFF6FF'},
+  {id:2,logo:'🍜',co:'써니뱅크 한식당',title:'홀·주방 직원',city:'브리즈번',type:'파트타임',field:'요식업',sal:'$28-$32/hr',desc:'써니뱅크 한식당 파트타임. 한국어 가능자. 세컨비자 가능.',tags:['요식업','써니뱅크','세컨비자'],posted:'1일 전',bg:'#FFF1F2'},
+  {id:3,logo:'🏥',co:'Gold Coast Hospital',title:'RN (한국어 가능)',city:'골드코스트',type:'정규직',field:'의료/간호',sal:'$85K-$105K',desc:'한국어 가능 RN. AHPRA 필수. 비자 스폰서 검토.',tags:['간호사','골드코스트','AHPRA'],posted:'3일 전',bg:'#F0FDF4'},
+  {id:4,logo:'📚',co:'에듀브리즈번',title:'IELTS 강사',city:'브리즈번',type:'계약직',field:'교육',sal:'$45-$60/hr',desc:'IELTS Writing/Speaking 전문 강사. 원어민 or 고득점자.',tags:['IELTS','강사','브리즈번'],posted:'4일 전',bg:'#FFFBEB'},
+  {id:5,logo:'🌾',co:'QLD 농장 (세컨비자)',title:'농장 워커',city:'기타QLD',type:'캐주얼',field:'물류',sal:'$28/hr+',desc:'퀸즐랜드 전역 농장. 세컨비자 88일 지원. 숙식 제공.',tags:['세컨비자','농장','워홀'],posted:'오늘',bg:'#F0FDF4'},
+  {id:6,logo:'✈️',co:'현대 여행사',title:'투어 가이드',city:'브리즈번',type:'파트타임',field:'교육',sal:'$30-$40/hr',desc:'한국어/영어 투어 가이드. 퀸즐랜드 지역 지식 필요.',tags:['투어','가이드','브리즈번'],posted:'2일 전',bg:'#FDF4FF'},
+];
+
+// ═══ NAV ═══
+function navTo(pg,btn){
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+pg).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(pg==='community'){renderComm('all');renderCommCatBtns();renderSponsor('sponsorLinks2');}
+  if(pg==='yellowpage') renderYP();
+  if(pg==='jobs'){renderJobs();renderSponsor('sponsorLinks3');}
+  if(pg==='map') renderMap();
+  if(pg==='info') renderInfo();
+  if(pg==='profile') renderProfile();
+}
+function mobileNav(pg,btn){
+  document.querySelectorAll('.mn-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if(pg==='profile'&&!user){openMd('lgMd');showToast('로그인 후 이용 가능해요 🔐');return;}
+  navTo(pg,null);
+}
+
+// ═══ AUTH ═══
+function openMd(id){document.getElementById(id).classList.add('open');}
+function closeMd(id){document.getElementById(id).classList.remove('open');}
+function closeMdBg(e,id){if(e.target.id===id)closeMd(id);}
+function toReg(){closeMd('lgMd');setTimeout(()=>openMd('rgMd'),200);}
+function toLg(){closeMd('rgMd');setTimeout(()=>openMd('lgMd'),200);}
+
+// ── 로그인 ──
+async function doLogin(){
+  const em=document.getElementById('lEmail').value.trim(), pw=document.getElementById('lPw').value;
+  if(!em||!pw){showToast('입력해주세요');return;}
+  showToast('로그인 중... ⏳');
+  const {data,error}=await sb.auth.signInWithPassword({email:em,password:pw});
+  if(error){showToast('로그인 실패: '+error.message+'❌');return;}
+  await loadProfile(data.user);
+  closeMd('lgMd');
+}
+
+// ── 회원가입 ──
+async function doReg(){
+  const nm=document.getElementById('rName').value.trim(), em=document.getElementById('rEmail').value.trim(), pw=document.getElementById('rPw').value;
+  const city=document.getElementById('rCity').value, visa=document.getElementById('rVisa').value;
+  if(!nm||!em||!pw){showToast('모든 항목을 입력해주세요');return;}
+  if(pw.length<8){showToast('비밀번호 8자 이상');return;}
+  showToast('가입 중... ⏳');
+  const {data,error}=await sb.auth.signUp({email:em,password:pw});
+  if(error){showToast('가입 실패: '+error.message+' ❌');return;}
+  // 프로필 저장
+  const color=rC(nm);
+  await sb.from('profiles').insert({id:data.user.id,name:nm,email:em,city,visa,color});
+  await loadProfile(data.user);
+  closeMd('rgMd');
+  showToast(`가입 완료! ${nm}님 환영해요 🎉`);
+}
+
+// ── 소셜 로그인 (Google) ──
+async function socialLogin(p){
+  if(p==='Google'){
+    await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.href}});
+  } else {
+    showToast('카카오 로그인 준비중 💛');
+  }
+}
+
+// ── 프로필 로드 ──
+async function loadProfile(authUser){
+  const {data:profile}=await sb.from('profiles').select('*').eq('id',authUser.id).single();
+  if(profile){
+    setUser({...profile, joined: new Date(profile.joined_at).toLocaleDateString('ko-KR',{year:'numeric',month:'long'})});
+  } else {
+    // 프로필 없으면 기본값
+    const nm=authUser.email.split('@')[0];
+    setUser({id:authUser.id,name:nm,email:authUser.email,color:rC(nm),city:'브리즈번',visa:'기타',joined:'2026년 3월'});
+  }
+}
+
+// ── 유저 UI 세팅 ──
+function setUser(u){
+  user=u;
+  document.getElementById('hdrR').innerHTML=`
+    <div class="hdr-search"><span class="si">🔍</span><input type="text" placeholder="업소, 게시글 검색..." id="gSearch" oninput="doSearch(this.value)" onfocus="showSDrop()" onblur="setTimeout(hideSDrop,200)"><div class="sdrop" id="sDrop"></div></div>
+    <button class="dm-btn" id="dmBtn" onclick="toggleDark()">${dark?'☀️':'🌙'}</button>
+    <div style="position:relative"><button class="notif-btn" id="nBtn" onclick="toggleNp()">🔔<span class="nbadge" id="nBadge" style="display:none">0</span></button><div class="np" id="npPanel"><div class="np-hd">알림 <button onclick="markAllRead()" style="font-size:10px;font-weight:700;color:var(--sky);background:none;border:none;cursor:pointer;">모두 읽음</button></div><div id="npList"></div></div></div>
+    <div class="user-chip" onclick="navTo('profile',null)"><div class="av" style="background:${u.color}">${u.name[0]}</div><span>${u.name}</span></div>
+    <button class="btn btn-ghost" onclick="logOut()">로그아웃</button>
+    <button class="btn btn-gold" onclick="openPostMd()">✏️ 글쓰기</button>`;
+  const wa=document.getElementById('writeAv');if(wa){wa.style.background=u.color;wa.textContent=u.name[0];}
+  renderNotifs();
+  loadLikedPosts();
+}
+
+// ── 로그아웃 ──
+async function logOut(){
+  await sb.auth.signOut();
+  user=null;
+  location.reload();
+}
+
+// ── 좋아요한 게시글 로드 ──
+async function loadLikedPosts(){
+  if(!user) return;
+  const {data}=await sb.from('likes').select('post_id').eq('user_id',user.id);
+  if(data) data.forEach(l=>likedP.add(l.post_id));
+}
+
+function ckLogin(fn){if(!user){openMd('lgMd');showToast('로그인 후 이용 가능해요 🔐');return;}fn();}
+function openPostMd(){openMd('postMd');}
+
+// ═══ SPONSOR LINKS ═══
+function renderSponsor(elId){
+  const el=document.getElementById(elId);if(!el)return;
+  el.innerHTML=sponsors.map(s=>`
+    <div class="sponsor-link" onclick="showToast('${s.nm} 업소 클릭! 📞')">
+      <div class="sl-ic">${s.ic}</div>
+      <div class="sl-nm">${s.nm}</div>
+      <div class="sl-cat">${s.cat}</div>
+    </div>`).join('');
+}
+
+// ═══ YELLOW PAGES ═══
+const ypCats=['전체','음식점/카페','이민/비자','부동산','의료/약국','미용/뷰티','교육/어학원','세무/회계','여행/투어'];
+function renderYP(){
+  const srch=(document.getElementById('ypSearch')||{}).value||'';
+  const cat=(document.getElementById('ypCat')||{}).value||'';
+  const area=(document.getElementById('ypArea')||{}).value||'';
+  const g=document.getElementById('ypGrid');if(!g)return;
+  let f=businesses;
+  if(srch) f=f.filter(b=>b.name.includes(srch)||b.category.includes(srch)||b.desc.includes(srch));
+  if(cat) f=f.filter(b=>b.category===cat);
+  if(area) f=f.filter(b=>b.area.includes(area));
+  g.innerHTML=f.map(b=>`
+    <div class="yp-card ${b.featured?'featured':''}">
+      <div class="yp-logo">${b.logo}</div>
+      <div class="yp-name">${b.name}</div>
+      <div class="yp-cat">${b.category}</div>
+      <div class="yp-desc">${b.desc}</div>
+      <div class="yp-meta"><span class="tag">📍 ${b.area}</span>${b.tags.map(t=>`<span class="tag">#${t}</span>`).join('')}</div>
+      <div class="yp-foot">
+        <button class="yp-btn" onclick="showToast('📞 ${b.phone}')">📞 전화</button>
+        <button class="yp-btn outline" onclick="showToast('${b.name} 정보 저장 🔖')">🔖 저장</button>
+      </div>
+    </div>`).join('')||'<div style="text-align:center;padding:48px;color:var(--muted);grid-column:1/-1"><div style="font-size:36px">🔍</div><p style="margin-top:8px">검색 결과가 없어요</p></div>';
+}
+
+function renderYPCatBtns(){
+  const el=document.getElementById('ypCatBtns');if(!el)return;
+  el.innerHTML=ypCats.map((c,i)=>`<button class="yp-cat-btn ${i===0?'active':''}" onclick="filterYP('${c}',this)">${c}</button>`).join('');
+}
+function filterYP(cat,btn){
+  document.querySelectorAll('.yp-cat-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const sel=document.getElementById('ypCat');
+  if(sel) sel.value=cat==='전체'?'':cat;
+  renderYP();
+}
+
+// ═══ POSTS ═══
+function mkCard(post,i,nativeAdAfter){
+  const liked=likedP.has(post.id);
+  const d=document.createElement('div');
+  d.className='post-card';d.style.animationDelay=(i*.07)+'s';
+  d.innerHTML=`
+    <div class="post-meta">
+      <div class="av" style="background:${post.color}">${post.author[0]}</div>
+      <div style="flex:1"><div class="au-nm">${post.author}</div><div class="au-tm">${post.time}</div></div>
+      <span class="pbadge" style="background:${post.bc};color:${post.bt}">${post.badge}</span>
+    </div>
+    <div class="p-title">${post.title}</div>
+    <div class="p-prev">${post.body}</div>
+    <div class="p-tags">${post.tags.map(t=>`<span class="tag">#${t}</span>`).join('')}</div>
+    <div class="p-foot">
+      <button class="p-act ${liked?'liked':''}" onclick="tLike(event,${post.id},this)">${liked?'❤️':'🤍'} <span>${post.likes+(liked?1:0)}</span></button>
+      <button class="p-act" onclick="event.stopPropagation();openDetail(${post.id})">💬 <span>${post.comments.length}</span></button>
+      <button class="p-act" onclick="event.stopPropagation();cpLink()">🔗 공유</button>
+      <span style="margin-left:auto;font-size:10px;color:var(--muted)">👁 ${post.views.toLocaleString()}</span>
+    </div>`;
+  d.onclick=e=>{if(e.target.closest('.p-act'))return;openDetail(post.id);};
+  return d;
+}
+
+// Native ad HTML
+const nativeAds=[
+  {bg:'#F0FDF4',ic:'⚖️',bgIc:'#dcfce7',title:'OzLaw 이민법인 — 무료 비자 상담',sub:'파트너비자·영주권·시민권 전문. 브리즈번 CBD. 15년 경력.',cta:'무료 상담 신청'},
+  {bg:'#EFF6FF',ic:'✈️',bgIc:'#dbeafe',title:'현대여행사 — 탕갈루마 데이투어',sub:'모턴섬·탕갈루마 리조트 당일치기. 한국어 가이드 포함.',cta:'예약하기'},
+];
+
+function mkNativeAd(i){
+  const a=nativeAds[i%nativeAds.length];
+  const d=document.createElement('div');
+  d.className='ad-native';
+  d.innerHTML=`<span class="ad-label">광고</span>
+    <div class="adn-inner">
+      <div class="adn-ic" style="background:${a.bgIc}">${a.ic}</div>
+      <div><div class="adn-title">${a.title}</div><div class="adn-sub">${a.sub}</div><span class="adn-cta" onclick="event.stopPropagation();showToast('광고 클릭! 📣')">${a.cta} →</span></div>
+    </div>`;
+  return d;
+}
+
+// ── DB에서 게시글 로드 ──
+async function loadAndRenderPosts(filter='all'){
+  const list=document.getElementById('postList');if(!list)return;
+  list.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted)"><div style="font-size:32px;animation:spin 1s linear infinite">⏳</div><p style="margin-top:8px">불러오는 중...</p></div>';
+  let q=sb.from('posts').select('*').order('created_at',{ascending:false}).limit(30);
+  if(filter&&filter!=='all') q=q.eq('category',filter);
+  const {data,error}=await q;
+  if(error||!data){list.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted)">불러오기 실패 😢</div>';return;}
+  postsCache=data;
+  renderPostsFromCache(data);
+}
+
+async function loadAndRenderCommPosts(filter='all'){
+  const list=document.getElementById('commList');if(!list)return;
+  list.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted)"><div style="font-size:32px">⏳</div></div>';
+  let q=sb.from('posts').select('*').order('created_at',{ascending:false}).limit(30);
+  if(filter&&filter!=='all') q=q.eq('category',filter);
+  const {data}=await q;
+  if(!data){return;}
+  list.innerHTML='';
+  data.forEach((p,i)=>{
+    list.appendChild(mkCardFromDB(p,i));
+    if(i===2) list.appendChild(mkNativeAd(0));
+  });
+}
+
+async function loadAndRenderComments(postId){
+  const {data}=await sb.from('comments').select('*').eq('post_id',postId).order('created_at',{ascending:true});
+  const cl=document.getElementById('cmtList');
+  const wt=document.querySelector('#detContent .w-t');
+  if(cl) cl.innerHTML=data?data.map(c=>renderCmtFromDB(c)).join(''):'';
+  if(wt) wt.textContent=`💬 댓글 ${data?data.length:0}개`;
+}
+
+function renderPostsFromCache(data){
+  const list=document.getElementById('postList');if(!list)return;
+  if(!data||!data.length){
+    list.innerHTML='<div style="text-align:center;padding:48px;color:var(--muted)"><div style="font-size:36px">📝</div><p style="margin-top:8px">아직 게시글이 없어요. 첫 글을 써보세요!</p></div>';
+    return;
+  }
+  list.innerHTML='';
+  // DB 게시글 + 기본 샘플 게시글 합치기
+  const allPosts=[...data, ...posts.filter(p=>typeof p.id==='number')];
+  allPosts.forEach((p,i)=>{
+    list.appendChild(p.author_id ? mkCardFromDB(p,i) : mkCard(p,i));
+    if(i===2||i===5) list.appendChild(mkNativeAd(i));
+  });
+}
+
+// DB 게시글 카드 생성
+function mkCardFromDB(p, i){
+  const id=p.id;
+  const liked=likedP.has(id);
+  const timeDiff=timeAgo(p.created_at);
+  const d=document.createElement('div');
+  d.className='post-card';d.style.animationDelay=(i*.07)+'s';
+  d.innerHTML=`
+    <div class="post-meta">
+      <div class="av" style="background:${p.author_color||'#FFB800'}">${(p.author_name||'?')[0]}</div>
+      <div style="flex:1"><div class="au-nm">${p.author_name||'익명'}</div><div class="au-tm">${timeDiff}</div></div>
+      <span class="pbadge" style="background:${p.badge_bg||'#FFFBEB'};color:${p.badge_color||'#92400E'}">${p.badge||'일반'}</span>
+    </div>
+    <div class="p-title">${p.title}</div>
+    <div class="p-prev">${p.body}</div>
+    <div class="p-tags">${(p.tags||[]).map(t=>`<span class="tag">#${t}</span>`).join('')}</div>
+    <div class="p-foot">
+      <button class="p-act ${liked?'liked':''}" onclick="tLikeDB(event,${id},this)">${liked?'❤️':'🤍'} <span>${p.likes||0}</span></button>
+      <button class="p-act" onclick="event.stopPropagation();openDetailDB(${id})">💬 <span>0</span></button>
+      <button class="p-act" onclick="event.stopPropagation();cpLink()">🔗 공유</button>
+      <span style="margin-left:auto;font-size:10px;color:var(--muted)">👁 ${p.views||0}</span>
+    </div>`;
+  d.onclick=e=>{if(e.target.closest('.p-act'))return;openDetailDB(id);};
+  return d;
+}
+
+// DB 댓글 렌더
+function renderCmtFromDB(c){
+  return `<div class="cmt-item">
+    <div class="av" style="background:${c.author_color||'#ccc'};width:28px;height:28px;font-size:10px">${(c.author_name||'?')[0]}</div>
+    <div class="cmt-body">
+      <div class="cmt-author">${c.author_name}</div>
+      <div class="cmt-text">${c.text}</div>
+      <div class="cmt-time">${timeAgo(c.created_at)}</div>
+    </div>
+  </div>`;
+}
+
+// 시간 포맷
+function timeAgo(ts){
+  if(!ts) return '방금 전';
+  const diff=Date.now()-new Date(ts).getTime();
+  const m=Math.floor(diff/60000);
+  if(m<1) return '방금 전';
+  if(m<60) return `${m}분 전`;
+  const h=Math.floor(m/60);
+  if(h<24) return `${h}시간 전`;
+  const d=Math.floor(h/24);
+  if(d<7) return `${d}일 전`;
+  return new Date(ts).toLocaleDateString('ko-KR');
+}
+
+// DB 게시글 상세보기
+async function openDetailDB(id){
+  // 조회수 증가
+  await sb.from('posts').update({views:sb.rpc ? undefined : undefined}).eq('id',id);
+  const {data:post}=await sb.from('posts').select('*').eq('id',id).single();
+  if(!post) return;
+  // 조회수 +1
+  await sb.from('posts').update({views:(post.views||0)+1}).eq('id',id);
+  const liked=likedP.has(id);
+  document.getElementById('detContent').innerHTML=`
+    <button class="det-back" onclick="navTo('home',document.querySelectorAll('nav button')[0])">← 목록으로</button>
+    <span class="pbadge" style="background:${post.badge_bg};color:${post.badge_color};margin-bottom:10px;display:inline-block">${post.badge}</span>
+    <div class="det-title">${post.title}</div>
+    <div class="post-meta" style="margin-bottom:12px">
+      <div class="av" style="background:${post.author_color}">${post.author_name[0]}</div>
+      <div><div class="au-nm">${post.author_name}</div><div class="au-tm">${timeAgo(post.created_at)} · 👁 ${(post.views||0)+1}</div></div>
+    </div>
+    <div class="det-body">${post.body}</div>
+    <div class="p-tags" style="margin-bottom:12px">${(post.tags||[]).map(t=>`<span class="tag">#${t}</span>`).join('')}</div>
+    <div class="det-acts">
+      <button class="det-btn ${liked?'liked':''}" id="detLike" onclick="tLikeDB(null,${id},this,true)">${liked?'❤️':'🤍'} 좋아요 ${post.likes||0}</button>
+      <button class="det-btn" onclick="cpLink()">🔗 공유</button>
+      <button class="det-btn" onclick="showToast('북마크 저장 🔖')">🔖 북마크</button>
+    </div>
+    <div class="cmts">
+      <div class="w-t" style="font-size:14px;margin-bottom:10px">💬 댓글 로딩중...</div>
+      <div class="cmt-box">
+        <div class="av" style="background:${user?user.color:'#ccc'};width:28px;height:28px;font-size:10px">${user?user.name[0]:'?'}</div>
+        <input class="cmt-inp" id="cmtInp" placeholder="${user?'댓글을 입력하세요...':'로그인 후 댓글 가능'}" onkeydown="if(event.key==='Enter')submitCmt(${id})">
+        <button class="btn btn-gold" style="padding:5px 11px;font-size:11px" onclick="submitCmt(${id})">등록</button>
+      </div>
+      <div id="cmtList"></div>
+    </div>`;
+  // 관련글
+  const rel=postsCache.filter(p=>p.id!==id&&p.category===post.category).slice(0,5);
+  document.getElementById('relPosts').innerHTML=(rel.length?rel:postsCache.filter(p=>p.id!==id).slice(0,5)).map((p,i)=>`<li class="pop-item" onclick="openDetailDB(${p.id})"><span class="rnk ${i<3?'top':''}">${i+1}</span><span class="pop-txt">${p.title}</span></li>`).join('');
+  document.getElementById('relPop').innerHTML=popular.map((p,i)=>`<li class="pop-item"><span class="rnk ${i<3?'top':''}">${i+1}</span><span class="pop-txt">${p.title}</span><span class="pop-vw">👁 ${p.views}</span></li>`).join('');
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-detail').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  // 댓글 로드
+  await loadAndRenderComments(id);
+}
+
+// ── 좋아요 (DB) ──
+async function tLikeDB(e, id, btn, isDetail=false){
+  if(e) e.stopPropagation();
+  if(!user){openMd('lgMd');showToast('로그인 후 좋아요 가능 🔐');return;}
+  if(likedP.has(id)){
+    // 좋아요 취소
+    await sb.from('likes').delete().eq('user_id',user.id).eq('post_id',id);
+    await sb.from('posts').update({likes:sb.rpc ? 0 : 0}).eq('id',id); // 실제론 트리거로 처리
+    likedP.delete(id);
+    const {data:p}=await sb.from('posts').select('likes').eq('id',id).single();
+    const newLikes=Math.max(0,(p?.likes||1)-1);
+    await sb.from('posts').update({likes:newLikes}).eq('id',id);
+    if(!isDetail) btn.innerHTML=`🤍 <span>${newLikes}</span>`;
+    else btn.innerHTML=`🤍 좋아요 ${newLikes}`;
+    btn.classList.remove('liked');
+  } else {
+    // 좋아요
+    await sb.from('likes').insert({user_id:user.id,post_id:id});
+    const {data:p}=await sb.from('posts').select('likes').eq('id',id).single();
+    const newLikes=(p?.likes||0)+1;
+    await sb.from('posts').update({likes:newLikes}).eq('id',id);
+    likedP.add(id);
+    if(!isDetail) btn.innerHTML=`❤️ <span>${newLikes}</span>`;
+    else btn.innerHTML=`❤️ 좋아요 ${newLikes}`;
+    btn.classList.add('liked');
+    showToast('좋아요! ❤️');
+  }
+}
+
+// 기존 renderPosts는 호환성 유지
+function renderPosts(filter='all'){loadAndRenderPosts(filter);}
+
+function renderComm(f){
+  const list=document.getElementById('commList');if(!list)return;
+  const arr=f==='all'?posts:posts.filter(p=>p.cat===f);
+  list.innerHTML='';
+  arr.forEach((p,i)=>{
+    list.appendChild(mkCard(p,i));
+    if(i===2) list.appendChild(mkNativeAd(0));
+  });
+}
+function renderCommCatBtns(){
+  const c=document.getElementById('commCatBtns');if(!c)return;
+  const cats=[['all','🏠 전체'],['visa','🛂 비자/이민'],['job','💼 구인구직'],['life','🏡 생활정보'],['meet','🤝 모임/동호회'],['study','📚 어학/공부']];
+  c.innerHTML=cats.map(([cat,lbl])=>`<button data-cat="${cat}" onclick="renderComm('${cat}')" style="text-align:left;padding:7px 10px;border-radius:7px;border:1.5px solid var(--border);background:var(--card);font-size:12px;font-weight:700;cursor:pointer;font-family:'Noto Sans KR',sans-serif;color:var(--text);transition:.2s;">${lbl}</button>`).join('');
+}
+
+function filterPosts(cat,el){
+  curFilter=cat;
+  document.querySelectorAll('.cat-c').forEach(c=>c.classList.remove('active'));
+  if(el) el.classList.add('active');
+  renderPosts(cat);
+}
+function swTab(tab,el){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  if(tab==='hot') renderPosts([...posts].sort((a,b)=>b.likes-a.likes));
+  else if(tab==='unanswered') renderPosts(posts.filter(p=>p.comments.length===0));
+  else renderPosts(curFilter);
+}
+
+// ═══ POST WRITE ═══
+function selCat(el){document.querySelectorAll('.csi').forEach(c=>c.classList.remove('sel'));el.classList.add('sel');}
+// ── 게시글 작성 (DB 저장) ──
+async function submitPost(){
+  const t=document.getElementById('pTitle').value.trim(), c=document.getElementById('pContent').value.trim();
+  if(!t){showToast('제목을 입력해주세요');return;}
+  if(!c){showToast('내용을 입력해주세요');return;}
+  const catEl=document.querySelector('.csi.sel');
+  const catTxt=catEl?catEl.textContent.replace(/[🛂💼🏡🤝📚❓]/g,'').trim():'생활정보';
+  const catMap={'비자/이민':'visa','구인구직':'job','생활정보':'life','모임':'meet','어학':'study','질문':'study'};
+  const tgs=document.getElementById('pTags').value.split(',').map(x=>x.trim()).filter(Boolean);
+  const badgeColors={'비자/이민':['#EFF6FF','#1D4ED8'],'구인구직':['#F0FDF4','#166534'],'생활정보':['#FFFBEB','#92400E'],'모임':['#FDF4FF','#7E22CE'],'어학':['#FFF1F2','#9F1239'],'질문':['#FFF1F2','#9F1239']};
+  const [bc,bt]=badgeColors[catTxt]||['#FFFBEB','#92400E'];
+
+  showToast('게시글 등록 중... ⏳');
+  const {data,error}=await sb.from('posts').insert({
+    author_id:user.id, author_name:user.name, author_color:user.color,
+    category:catMap[catTxt]||'life', badge:catTxt, badge_bg:bc, badge_color:bt,
+    title:t, body:c, tags:tgs.length?tgs:['새글']
+  }).select().single();
+
+  if(error){showToast('등록 실패 ❌ '+error.message);return;}
+  closeMd('postMd');
+  document.getElementById('pTitle').value='';document.getElementById('pContent').value='';document.getElementById('pTags').value='';
+  await loadAndRenderPosts(curFilter);
+  showToast('게시글 등록 완료! 🎉');
+}
+
+// ═══ DETAIL ═══
+function openDetail(id){
+  const post=posts.find(p=>p.id===id);if(!post)return;
+  post.views++;
+  const liked=likedP.has(id);
+  document.getElementById('detContent').innerHTML=`
+    <button class="det-back" onclick="navTo('home',document.querySelectorAll('nav button')[0])">← 목록으로</button>
+    <span class="pbadge" style="background:${post.bc};color:${post.bt};margin-bottom:10px;display:inline-block">${post.badge}</span>
+    <div class="det-title">${post.title}</div>
+    <div class="post-meta" style="margin-bottom:12px">
+      <div class="av" style="background:${post.color}">${post.author[0]}</div>
+      <div><div class="au-nm">${post.author}</div><div class="au-tm">${post.time} · 👁 ${post.views.toLocaleString()}</div></div>
+    </div>
+    <div class="det-body">${post.body}</div>
+    <div class="p-tags" style="margin-bottom:12px">${post.tags.map(t=>`<span class="tag">#${t}</span>`).join('')}</div>
+    <div class="det-acts">
+      <button class="det-btn ${liked?'liked':''}" id="detLike" onclick="tLikeD(${id})">${liked?'❤️':'🤍'} 좋아요 ${post.likes+(liked?1:0)}</button>
+      <button class="det-btn" onclick="cpLink()">🔗 공유</button>
+      <button class="det-btn" onclick="showToast('북마크 저장 🔖')">🔖 북마크</button>
+    </div>
+    <div class="cmts">
+      <div class="w-t" style="font-size:14px;margin-bottom:10px">💬 댓글 ${post.comments.length}개</div>
+      <div class="cmt-box">
+        <div class="av" style="background:${user?user.color:'#ccc'};width:28px;height:28px;font-size:10px">${user?user.name[0]:'?'}</div>
+        <input class="cmt-inp" id="cmtInp" placeholder="${user?'댓글을 입력하세요...':'로그인 후 댓글 가능'}" onkeydown="if(event.key==='Enter')submitCmt(${id})">
+        <button class="btn btn-gold" style="padding:5px 11px;font-size:11px" onclick="submitCmt(${id})">등록</button>
+      </div>
+      <div id="cmtList">${renderCmts(post.comments)}</div>
+    </div>`;
+  const rel=posts.filter(p=>p.id!==id&&p.cat===post.cat).slice(0,5);
+  document.getElementById('relPosts').innerHTML=(rel.length?rel:posts.filter(p=>p.id!==id).slice(0,5)).map((p,i)=>`<li class="pop-item" onclick="openDetail(${p.id})"><span class="rnk ${i<3?'top':''}">${i+1}</span><span class="pop-txt">${p.title}</span></li>`).join('');
+  document.getElementById('relPop').innerHTML=popular.map((p,i)=>`<li class="pop-item"><span class="rnk ${i<3?'top':''}">${i+1}</span><span class="pop-txt">${p.title}</span><span class="pop-vw">👁 ${p.views}</span></li>`).join('');
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-detail').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function renderCmts(cmts){
+  return cmts.map(c=>`
+    <div class="cmt-item">
+      <div class="av" style="background:${c.color};width:28px;height:28px;font-size:10px">${c.author[0]}</div>
+      <div class="cmt-body">
+        <div class="cmt-author">${c.author}<span class="cmt-lk" onclick="lkC(${c.id},this)">🤍 ${c.likes}</span></div>
+        <div class="cmt-text">${c.text}</div>
+        <div class="cmt-time">${c.time}</div>
+      </div>
+    </div>`).join('');
+}
+// ── 댓글 작성 (DB 저장) ──
+async function submitCmt(postId){
+  if(!user){openMd('lgMd');showToast('로그인 후 댓글 가능 🔐');return;}
+  const inp=document.getElementById('cmtInp'),txt=inp.value.trim();
+  if(!txt){showToast('댓글을 입력해주세요');return;}
+  const {data,error}=await sb.from('comments').insert({
+    post_id:postId, author_id:user.id,
+    author_name:user.name, author_color:user.color, text:txt
+  }).select().single();
+  if(error){showToast('댓글 등록 실패 ❌');return;}
+  inp.value='';
+  // 댓글 목록 새로고침
+  await loadAndRenderComments(postId);
+  showToast('댓글 등록! 💬');
+}
+function lkC(id,el){
+  if(!user){openMd('lgMd');return;}
+  if(likedC.has(id)){likedC.delete(id);el.textContent=`🤍 ${parseInt(el.textContent.replace(/\D/g,''))-1}`;}
+  else{likedC.add(id);el.textContent=`❤️ ${parseInt(el.textContent.replace(/\D/g,''))+1}`;}
+}
+function tLike(e,id,btn){
+  e.stopPropagation();if(!user){openMd('lgMd');return;}
+  const p=posts.find(x=>x.id===id);
+  if(likedP.has(id)){likedP.delete(id);btn.classList.remove('liked');btn.innerHTML=`🤍 <span>${p.likes}</span>`;}
+  else{likedP.add(id);btn.classList.add('liked');btn.innerHTML=`❤️ <span>${p.likes+1}</span>`;showToast('좋아요! ❤️');}
+}
+function tLikeD(id){
+  if(!user){openMd('lgMd');return;}
+  const p=posts.find(x=>x.id===id);const btn=document.getElementById('detLike');
+  if(likedP.has(id)){likedP.delete(id);btn.classList.remove('liked');btn.innerHTML=`🤍 좋아요 ${p.likes}`;}
+  else{likedP.add(id);btn.classList.add('liked');btn.innerHTML=`❤️ 좋아요 ${p.likes+1}`;showToast('좋아요! ❤️');}
+}
+
+// ═══ JOBS ═══
+function renderJobs(){
+  const s=(document.getElementById('jSearch')||{}).value||'';
+  const ci=(document.getElementById('jCity')||{}).value||'';
+  const ty=(document.getElementById('jType')||{}).value||'';
+  const fi=(document.getElementById('jField')||{}).value||'';
+  const g=document.getElementById('jobsGrid');if(!g)return;
+  const f=jobs.filter(j=>{
+    if(s&&!j.title.includes(s)&&!j.co.includes(s))return false;
+    if(ci&&j.city!==ci)return false;if(ty&&j.type!==ty)return false;if(fi&&j.field!==fi)return false;return true;
+  });
+  g.innerHTML=f.map(j=>`
+    <div class="job-card">
+      <div class="job-hdr"><div class="job-logo" style="background:${j.bg}">${j.logo}</div><div><div class="job-co">${j.co}</div><div class="job-title">${j.title}</div></div></div>
+      <div class="job-tags"><span class="job-tag jt-type">${j.type}</span><span class="job-tag jt-loc">📍 ${j.city}</span><span class="job-tag jt-sal">💰 ${j.sal}</span></div>
+      <div class="job-desc">${j.desc}</div>
+      <div class="p-tags">${j.tags.map(t=>`<span class="tag">#${t}</span>`).join('')}</div>
+      <div class="job-foot"><span class="job-posted">📅 ${j.posted}</span><button class="btn-apply" onclick="ckLogin(()=>showToast('&quot;${j.title}&quot; 지원 완료! 📨'))">지원하기 →</button></div>
+    </div>`).join('')||'<div style="text-align:center;padding:48px;color:var(--muted);grid-column:1/-1"><div style="font-size:36px">🔍</div><p style="margin-top:8px">검색 결과 없음</p></div>';
+}
+
+// ═══ MAP ═══
+function renderMap(){
+  document.getElementById('meetList').innerHTML=meetings.map(m=>`
+    <div class="meet-li" id="ml-${m.id}" onclick="selMeet(${m.id})">
+      <div class="meet-date-b">${m.date}</div>
+      <div class="meet-inf"><div class="meet-nm">${m.name}</div><div class="meet-lc">📍 ${m.city}</div></div>
+      <span class="meet-cnt">${m.members}명</span>
+    </div>`).join('');
+  const pc=document.getElementById('mapPins');pc.innerHTML='';
+  meetings.forEach(m=>{
+    const pin=document.createElement('div');
+    pin.style.cssText=`position:absolute;left:${m.x/800*100}%;top:${m.y/460*100}%;transform:translate(-50%,-50%);z-index:5;`;
+    const ico=m.type.includes('스터디')?'📚':m.type.includes('세미나')?'🎓':m.type.includes('스포츠')?'⚽':'🍺';
+    pin.innerHTML=`<div style="background:${m.color};color:#fff;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;box-shadow:0 3px 9px rgba(0,0,0,.22);border:2px solid #fff;transition:.2s;" onmouseover="showTip(${m.id})" onmouseout="hideTip()" onclick="selMeet(${m.id})">${ico}</div>`;
+    pc.appendChild(pin);
+  });
+}
+function showTip(id){
+  const m=meetings.find(x=>x.id===id);const tip=document.getElementById('mapTip');
+  tip.style.left=(m.x/800*100+2)+'%';tip.style.top=(m.y/460*100+5)+'%';
+  tip.innerHTML=`<strong>${m.name}</strong><br>📍 ${m.city} · 📅 ${m.date}<br>👥 ${m.members}명<br><small style="color:rgba(255,184,0,.9)">${m.desc}</small>`;
+  tip.classList.add('show');
+}
+function hideTip(){document.getElementById('mapTip').classList.remove('show');}
+function selMeet(id){
+  document.querySelectorAll('.meet-li').forEach(e=>e.classList.remove('sel'));
+  const el=document.getElementById('ml-'+id);if(el){el.classList.add('sel');el.scrollIntoView({block:'nearest',behavior:'smooth'});}
+  const m=meetings.find(x=>x.id===id);
+  ckLogin(()=>showToast(`"${m.name}" 참가 신청! 🎉 ${m.members+1}번째`));
+}
+
+// ═══ INFO ═══
+function renderInfo(){
+  document.getElementById('infoGrid').innerHTML=infoCards.map(c=>`
+    <div class="info-card" onclick="showToast('${c.title} 준비중 📋')">
+      <div class="ic-icon">${c.ic}</div>
+      <div class="ic-title">${c.title}</div>
+      <div class="ic-desc">${c.desc}</div>
+      <span class="ic-tag">${c.tag}</span>
+    </div>`).join('');
+}
+
+// ═══ PROFILE ═══
+function renderProfile(){
+  if(!user){navTo('home',null);openMd('lgMd');return;}
+  const myPosts=posts.filter(p=>p.author===user.name);
+  document.getElementById('profileHero').innerHTML=`
+    <div class="profile-av" style="background:${user.color}">${user.name[0]}</div>
+    <div style="flex:1">
+      <div class="profile-name">${user.name}</div>
+      <div class="profile-sub">📍 ${user.city} · ${user.visa} · 가입 ${user.joined}</div>
+      <div class="profile-stats">
+        <div><div class="ps-n">${myPosts.length}</div><div class="ps-l">게시글</div></div>
+        <div><div class="ps-n">${likedP.size}</div><div class="ps-l">좋아요</div></div>
+        <div><div class="ps-n">12</div><div class="ps-l">댓글</div></div>
+      </div>
+    </div>
+    <button class="p-edit" onclick="showToast('프로필 수정 준비중 🛠')">프로필 수정</button>`;
+  const bdgs=[];
+  if(myPosts.length>=1) bdgs.push({ic:'✍️',l:'첫 글 작성'});
+  if(likedP.size>=3) bdgs.push({ic:'❤️',l:'좋아요 마스터'});
+  bdgs.push({ic:'🦘',l:'OzMate 회원'});
+  if(user.visa.includes('워킹')) bdgs.push({ic:'🎒',l:'워홀러'});
+  if(user.city==='브리즈번') bdgs.push({ic:'🌞',l:'브리즈번 주민'});
+  document.getElementById('profileBadges').innerHTML=bdgs.map(b=>`<div class="badge-i">${b.ic} ${b.l}</div>`).join('');
+  swPTab('posts',document.querySelector('.ptab'));
+}
+function swPTab(tab,btn){
+  document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  const ct=document.getElementById('profileContent');
+  const myPosts=posts.filter(p=>p.author===user?.name);
+  if(tab==='posts'){
+    ct.innerHTML='';
+    if(!myPosts.length){ct.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted)"><div style="font-size:36px">✍️</div><p style="margin-top:9px">아직 작성한 게시글이 없어요</p><button class="sub-btn" style="width:auto;padding:9px 22px;margin-top:14px" onclick="ckLogin(openPostMd)">첫 글 쓰기</button></div>';return;}
+    myPosts.forEach((p,i)=>{const c=mkCard(p,i);ct.appendChild(c);});
+  } else if(tab==='comments'){
+    ct.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted)"><div style="font-size:36px">💬</div><p style="margin-top:9px">댓글 활동이 여기 표시돼요</p></div>';
+  } else {
+    const liked=posts.filter(p=>likedP.has(p.id));
+    ct.innerHTML='';
+    if(!liked.length){ct.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted)"><div style="font-size:36px">❤️</div><p style="margin-top:9px">좋아요한 게시글이 없어요</p></div>';return;}
+    liked.forEach((p,i)=>ct.appendChild(mkCard(p,i)));
+  }
+}
+
+// ═══ SIDEBAR ═══
+function renderOnline(){
+  const el=document.getElementById('onlineList');if(!el)return;
+  el.innerHTML=onlineM.map(m=>`
+    <div class="mem-item">
+      <div class="av" style="background:${m.color};width:26px;height:26px;font-size:10px">${m.name[0]}</div>
+      <div><div class="mem-nm">${m.name}</div><div class="mem-lc">📍 ${m.loc}</div></div>
+      <span class="on-b">온라인</span>
+    </div>`).join('');
+}
+function renderPopular(){
+  const el=document.getElementById('popularList');if(!el)return;
+  el.innerHTML=popular.map((p,i)=>`
+    <li class="pop-item" onclick="showToast('인기글 보는 중 🔥')">
+      <span class="rnk ${i<3?'top':''}">${i+1}</span><span class="pop-txt">${p.title}</span><span class="pop-vw">👁 ${p.views}</span>
+    </li>`).join('');
+}
+function renderSkyline(){
+  const el=document.getElementById('skyline');if(!el)return;
+  [[28,72],[18,108],[36,148],[22,188],[46,228],[28,168],[42,208],[22,138],[32,118],[18,82]].forEach(([w,h],i)=>{
+    const b=document.createElement('div');b.className='bld';b.style.cssText=`width:${w}px;height:${h}px;animation-delay:${i*.1}s`;el.appendChild(b);
+  });
+}
+function cpLink(){navigator.clipboard?.writeText(location.href);showToast('링크 복사! 📋');}
+function animStat(id,target){
+  const el=document.getElementById(id);if(!el)return;
+  let cur=0;const step=Math.ceil(target/60);
+  const t=setInterval(()=>{cur=Math.min(cur+step,target);el.textContent=cur.toLocaleString();if(cur>=target)clearInterval(t);},22);
+}
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+// ═══ INIT ═══
+document.addEventListener('DOMContentLoaded', async ()=>{
+  // 기존 UI 초기화
+  renderOnline();renderPopular();
+  renderNotifs();renderCommCatBtns();renderYPCatBtns();
+  renderSponsor('sponsorLinks');
+  animStat('sc1',13240);animStat('sc2',3841);animStat('sc3',312);animStat('sc4',247);
+
+  // Supabase 세션 확인 (이미 로그인된 유저 자동 복원)
+  const {data:{session}}=await sb.auth.getSession();
+  if(session){
+    await loadProfile(session.user);
+    showToast(`다시 오셨군요, 환영해요! 🦘`);
+  }
+
+  // DB에서 게시글 로드
+  await loadAndRenderPosts('all');
+
+  // Auth 상태 변경 감지 (로그인/로그아웃)
+  sb.auth.onAuthStateChange(async(event, session)=>{
+    if(event==='SIGNED_IN' && session){
+      await loadProfile(session.user);
+    } else if(event==='SIGNED_OUT'){
+      user=null;
+    }
+  });
+});
+
+// CSS 스피너 추가
+const spinStyle=document.createElement('style');
+spinStyle.textContent='@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}';
+document.head.appendChild(spinStyle);
+</script>
+</body>
+</html>
