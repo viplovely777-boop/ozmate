@@ -1925,7 +1925,7 @@ async function loadAndRenderPosts(filter='all'){
   list.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted)"><div style="font-size:32px;animation:spin 1s linear infinite">â³</div><p style="margin-top:8px">ë¶ë¬ì¤ë ì¤...</p></div>';
   let q=sb.from('posts').select('*').order('created_at',{ascending:false}).limit(30);
   if(filter&&filter!=='all') q=q.eq('category',filter);
-  const {data,error}=await q;
+  let {data,error}=await q;
   if(error||!data){list.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted)">ë¶ë¬ì¤ê¸° ì¤í¨ ð¢</div>';return;}
   if(!data.length){data=[
 {id:1,title:'및리즈번 살면서 제일 좋은 점 vs 나쁜 점 솔직후기',body:'이민 2년차 소감입니다. 날씨가 진짜 최고이고 물가는 시드니보다 저렴해요. 다만 대중교통이 없어서 차 없으면 힘들어요!',category:'자유게시판',cat:'free',badge:'인기',badge_bg:'#FEF3C7',badge_color:'#D97706',author_name:'이민3년차',author_color:'#3B82F6',tags:['브리즈번','이민후기'],likes:47,comments:23,views:412,created_at:new Date(Date.now()-10800000).toISOString()},
