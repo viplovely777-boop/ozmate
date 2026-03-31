@@ -1557,6 +1557,7 @@ const sb = createClient('https://rcfzijqwpajvnvbyvnly.supabase.co', 'sb_publisha
 
 // âââ STATE âââ
 let user=null, curFilter='all', likedP=new Set(), likedC=new Set(), dark=false, npOpen=false;
+let postsCache=null;
 const AVC=['#E8392A','#009DC4','#00843D','#8B5CF6','#F59E0B','#EC4899'];
 const rC=s=>AVC[s.charCodeAt(0)%AVC.length];
 
