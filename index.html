@@ -1885,8 +1885,8 @@ function mkCard(post,i,nativeAdAfter){
   d.className='post-card';d.style.animationDelay=(i*.07)+'s';
   d.innerHTML=`
     <div class="post-meta">
-      <div class="av" style="background:${post.color}">${post.author[0]}</div>
-      <div style="flex:1"><div class="au-nm">${post.author}</div><div class="au-tm">${post.time}</div></div>
+      <div class="av" style="background:${post.color}">${(post.author||post.author_name||'O')[0]}</div>
+      <div style="flex:1"><div class="au-nm">${(post.author||post.author_name||'OzMate')}</div><div class="au-tm">${post.time}</div></div>
       <span class="pbadge" style="background:${post.bc};color:${post.bt}">${post.badge}</span>
     </div>
     <div class="p-title">${post.title}</div>
@@ -2173,8 +2173,8 @@ function openDetail(id){
     <span class="pbadge" style="background:${post.bc};color:${post.bt};margin-bottom:10px;display:inline-block">${post.badge}</span>
     <div class="det-title">${post.title}</div>
     <div class="post-meta" style="margin-bottom:12px">
-      <div class="av" style="background:${post.color}">${post.author[0]}</div>
-      <div><div class="au-nm">${post.author}</div><div class="au-tm">${post.time} Â· ð ${post.views.toLocaleString()}</div></div>
+      <div class="av" style="background:${post.color}">${(post.author||post.author_name||'O')[0]}</div>
+      <div><div class="au-nm">${(post.author||post.author_name||'OzMate')}</div><div class="au-tm">${post.time} Â· ð ${post.views.toLocaleString()}</div></div>
     </div>
     <div class="det-body">${post.body}</div>
     <div class="p-tags" style="margin-bottom:12px">${post.tags.map(t=>`<span class="tag">#${t}</span>`).join('')}</div>
