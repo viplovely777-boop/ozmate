@@ -1886,17 +1886,17 @@ function mkCard(post,i,nativeAdAfter){
   d.innerHTML=`
     <div class="post-meta">
       <div class="av" style="background:${post.color}">${(post.author||post.author_name||'O')[0]}</div>
-      <div style="flex:1"><div class="au-nm">${(post.author||post.author_name||'OzMate')}</div><div class="au-tm">${post.time}</div></div>
+      <div style="flex:1"><div class="au-nm">${(post.author||post.author_name||'OzMate')}</div><div class="au-tm">${post.time||''}</div></div>
       <span class="pbadge" style="background:${post.bc};color:${post.bt}">${post.badge}</span>
     </div>
     <div class="p-title">${post.title}</div>
     <div class="p-prev">${post.body}</div>
-    <div class="p-tags">${post.tags.map(t=>`<span class="tag">#${t}</span>`).join('')}</div>
+    <div class="p-tags">${(post.tags||[]).map(t=>`<span class="tag">#${t}</span>`).join('')}</div>
     <div class="p-foot">
       <button class="p-act ${liked?'liked':''}" onclick="tLike(event,${post.id},this)">${liked?'â¤ï¸':'ð¤'} <span>${post.likes+(liked?1:0)}</span></button>
-      <button class="p-act" onclick="event.stopPropagation();openDetail(${post.id})">ð¬ <span>${post.comments.length}</span></button>
+      <button class="p-act" onclick="event.stopPropagation();openDetail(${post.id})">ð¬ <span>${post.comments||0}</span></button>
       <button class="p-act" onclick="event.stopPropagation();cpLink()">ð ê³µì </button>
-      <span style="margin-left:auto;font-size:10px;color:var(--muted)">ð ${post.views.toLocaleString()}</span>
+      <span style="margin-left:auto;font-size:10px;color:var(--muted)">ð ${(post.views||0).toLocaleString()}</span>
     </div>`;
   d.onclick=e=>{if(e.target.closest('.p-act'))return;openDetail(post.id);};
   return d;
@@ -1929,12 +1929,12 @@ async function loadAndRenderPosts(filter='all'){
   let {data,error}=await q;
   if(error||!data){list.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted)">ë¶ë¬ì¤ê¸° ì¤í¨ ð¢</div>';return;}
   if(!data.length){data=[
-{id:1,title:'및리즈번 살면서 제일 좋은 점 vs 나쁜 점 솔직후기',body:'이민 2년차 소감입니다. 날씨가 진짜 최고이고 물가는 시드니보다 저렴해요. 다만 대중교통이 없어서 차 없으면 힘들어요!',category:'자유게시판',cat:'free',badge:'인기',badge_bg:'#FEF3C7',badge_color:'#D97706',author_name:'이민3년차',author_color:'#3B82F6',tags:['브리즈번','이민후기'],likes:47,comments:23,views:412,created_at:new Date(Date.now()-10800000).toISOString()},
-{id:2,title:'호주 운전면허 한국면허 교환 후기 (퀵즈랜드)',body:'드디어 퀵즈랜드 면허로 교환 성공! 준비물: 한국면허+영문번역 공증본, 여권, 거주 증빙서류 2개. 비용 $53.45. 당일 임시면허 받고 2주 내로 집으로 옵니다!',category:'생활정보',cat:'life',badge:'정보',badge_bg:'#F0FDF4',badge_color:'#16A34A',author_name:'QLD면허완료',author_color:'#10B981',tags:['운전면허','퀵즈랜드'],likes:89,comments:31,views:1247,created_at:new Date(Date.now()-86400000).toISOString()},
-{id:3,title:'브리즈번 한인 배드민턴 동호회 멤버 모집!',body:'매주 토요일 오전 8-10시 Chandler Indoor Sports Centre에서 배드민턴 치고 있습니다. 실력 무관 누구나 환영! 참가비 $10/회.',category:'모임/동호회',cat:'club',badge:'모집',badge_bg:'#FDF4FF',badge_color:'#9333EA',author_name:'배드민턴매니아',author_color:'#EC4899',tags:['배드민턴','동호회','브리즈번'],likes:34,comments:19,views:523,created_at:new Date(Date.now()-172800000).toISOString()},
-{id:4,title:'호주 Tax Return 직접 하는 방법 완전정리',body:'Tax Return 시즈었이 다가왔네요! myGov 로그인 → ATO 연결 → Lodge Tax Return 클릭 → 공제 항목 추가 → 제출. 환급은 보통 2주 내로 들어와요!',category:'비자/세금',cat:'tax',badge:'정보',badge_bg:'#F0FDF4',badge_color:'#16A34A',author_name:'세금전문가아님',author_color:'#0EA5E9',tags:['세금환급','Tax Return'],likes:203,comments:45,views:4102,created_at:new Date(Date.now()-432000000).toISOString()},
-{id:5,title:'호주에서 한국 치킨이 먹고 싶을 때 꿼팟 물가다 혁텟 민티친 두 번 틀길기 한국치킨 완성 0 탄',body:'진짜 한국 치킨이 그리울 때! 1️⃣ 한인마트 냉동치킨 활용 2️⃣ 닭날개에 전분+밀가루 반반, 두 번 틀기면 진짜 맛있어요!',category:'맛집/요리',cat:'food',badge:'꿼팟',badge_bg:'#FEF9C3',badge_color:'#CA8A04',author_name:'치킨러버_BNE',author_color:'#EF4444',tags:['치킨','꿼팟','요리'],likes:156,comments:67,views:2891,created_at:new Date(Date.now()-259200000).toISOString()},
-{id:6,title:'노사 Noosa 당일치기 여행 후기 �',body:'브리즈번에서 시차 2시간거리인데 진짜 다녀올 만해요! Noosa Main Beach 수영 최고, 국립공원 트레킹도 은근해요. 주차는 이른 아침에 가야 자리 있어요!',category:'여행/나들이',cat:'travel',badge:'후기',badge_bg:'#EFF6FF',badge_color:'#2563EB',author_name:'주말여행러',author_color:'#6366F1',tags:['노사','선샤인코스트','여행'],likes:78,comments:22,views:834,created_at:new Date(Date.now()-345600000).toISOString()}
+{id:1,title:'및리즈번 살면서 제일 좋은 점 vs 나쁜 점 솔직후기',body:'이민 2년차 소감입니다. 날씨가 진짜 최고이고 물가는 시드니보다 저렴해요. 다만 대중교통이 없어서 차 없으면 힘들어요!',category:'자유게시판',cat:'free',badge:'인기',badge_bg:'#FEF3C7',badge_color:'#D97706',author_name:'이민3년차',author_color:'#3B82F6',tags:['브리즈번','이민후기'],likes:47,comments:23,views:412,time:'3시간 전',created_at:new Date(Date.now()-10800000).toISOString()},
+{id:2,title:'호주 운전면허 한국면허 교환 후기 (퀵즈랜드)',body:'드디어 퀵즈랜드 면허로 교환 성공! 준비물: 한국면허+영문번역 공증본, 여권, 거주 증빙서류 2개. 비용 $53.45. 당일 임시면허 받고 2주 내로 집으로 옵니다!',category:'생활정보',cat:'life',badge:'정보',badge_bg:'#F0FDF4',badge_color:'#16A34A',author_name:'QLD면허완료',author_color:'#10B981',tags:['운전면허','퀵즈랜드'],likes:89,comments:31,views:1247,time:'1일 전',created_at:new Date(Date.now()-86400000).toISOString()},
+{id:3,title:'브리즈번 한인 배드민턴 동호회 멤버 모집!',body:'매주 토요일 오전 8-10시 Chandler Indoor Sports Centre에서 배드민턴 치고 있습니다. 실력 무관 누구나 환영! 참가비 $10/회.',category:'모임/동호회',cat:'club',badge:'모집',badge_bg:'#FDF4FF',badge_color:'#9333EA',author_name:'배드민턴매니아',author_color:'#EC4899',tags:['배드민턴','동호회','브리즈번'],likes:34,comments:19,views:523,time:'2일 전',created_at:new Date(Date.now()-172800000).toISOString()},
+{id:4,title:'호주 Tax Return 직접 하는 방법 완전정리',body:'Tax Return 시즈었이 다가왔네요! myGov 로그인 → ATO 연결 → Lodge Tax Return 클릭 → 공제 항목 추가 → 제출. 환급은 보통 2주 내로 들어와요!',category:'비자/세금',cat:'tax',badge:'정보',badge_bg:'#F0FDF4',badge_color:'#16A34A',author_name:'세금전문가아님',author_color:'#0EA5E9',tags:['세금환급','Tax Return'],likes:203,comments:45,views:4102,time:'5일 전',created_at:new Date(Date.now()-432000000).toISOString()},
+{id:5,title:'호주에서 한국 치킨이 먹고 싶을 때 꿼팟 물가다 혁텟 민티친 두 번 틀길기 한국치킨 완성 0 탄',body:'진짜 한국 치킨이 그리울 때! 1️⃣ 한인마트 냉동치킨 활용 2️⃣ 닭날개에 전분+밀가루 반반, 두 번 틀기면 진짜 맛있어요!',category:'맛집/요리',cat:'food',badge:'꿼팟',badge_bg:'#FEF9C3',badge_color:'#CA8A04',author_name:'치킨러버_BNE',author_color:'#EF4444',tags:['치킨','꿼팟','요리'],likes:156,comments:67,views:2891,time:'3일 전',created_at:new Date(Date.now()-259200000).toISOString()},
+{id:6,title:'노사 Noosa 당일치기 여행 후기 �',body:'브리즈번에서 시차 2시간거리인데 진짜 다녀올 만해요! Noosa Main Beach 수영 최고, 국립공원 트레킹도 은근해요. 주차는 이른 아침에 가야 자리 있어요!',category:'여행/나들이',cat:'travel',badge:'후기',badge_bg:'#EFF6FF',badge_color:'#2563EB',author_name:'주말여행러',author_color:'#6366F1',tags:['노사','선샤인코스트','여행'],likes:78,comments:22,views:834,time:'4일 전',created_at:new Date(Date.now()-345600000).toISOString()}
 ];}
   postsCache=data;
   renderPostsFromCache(data);
@@ -2131,7 +2131,7 @@ function swTab(tab,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
   if(tab==='hot') renderPosts([...posts].sort((a,b)=>b.likes-a.likes));
-  else if(tab==='unanswered') renderPosts(posts.filter(p=>p.comments.length===0));
+  else if(tab==='unanswered') renderPosts(posts.filter(p=>p.comments===0));
   else renderPosts(curFilter);
 }
 
@@ -2174,17 +2174,17 @@ function openDetail(id){
     <div class="det-title">${post.title}</div>
     <div class="post-meta" style="margin-bottom:12px">
       <div class="av" style="background:${post.color}">${(post.author||post.author_name||'O')[0]}</div>
-      <div><div class="au-nm">${(post.author||post.author_name||'OzMate')}</div><div class="au-tm">${post.time} Â· ð ${post.views.toLocaleString()}</div></div>
+      <div><div class="au-nm">${(post.author||post.author_name||'OzMate')}</div><div class="au-tm">${post.time||''} Â· ð ${(post.views||0).toLocaleString()}</div></div>
     </div>
     <div class="det-body">${post.body}</div>
-    <div class="p-tags" style="margin-bottom:12px">${post.tags.map(t=>`<span class="tag">#${t}</span>`).join('')}</div>
+    <div class="p-tags" style="margin-bottom:12px">${(post.tags||[]).map(t=>`<span class="tag">#${t}</span>`).join('')}</div>
     <div class="det-acts">
       <button class="det-btn ${liked?'liked':''}" id="detLike" onclick="tLikeD(${id})">${liked?'â¤ï¸':'ð¤'} ì¢ìì ${post.likes+(liked?1:0)}</button>
       <button class="det-btn" onclick="cpLink()">ð ê³µì </button>
       <button class="det-btn" onclick="showToast('ë¶ë§í¬ ì ì¥ ð')">ð ë¶ë§í¬</button>
     </div>
     <div class="cmts">
-      <div class="w-t" style="font-size:14px;margin-bottom:10px">ð¬ ëê¸ ${post.comments.length}ê°</div>
+      <div class="w-t" style="font-size:14px;margin-bottom:10px">ð¬ ëê¸ ${post.comments||0}ê°</div>
       <div class="cmt-box">
         <div class="av" style="background:${user?user.color:'#ccc'};width:28px;height:28px;font-size:10px">${user?user.name[0]:'?'}</div>
         <input class="cmt-inp" id="cmtInp" placeholder="${user?'ëê¸ì ìë ¥íì¸ì...':'ë¡ê·¸ì¸ í ëê¸ ê°ë¥'}" onkeydown="if(event.key==='Enter')submitCmt(${id})">
