@@ -1927,6 +1927,7 @@ async function loadAndRenderPosts(filter='all'){
   if(filter&&filter!=='all') q=q.eq('category',filter);
   const {data,error}=await q;
   if(error||!data){list.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted)">ë¶ë¬ì¤ê¸° ì¤í¨ ð¢</div>';return;}
+  if(!data.length){list.innerHTML='<div style="text-align:center;padding:48px 16px;color:#9CA3AF"><div style="font-size:40px;margin-bottom:12px">✍️</div><p style="font-size:15px;font-weight:600;color:#6B7280;margin:0 0 6px">아직 게시글이 없어요</p><p style="font-size:13px;color:#9CA3AF;margin:0">첫 번째 글을 작성해보세요!</p></div>';return;}
   postsCache=data;
   renderPostsFromCache(data);
 }
