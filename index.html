@@ -4,6 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OzMate â ë¸ë¦¬ì¦ë² íì¸ No.1 ì»¤ë®¤ëí°</title>
+<meta name="description" content="호주 브리즈번·시드니 한인 No.1 커뮤니티 OzMate. 구인구직, 렌트/부동산, 자유게시판, 동호회 정보를 한 곳에서!">
+<meta name="keywords" content="호주 한인, 브리즈번 한인, 시드니 한인, OzMate, 호주 커뮤니티, 구인구직, 렌트, 한인 모임, 골드코스트">
+<link rel="canonical" href="https://ozmate.vercel.app/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ozmate.vercel.app/">
+<meta property="og:title" content="OzMate — 호주 한인 No.1 커뮤니티">
+<meta property="og:description" content="브리즈번·시드니 한인들의 구인구직, 렌트, 자유게시판, 동호회를 한 곳에서!">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="OzMate — 호주 한인 No.1 커뮤니티">
+<meta name="twitter:description" content="호주 한인 커뮤니티 플랫폼">
+<meta name="theme-color" content="#FFB800">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="OzMate">
+<meta name="robots" content="index, follow">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 /* âââ VARIABLES âââ */
@@ -785,6 +800,54 @@ body{font-size:15px;line-height:1.6;}
   .tabs{padding:10px 12px!important;}
   .tab{padding:5px 12px!important;font-size:12px!important;}
 }
+
+/* ===== OzMate v2 Design Enhancement ===== */
+html{scroll-behavior:smooth}
+body{animation:pageIn .35s ease}
+@keyframes pageIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+/* Back to top */
+#oz-top-btn{position:fixed;bottom:22px;right:18px;z-index:9999;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#FFB800,#FF8C00);color:#fff;border:none;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(255,184,0,.45);opacity:0;visibility:hidden;transition:all .3s cubic-bezier(.34,1.56,.64,1);transform:translateY(10px)}
+#oz-top-btn.show{opacity:1;visibility:visible;transform:translateY(0)}
+#oz-top-btn:hover{transform:translateY(-3px) scale(1.08);box-shadow:0 6px 20px rgba(255,184,0,.55)}
+/* Sticky nav shadow on scroll */
+.nav{position:sticky;top:0;z-index:100;transition:box-shadow .2s}
+.nav.oz-scrolled{box-shadow:0 2px 16px rgba(0,0,0,.13)!important}
+/* Card hover */
+.job-card,.post-card{transition:transform .2s ease,box-shadow .2s ease}
+.job-card:hover,.post-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.10)}
+/* Focus styles */
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+/* Tab underline animation */
+.tab{position:relative;overflow:hidden}
+.tab::after{content:'';position:absolute;bottom:0;left:50%;right:50%;height:2px;background:var(--gold);transition:all .25s ease}
+.tab.active::after{left:8%;right:8%}
+/* Button active press */
+.btn-primary:active,.btn-secondary:active{transform:scale(.97)}
+/* Hero glow */
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(255,184,0,.07) 0%,transparent 65%);pointer-events:none}
+/* Skeleton shimmer */
+@keyframes shimmer{0%{background-position:-400px 0}100%{background-position:400px 0}}
+.skeleton{background:linear-gradient(90deg,#f0f0f0 25%,#e8e8e8 50%,#f0f0f0 75%);background-size:800px 100%;animation:shimmer 1.4s infinite;border-radius:6px}
+/* Toast blur */
+.toast{backdrop-filter:blur(8px);border:1px solid rgba(255,184,0,.2)!important}
+/* Footer link hover */
+.fc a{transition:color .15s,padding-left .15s}
+.fc a:hover{color:var(--gold)!important;padding-left:4px}
+/* Mobile touch improvements */
+@media(max-width:900px){
+  .tab{min-height:44px}
+  input,select,textarea{font-size:16px!important}
+  .job-card,.post-card{margin-bottom:10px}
+}
+@media(max-width:480px){
+  .footer-in{grid-template-columns:1fr!important;gap:20px!important}
+  .hero h1{font-size:clamp(20px,6vw,30px)!important}
+  .tab{padding:9px 12px!important;font-size:12px!important}
+}
+@media print{.nav,.footer,#oz-top-btn{display:none!important}}
 </style>
 </head>
 <body>
@@ -2384,5 +2447,16 @@ const spinStyle=document.createElement('style');
 spinStyle.textContent='@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}';
 document.head.appendChild(spinStyle);
 </script>
-</body>
+
+<button id="oz-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="맨 위로 가기" title="맨 위로">▲</button>
+<script>
+(function(){
+  var btn=document.getElementById('oz-top-btn');
+  var nav=document.querySelector('.nav');
+  window.addEventListener('scroll',function(){
+    if(window.pageYOffset>300){btn.classList.add('show');}else{btn.classList.remove('show');}
+    if(window.pageYOffset>60){nav&&nav.classList.add('oz-scrolled');}else{nav&&nav.classList.remove('oz-scrolled');}
+  },{passive:true});
+})();
+</script></body>
 </html>
