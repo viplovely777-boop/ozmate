@@ -2420,6 +2420,34 @@ document.head.appendChild(spinStyle);
 
 // 백투탑 + 네비 스크롤
 window.addEventListener('scroll',function(){var b=document.getElementById('oz-top-btn');var n=document.querySelector('.nav');if(b){if(window.pageYOffset>300)b.classList.add('show');else b.classList.remove('show');}if(n){if(window.pageYOffset>60)n.classList.add('oz-scrolled');else n.classList.remove('oz-scrolled');}},{passive:true});
+
+// ── window exports (onclick 접근용) ──
+window.navTo=navTo;
+window.toggleDark=toggleDark;
+window.toggleNp=toggleNp;
+window.markAllRead=markAllRead;
+window.readN=readN;
+window.openMd=openMd;
+window.showToast=showToast;
+window.ckLogin=ckLogin;
+window.filterPosts=filterPosts;
+window.swTab=swTab;
+window.tLike=tLike;
+window.openDetail=openDetail;
+window.cpLink=cpLink;
+window.renderComm=renderComm;
+window.filterYP=filterYP;
+window.swPTab=swPTab;
+window.closeMdBg=closeMdBg;
+window.closeMd=closeMd;
+window.doLogin=doLogin;
+window.socialLogin=socialLogin;
+window.toReg=toReg;
+window.doReg=doReg;
+window.toLg=toLg;
+window.selCat=selCat;
+window.submitPost=submitPost;
+window.mobileNav=mobileNav;
 </script>
 
 <button id="oz-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="맨 위로">▲</button>
