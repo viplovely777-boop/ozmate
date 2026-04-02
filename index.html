@@ -339,6 +339,12 @@ nav button:hover,nav button.active{color:#fff;background:rgba(255,255,255,.12);}
 .profile-hero{background:var(--dark);border-radius:14px;padding:28px;margin-bottom:16px;display:flex;align-items:center;gap:20px;position:relative;overflow:hidden;}
 .profile-hero::before{content:'';position:absolute;width:260px;height:260px;background:radial-gradient(circle,rgba(255,184,0,.15),transparent 70%);top:-80px;right:-40px;}
 .profile-av{width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:28px;color:#fff;border:3px solid var(--gold);flex-shrink:0;}
+.profile-av img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+.av-upload-wrap{position:relative;cursor:pointer;}
+.av-upload-wrap:hover::after{content:"📷";position:absolute;bottom:0;right:0;background:var(--gold);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:13px;}
+.ep-avatar{width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);display:block;margin:0 auto 10px;cursor:pointer;}
+.ep-av-wrap{text-align:center;margin-bottom:12px;}
+.ep-av-btn{font-size:12px;color:var(--gold);cursor:pointer;text-decoration:underline;}
 .profile-name{font-family:'Nunito',sans-serif;font-size:22px;font-weight:900;color:#fff;margin-bottom:3px;}
 .profile-sub{font-size:12px;color:rgba(255,255,255,.55);margin-bottom:11px;}
 .profile-stats{display:flex;gap:22px;}
@@ -1577,7 +1583,12 @@ document.addEventListener('DOMContentLoaded',function(){var m=document.cookie.ma
 <div class="overlay" id="editProfileMd" onclick="closeMdBg(event,'editProfileMd')">
   <div class="modal" style="width:420px">
     <div class="md-hdr"><div class="md-t">✏️ 프로필 수정</div><button class="cls-btn" onclick="closeMd('editProfileMd')">✕</button></div>
-    <div class="fg"><label class="fl">닉네임</label><input class="fi" id="epName" placeholder="닉네임"></div>
+    <div class="ep-av-wrap">
+    <div id="epAvPreview" class="profile-av" style="width:80px;height:80px;margin:0 auto;background:#F59E0B;font-size:28px;">?</div>
+    <input type="file" id="epAvFile" accept="image/*" style="display:none" onchange="previewAvatar(this)">
+    <div class="ep-av-btn" onclick="document.getElementById('epAvFile').click()">📷 사진 변경</div>
+  </div>
+  <div class="fg"><label class="fl">닉네임</label><input class="fi" id="epName" placeholder="닉네임"></div>
     <div class="fg"><label class="fl">거주 지역</label><select class="fi" id="epCity"><option>브리즈번</option><option>골드코스트</option><option>선샤인코스트</option><option>케언즈</option><option>기타 QLD</option></select></div>
     <div class="fg"><label class="fl">비자 종류</label><select class="fi" id="epVisa"><option>영주권/시민권</option><option>워킹홀리데이(417)</option><option>학생비자(500)</option><option>기술이민(189/190)</option><option>파트너비자(820/801)</option><option>기타</option></select></div>
     <button class="btn-primary" style="width:100%;margin-top:12px" onclick="saveProfile()">저장하기 💾</button>
@@ -1867,7 +1878,7 @@ function setUser(u){
 }
 
 // ── 로그아웃 ──
-async function logOut(){
+async async function logOut(){
   await sb.auth.signOut();
   user=null;
   location.reload();
@@ -2520,17 +2531,26 @@ window.doFullSearch = doFullSearch;
 
 // ── 프로필 수정 ──
 async function showEditProfile(){
-  openMd('editProfileMd');
+  const md = document.getElementById('editProfileMd');
+  md.classList.add('open');
+  md.style.display = 'flex';
   const {data:{user}} = await sb.auth.getUser();
-  if(!user){ closeMd('editProfileMd'); showToast('로그인이 필요해요'); return; }
-  const {data:p} = await sb.from('profiles').select('name,city,visa').eq('id',user.id).single();
+  if(!user){
+    md.classList.remove('open'); md.style.display='';
+    showToast('로그인이 필요해요'); return;
+  }
+  const {data:p} = await sb.from('profiles').select('name,city,visa,avatar_url,color').eq('id',user.id).single();
   if(p){
     document.getElementById('epName').value = p.name||'';
     const cityOpts = document.getElementById('epCity').options;
-    for(let i=0;i<cityOpts.length;i++) if(cityOpts[i].text===p.city) cityOpts[i].selected=true;
+    for(let i=0;i<cityOpts.length;i++) cityOpts[i].selected = (cityOpts[i].text===p.city);
     const visaOpts = document.getElementById('epVisa').options;
-    for(let i=0;i<visaOpts.length;i++) if(visaOpts[i].text===p.visa) visaOpts[i].selected=true;
+    for(let i=0;i<visaOpts.length;i++) visaOpts[i].selected = (visaOpts[i].text===p.visa);
+    const prev = document.getElementById('epAvPreview');
+    if(p.avatar_url){ prev.innerHTML='<img src="'+p.avatar_url+'" style="width:100%;height:100%;object-fit:cover;border-radius:50%">'; prev.style.background='none'; }
+    else { prev.innerHTML=(p.name||'?')[0].toUpperCase(); prev.style.background=p.color||'#F59E0B'; }
   }
+  window._epUserId = user.id;
 }
 async function saveProfile(){
   const {data:{user}} = await sb.auth.getUser();
