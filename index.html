@@ -820,7 +820,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold,#FFB800);outli
 .lang-btn.active{background:var(--gold);border-color:var(--gold);color:#000;}
 .goog-te-banner-frame,.goog-te-balloon-frame,.VIpgJd-ZVi9od-ORHb-OEVmcd,.goog-te-ftab-float,#goog-gt-tt{display:none!important;}
 body{top:0!important;}
-</style>
+#page-search{padding:20px;max-width:900px;margin:0 auto;}.sr-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--border);}.sr-header h2{font-size:18px;font-weight:800;}.sr-back{padding:6px 16px;border-radius:20px;background:var(--gold);color:#000;font-weight:700;font-size:13px;border:none;cursor:pointer;}.sr-section{margin-bottom:24px;}.sr-section h3{font-size:14px;font-weight:800;margin-bottom:10px;color:var(--gold);}.sr-item{background:var(--card);border-radius:10px;padding:14px 16px;margin-bottom:8px;cursor:pointer;border:1.5px solid var(--border);transition:.15s;}.sr-item:hover{border-color:var(--gold);}.sr-title{font-weight:700;font-size:14px;margin-bottom:4px;}.sr-meta{font-size:12px;color:var(--muted);}.sr-empty{text-align:center;padding:30px;color:var(--muted);font-size:13px;}</style>
 <script>
 function googleTranslateElementInit(){new google.translate.TranslateElement({pageLanguage:'ko',includedLanguages:'en,zh-CN,ja',autoDisplay:false},'google_translate_element');}
 function setLang(l){if(l==='ko'){document.cookie='googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/';document.cookie='googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=.'+location.hostname;}else{var e=new Date(Date.now()+31536000000).toUTCString();document.cookie='googtrans=/ko/'+l+';expires='+e+';path=/';document.cookie='googtrans=/ko/'+l+';expires='+e+';path=/;domain=.'+location.hostname;}location.reload();}
@@ -848,8 +848,8 @@ document.addEventListener('DOMContentLoaded',function(){var m=document.cookie.ma
     </nav>
     <div class="hdr-r" id="hdrR">
       <div class="hdr-search">
-        <span class="si">🔍</span>
-        <input type="text" placeholder="업소, 게시글 검색..." id="gSearch" oninput="doSearch(this.value)" onfocus="showSDrop()" onblur="setTimeout(hideSDrop,200)">
+        <span class="si" onclick="doFullSearch(document.getElementById('gSearch').value)" style="cursor:pointer">🔍</span>
+        <input type="text" placeholder="업소, 게시글 검색..." id="gSearch" oninput="doSearch(this.value)" onfocus="showSDrop()" onblur="setTimeout(hideSDrop,200) onkeydown="if(event.key==='Enter')doFullSearch(this.value)"">
         <div class="sdrop" id="sDrop"></div>
       </div>
       <button class="dm-btn" id="dmBtn" onclick="toggleDark()">🌙</button>
@@ -1455,6 +1455,15 @@ document.addEventListener('DOMContentLoaded',function(){var m=document.cookie.ma
   </div>
 </div>
 
+<div class="page" id="page-search">
+  <div class="sr-header">
+    <h2>🔍 &ldquo;<span id="srKeyword"></span>&rdquo; 검색결과</h2>
+    <button class="sr-back" onclick="navTo('home',null)">← 홈으로</button>
+  </div>
+  <div id="srPostList" class="sr-section"></div>
+  <div id="srBizList" class="sr-section"></div>
+</div>
+
 <!-- ═══ MODALS ═══ -->
 <div class="overlay" id="lgMd" onclick="closeMdBg(event,'lgMd')">
   <div class="modal">
@@ -1610,6 +1619,23 @@ function toggleDark(){
 }
 
 // ═══ SEARCH ═══
+function doFullSearch(q){
+  if(!q.trim())return;
+  hideSDrop();
+  navTo('search',null);
+  const kw=document.getElementById('srKeyword');
+  if(kw)kw.textContent=q;
+  const pRes=(typeof posts!=='undefined')?posts.filter(p=>p.title.includes(q)||(p.tags&&p.tags.some(t=>t.includes(q)))):[];
+  const bRes=(typeof businesses!=='undefined')?businesses.filter(b=>b.name.includes(q)||b.category.includes(q)):[];
+  const pEl=document.getElementById('srPostList');
+  const bEl=document.getElementById('srBizList');
+  pEl.innerHTML=pRes.length
+    ?'<h3>📝 게시글 ('+pRes.length+')</h3>'+pRes.map(p=>`<div class="sr-item" onclick="openDetail(${p.id})"><div class="sr-title">${p.title}</div><div class="sr-meta">${p.badge||''} · 조회 ${p.views||0}</div></div>`).join('')
+    :'<div class="sr-empty">검색 결과가 없어요</div>';
+  bEl.innerHTML=bRes.length
+    ?'<h3>🏪 업소 ('+bRes.length+')</h3>'+bRes.map(b=>`<div class="sr-item" onclick="navTo('yellowpage',null)"><div class="sr-title">${b.name}</div><div class="sr-meta">${b.category}</div></div>`).join('')
+    :'<div class="sr-empty">검색 결과가 없어요</div>';
+}
 function doSearch(q){
   if(!q.trim()){hideSDrop();hideMSDrop();return;}
   if(typeof posts==='undefined'||typeof businesses==='undefined') return;
@@ -2470,6 +2496,7 @@ window.openPostMd = openPostMd;
 window.selMeet = selMeet;
 window.openPostMd = openPostMd;
 window.selMeet = selMeet;
+window.doFullSearch = doFullSearch;
 window.doSearch = doSearch;
 window.showSDrop = showSDrop;
 window.hideSDrop = hideSDrop;
