@@ -1573,6 +1573,16 @@ document.addEventListener('DOMContentLoaded',function(){var m=document.cookie.ma
   </div>
 </footer>
 
+
+<div class="overlay" id="editProfileMd" onclick="closeMdBg(event,'editProfileMd')">
+  <div class="modal" style="width:420px">
+    <div class="md-hdr"><div class="md-t">✏️ 프로필 수정</div><button class="cls-btn" onclick="closeMd('editProfileMd')">✕</button></div>
+    <div class="fg"><label class="fl">닉네임</label><input class="fi" id="epName" placeholder="닉네임"></div>
+    <div class="fg"><label class="fl">거주 지역</label><select class="fi" id="epCity"><option>브리즈번</option><option>골드코스트</option><option>선샤인코스트</option><option>케언즈</option><option>기타 QLD</option></select></div>
+    <div class="fg"><label class="fl">비자 종류</label><select class="fi" id="epVisa"><option>영주권/시민권</option><option>워킹홀리데이(417)</option><option>학생비자(500)</option><option>기술이민(189/190)</option><option>파트너비자(820/801)</option><option>기타</option></select></div>
+    <button class="btn-primary" style="width:100%;margin-top:12px" onclick="saveProfile()">저장하기 💾</button>
+  </div>
+</div>
 <script type="module">
 // ═══ SUPABASE ═══
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
@@ -2366,7 +2376,7 @@ function renderProfile(){
         <div><div class="ps-n">12</div><div class="ps-l">댓글</div></div>
       </div>
     </div>
-    <button class="p-edit" onclick="showToast('프로필 수정 준비중 🛠')">프로필 수정</button>`;
+    <button class="p-edit" onclick="showEditProfile()">프로필 수정</button>`;
   const bdgs=[];
   if(myPosts.length>=1) bdgs.push({ic:'✍️',l:'첫 글 작성'});
   if(likedP.size>=3) bdgs.push({ic:'❤️',l:'좋아요 마스터'});
@@ -2507,6 +2517,37 @@ window.selMeet = selMeet;
 window.openPostMd = openPostMd;
 window.selMeet = selMeet;
 window.doFullSearch = doFullSearch;
+
+// ── 프로필 수정 ──
+async function showEditProfile(){
+  const {data:{user}} = await sb.auth.getUser();
+  if(!user){ showToast('로그인이 필요해요'); return; }
+  const {data:p} = await sb.from('profiles').select('name,city,visa').eq('id',user.id).single();
+  if(p){
+    document.getElementById('epName').value = p.name||'';
+    const cityOpts = document.getElementById('epCity').options;
+    for(let i=0;i<cityOpts.length;i++) if(cityOpts[i].value===p.city||cityOpts[i].text===p.city) cityOpts[i].selected=true;
+    const visaOpts = document.getElementById('epVisa').options;
+    for(let i=0;i<visaOpts.length;i++) if(visaOpts[i].value===p.visa||visaOpts[i].text===p.visa) visaOpts[i].selected=true;
+  }
+  openMd('editProfileMd');
+}
+async function saveProfile(){
+  const {data:{user}} = await sb.auth.getUser();
+  if(!user){ showToast('로그인이 필요해요'); return; }
+  const name = document.getElementById('epName').value.trim();
+  const city = document.getElementById('epCity').value;
+  const visa = document.getElementById('epVisa').value;
+  if(!name){ showToast('닉네임을 입력해주세요'); return; }
+  const {error} = await sb.from('profiles').update({name,city,visa}).eq('id',user.id);
+  if(error){ showToast('저장 실패: '+error.message); return; }
+  await loadProfile(user);
+  closeMd('editProfileMd');
+  showToast('프로필이 수정됐어요 ✅');
+}
+window.showEditProfile = showEditProfile;
+window.saveProfile = saveProfile;
+
 window.doSearch = doSearch;
 window.showSDrop = showSDrop;
 window.hideSDrop = hideSDrop;
