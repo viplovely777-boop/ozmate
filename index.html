@@ -413,7 +413,7 @@ nav button:hover,nav button.active{color:#fff;background:rgba(255,255,255,.12);}
 .social-btns{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
 .s-btn{padding:8px;border-radius:7px;font-size:12px;font-weight:700;border:1.5px solid var(--border);background:var(--card);cursor:pointer;transition:.2s;font-family:'Noto Sans KR',sans-serif;display:flex;align-items:center;justify-content:center;gap:5px;color:var(--text);}
 .s-btn-apple{background:#000;color:#fff;border-color:#000;}
-.s-btn-apple:hover{background:#333;}
+.s-btn-apple:hover{background:#333;}.s-btn-naver{background:#03C75A;color:#fff;border-color:#03C75A;}.s-btn-naver:hover{background:#02b350;}
 .s-btn:hover{border-color:var(--gold);}
 .sw-auth{text-align:center;margin-top:11px;font-size:11px;color:var(--muted);}
 .sw-auth a{color:var(--sky);font-weight:700;cursor:pointer;}
@@ -1478,6 +1478,7 @@ document.addEventListener('DOMContentLoaded',function(){var m=document.cookie.ma
       <button class="s-btn" onclick="socialLogin('Google')">🇬 Google</button>
       <button class="s-btn" onclick="socialLogin('카카오')">💛 카카오</button>
       <button class="s-btn s-btn-apple" onclick="socialLogin('Apple')">🍎 Apple</button>
+      <button class="s-btn s-btn-naver" onclick="socialLogin('Naver')">🟢 네이버</button>
     </div>
     <div class="sw-auth">계정 없으세요? <a onclick="toReg()">회원가입</a></div>
   </div>
@@ -1807,6 +1808,8 @@ async function socialLogin(p){
     await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.href}});
   } else if(p==='Apple'){
     showToast('Apple 로그인은 준비 중이에요 🍎');
+  } else if(p==='Naver'){
+    showToast('네이버 로그인은 준비 중이에요 💚');
   } else {
     showToast('카카오 로그인 준비중 💛');
   }}
