@@ -1805,11 +1805,11 @@ async function doReg(){
 async function socialLogin(p){
   if(p==='Google'){
     await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.href}});
+  } else if(p==='Apple'){
+    showToast('Apple 로그인은 준비 중이에요 🍎');
   } else {
     showToast('카카오 로그인 준비중 💛');
-  }
-  if(provider==='Apple'){showToast('Apple 로그인은 준비 중이에요 🍎');return;}
-}
+  }}
 
 // ── 프로필 로드 ──
 async function loadProfile(authUser){
