@@ -1914,8 +1914,8 @@ function mkCard(post,i,nativeAdAfter){
     <div class="p-prev">${post.body}</div>
     <div class="p-tags">${(post.tags||[]).map(t=>`<span class="tag">#${t}</span>`).join('')}</div>
     <div class="p-foot">
-      <button class="p-act ${liked?'liked':''}" onclick="tLike(event,${post.id},this)">${liked?'❤️':'🤍'} <span>${post.likes+(liked?1:0)}</span></button>
-      <button class="p-act" onclick="event.stopPropagation();openDetail(${post.id})">💬 <span>${post.comments||0}</span></button>
+      <button class="p-act ${liked?'liked':''}" onclick="tLike(event,${post.id},this)">${liked?'❤️':'🤍'} <span>${(post.likes||0)+(liked?1:0)}</span></button>
+      <button class="p-act" onclick="event.stopPropagation();openDetail(${post.id})">💬 <span>${Array.isArray(post.comments)?post.comments.length:(post.comments||0)}</span></button>
       <button class="p-act" onclick="event.stopPropagation();cpLink()">🔗 공유</button>
       <span style="margin-left:auto;font-size:10px;color:var(--muted)">👁 ${(post.views||0).toLocaleString()}</span>
     </div>`;
@@ -2201,12 +2201,12 @@ function openDetail(id){
     <div class="det-body">${post.body}</div>
     <div class="p-tags" style="margin-bottom:12px">${(post.tags||[]).map(t=>`<span class="tag">#${t}</span>`).join('')}</div>
     <div class="det-acts">
-      <button class="det-btn ${liked?'liked':''}" id="detLike" onclick="tLikeD(${id})">${liked?'❤️':'🤍'} 좋아요 ${post.likes+(liked?1:0)}</button>
+      <button class="det-btn ${liked?'liked':''}" id="detLike" onclick="tLikeD(${id})">${liked?'❤️':'🤍'} 좋아요 ${(post.likes||0)+(liked?1:0)}</button>
       <button class="det-btn" onclick="cpLink()">🔗 공유</button>
       <button class="det-btn" onclick="showToast('북마크 저장 🔖')">🔖 북마크</button>
     </div>
     <div class="cmts">
-      <div class="w-t" style="font-size:14px;margin-bottom:10px">💬 댓글 ${post.comments||0}개</div>
+      <div class="w-t" style="font-size:14px;margin-bottom:10px">💬 댓글 ${Array.isArray(post.comments)?post.comments.length:(post.comments||0)}개</div>
       <div class="cmt-box">
         <div class="av" style="background:${user?user.color:'#ccc'};width:28px;height:28px;font-size:10px">${user?user.name[0]:'?'}</div>
         <input class="cmt-inp" id="cmtInp" placeholder="${user?'댓글을 입력하세요...':'로그인 후 댓글 가능'}" onkeydown="if(event.key==='Enter')submitCmt(${id})">
@@ -2256,13 +2256,13 @@ function lkC(id,el){
 function tLike(e,id,btn){
   e.stopPropagation();if(!user){openMd('lgMd');return;}
   const p=posts.find(x=>x.id===id);
-  if(likedP.has(id)){likedP.delete(id);btn.classList.remove('liked');btn.innerHTML=`🤍 <span>${p.likes}</span>`;}
+  if(likedP.has(id)){likedP.delete(id);btn.classList.remove('liked');btn.innerHTML=`🤍 <span>${p.likes||0}</span>`;}
   else{likedP.add(id);btn.classList.add('liked');btn.innerHTML=`❤️ <span>${p.likes+1}</span>`;showToast('좋아요! ❤️');}
 }
 function tLikeD(id){
   if(!user){openMd('lgMd');return;}
   const p=posts.find(x=>x.id===id);const btn=document.getElementById('detLike');
-  if(likedP.has(id)){likedP.delete(id);btn.classList.remove('liked');btn.innerHTML=`🤍 좋아요 ${p.likes}`;}
+  if(likedP.has(id)){likedP.delete(id);btn.classList.remove('liked');btn.innerHTML=`🤍 좋아요 ${p.likes||0}`;}
   else{likedP.add(id);btn.classList.add('liked');btn.innerHTML=`❤️ 좋아요 ${p.likes+1}`;showToast('좋아요! ❤️');}
 }
 
@@ -2470,6 +2470,10 @@ window.toLg=toLg;
 window.selCat=selCat;
 window.submitPost=submitPost;
 window.mobileNav=mobileNav;
+window.openPostMd = openPostMd;
+window.selMeet = selMeet;
+window.openPostMd = openPostMd;
+window.selMeet = selMeet;
 </script>
 
 <button id="oz-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="� \">�</button>
