@@ -810,7 +810,21 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold,#FFB800);outli
 .fc a:hover{color:var(--gold,#FFB800)!important}
 @media(max-width:900px){input,select,textarea{font-size:16px!important}}
 @media(max-width:480px){.footer-in{grid-template-columns:1fr!important}}
+
+/* ═══ LANG SWITCHER ═══ */
+.lang-sw{display:flex;gap:3px;align-items:center;margin-right:6px;}
+.lang-btn{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);padding:3px 9px;border-radius:5px;cursor:pointer;font-size:11px;font-weight:700;transition:.2s;font-family:'Nunito',sans-serif;line-height:1.4;}
+.lang-btn:hover{background:rgba(255,184,0,.25);border-color:var(--gold);color:#fff;}
+.lang-btn.active{background:var(--gold);border-color:var(--gold);color:#000;}
+.goog-te-banner-frame,.goog-te-balloon-frame{display:none!important;}
+body{top:0!important;}
 </style>
+<script>
+function googleTranslateElementInit(){new google.translate.TranslateElement({pageLanguage:'ko',includedLanguages:'en,zh-CN,ja',autoDisplay:false},'google_translate_element');}
+function setLang(l){if(l==='ko'){document.cookie='googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/';document.cookie='googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=.'+location.hostname;}else{var e=new Date(Date.now()+31536000000).toUTCString();document.cookie='googtrans=/ko/'+l+';expires='+e+';path=/';document.cookie='googtrans=/ko/'+l+';expires='+e+';path=/;domain=.'+location.hostname;}location.reload();}
+document.addEventListener('DOMContentLoaded',function(){var m=document.cookie.match(/googtrans=\/ko\/([^;]+)/),lang=m?m[1]:'ko';document.querySelectorAll('.lang-btn').forEach(function(b){b.classList.toggle('active',b.dataset.lang===lang||(b.dataset.lang==='ko'&&!m));});});
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body>
 
@@ -844,6 +858,13 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold,#FFB800);outli
           <div id="npList"></div>
         </div>
       </div>
+      <div class="lang-sw">
+        <button class="lang-btn" onclick="setLang('ko')" data-lang="ko">KO</button>
+        <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
+        <button class="lang-btn" onclick="setLang('zh-CN')" data-lang="zh-CN">中</button>
+        <button class="lang-btn" onclick="setLang('ja')" data-lang="ja">日</button>
+      </div>
+      <div id="google_translate_element" style="display:none"></div>
       <button class="btn btn-ghost" onclick="openMd('lgMd')">로그인</button>
       <button class="btn btn-gold" onclick="openMd('rgMd')">회원가입</button>
     </div>
