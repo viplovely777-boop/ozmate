@@ -2447,6 +2447,16 @@ document.addEventListener('DOMContentLoaded', async ()=>{
   // DB에서 게시글 로드
   await loadAndRenderPosts('all');
 
+  // OAuth 콜백 해시 처리 (bad_oauth_state 우회)
+  (async()=>{
+    const hash = new URLSearchParams(window.location.hash.slice(1));
+    const at = hash.get('access_token');
+    const rt = hash.get('refresh_token');
+    if(at && rt){
+      await sb.auth.setSession({access_token:at, refresh_token:rt});
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  })();
   // Auth 상태 변경 감지 (로그인/로그아웃)
   sb.auth.onAuthStateChange(async(event, session)=>{
     if(event==='SIGNED_IN' && session){
