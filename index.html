@@ -2520,17 +2520,17 @@ window.doFullSearch = doFullSearch;
 
 // ── 프로필 수정 ──
 async function showEditProfile(){
+  openMd('editProfileMd');
   const {data:{user}} = await sb.auth.getUser();
-  if(!user){ showToast('로그인이 필요해요'); return; }
+  if(!user){ closeMd('editProfileMd'); showToast('로그인이 필요해요'); return; }
   const {data:p} = await sb.from('profiles').select('name,city,visa').eq('id',user.id).single();
   if(p){
     document.getElementById('epName').value = p.name||'';
     const cityOpts = document.getElementById('epCity').options;
-    for(let i=0;i<cityOpts.length;i++) if(cityOpts[i].value===p.city||cityOpts[i].text===p.city) cityOpts[i].selected=true;
+    for(let i=0;i<cityOpts.length;i++) if(cityOpts[i].text===p.city) cityOpts[i].selected=true;
     const visaOpts = document.getElementById('epVisa').options;
-    for(let i=0;i<visaOpts.length;i++) if(visaOpts[i].value===p.visa||visaOpts[i].text===p.visa) visaOpts[i].selected=true;
+    for(let i=0;i<visaOpts.length;i++) if(visaOpts[i].text===p.visa) visaOpts[i].selected=true;
   }
-  openMd('editProfileMd');
 }
 async function saveProfile(){
   const {data:{user}} = await sb.auth.getUser();
@@ -2545,6 +2545,7 @@ async function saveProfile(){
   closeMd('editProfileMd');
   showToast('프로필이 수정됐어요 ✅');
 }
+window.logOut = logOut;
 window.showEditProfile = showEditProfile;
 window.saveProfile = saveProfile;
 
