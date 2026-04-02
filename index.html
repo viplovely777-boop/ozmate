@@ -848,8 +848,8 @@ document.addEventListener('DOMContentLoaded',function(){var m=document.cookie.ma
     </nav>
     <div class="hdr-r" id="hdrR">
       <div class="hdr-search">
-        <span class="si" onclick="doFullSearch(document.getElementById('gSearch').value)" style="cursor:pointer">🔍</span>
-        <input type="text" placeholder="업소, 게시글 검색..." id="gSearch" oninput="doSearch(this.value)" onfocus="showSDrop()" onblur="setTimeout(hideSDrop,200)" onkeydown="if(event.key==='Enter')doFullSearch(this.value)">
+        <span class="si" onmousedown="event.preventDefault();doFullSearch(document.getElementById('gSearch').value)" style="cursor:pointer">🔍</span>
+        <input type="text" placeholder="업소, 게시글 검색..." id="gSearch" oninput="doSearch(this.value)" onfocus="showSDrop()" onblur="setTimeout(hideSDrop,200)" onkeydown="if(event.key==='Enter'){event.preventDefault();doFullSearch(this.value)}">
         <div class="sdrop" id="sDrop"></div>
       </div>
       <button class="dm-btn" id="dmBtn" onclick="toggleDark()">🌙</button>
