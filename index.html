@@ -871,18 +871,7 @@ document.addEventListener('DOMContentLoaded',function(){var m=document.cookie.ma
       <button class="btn btn-gold" onclick="openMd('rgMd')">회원가입</button>
     </div>
   </div>
-</header>
-
-<!-- ═══ MOBILE SEARCH BAR ═══ -->
-<div class="mobile-search-bar">
-  <div class="mobile-search-wrap">
-    <span class="si">🔍</span>
-    <input type="text" placeholder="업소, 게시글 검색..." id="mSearch" oninput="doSearch(this.value)" onfocus="showMSDrop()" onblur="setTimeout(hideMSDrop,200)">
-    <div class="mobile-sdrop" id="msDrop"></div>
-  </div>
-</div>
-
-<!-- ═══ TOP BANNER AD ═══ -->
+</header><!-- ═══ TOP BANNER AD ═══ -->
 <div class="ad-top-banner" id="topBanner">
   <div class="ad-top-inner">
     <div class="ad-top-slot" onclick="showToast('이민법인 OzLaw 광고 클릭 📱')">
@@ -2481,6 +2470,9 @@ window.openPostMd = openPostMd;
 window.selMeet = selMeet;
 window.openPostMd = openPostMd;
 window.selMeet = selMeet;
+window.doSearch = doSearch;
+window.showSDrop = showSDrop;
+window.hideSDrop = hideSDrop;
 </script>
 
 <button id="oz-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="� \">�</button>
