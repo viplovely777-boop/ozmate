@@ -553,6 +553,12 @@ footer{background:var(--dark);padding:36px 20px 80px;margin-top:48px;}
 
   /* Info grid */
   .info-grid{grid-template-columns:1fr;}
+
+  /* Ad top banner — horizontal scroll */
+  .ad-top-inner{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;justify-content:flex-start;padding:8px 12px;}
+  .ad-top-inner::-webkit-scrollbar{display:none;}
+  .ad-top-slot{flex:0 0 230px;min-width:230px;height:60px;}
+  .ad-native{margin:0 14px 12px;}
 }
 
 /* ═══ RESPONSIVE — MOBILE (480px) ═══ */
@@ -612,6 +618,7 @@ footer{background:var(--dark);padding:36px 20px 80px;margin-top:48px;}
   .yp-cat-btn{padding:6px 10px;font-size:11px;}
 
   /* Ad top — 더 작게 */
+  .ad-top-slot{flex:0 0 195px;min-width:195px;height:54px;}
   .ad-top-content .ad-ic{font-size:22px;}
   .ad-top-content .ad-txt strong{font-size:13px;}
   .ad-top-tag{display:none;}
