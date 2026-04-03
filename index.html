@@ -1878,7 +1878,7 @@ function setUser(u){
 }
 
 // ── 로그아웃 ──
-async async function logOut(){
+async function logOut(){
   await sb.auth.signOut();
   user=null;
   location.reload();
