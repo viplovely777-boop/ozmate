@@ -514,10 +514,11 @@ footer{background:var(--dark);padding:36px 20px 80px;margin-top:48px;}
   .srch-row{flex-direction:column;}
   .s-inp,.s-sel{width:100%;}
 
-  /* Ad top banner — 모바일에서 1개만 노출 */
-  .ad-top-inner{flex-direction:column;gap:7px;padding:8px 14px;}
-  .ad-top-slot:not(:first-child){display:none;}
-  .ad-top-slot{height:60px;}
+  /* Ad top banner — horizontal scroll (all 3 slots) */
+  .ad-top-inner{flex-direction:row;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;justify-content:flex-start;padding:8px 12px;gap:8px;}
+  .ad-top-inner::-webkit-scrollbar{display:none;}
+  .ad-top-slot:not(:first-child){display:flex;}
+  .ad-top-slot{flex:0 0 230px;min-width:230px;height:60px;}
 
   /* Ad packages */
   .ad-packages,.ad-slots-grid{grid-template-columns:1fr;}
@@ -553,12 +554,6 @@ footer{background:var(--dark);padding:36px 20px 80px;margin-top:48px;}
 
   /* Info grid */
   .info-grid{grid-template-columns:1fr;}
-
-  /* Ad top banner — horizontal scroll */
-  .ad-top-inner{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;justify-content:flex-start;padding:8px 12px;}
-  .ad-top-inner::-webkit-scrollbar{display:none;}
-  .ad-top-slot{flex:0 0 230px;min-width:230px;height:60px;}
-  .ad-native{margin:0 14px 12px;}
 }
 
 /* ═══ RESPONSIVE — MOBILE (480px) ═══ */
