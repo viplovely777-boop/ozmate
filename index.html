@@ -845,9 +845,8 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold,#FFB800);outli
 .goog-te-banner-frame,.goog-te-balloon-frame,.VIpgJd-ZVi9od-ORHb-OEVmcd,.goog-te-ftab-float,#goog-gt-tt{display:none!important;}
 body{top:0!important;}
 #page-search{padding:20px;max-width:900px;margin:0 auto;}.sr-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--border);}.sr-header h2{font-size:18px;font-weight:800;}.sr-back{padding:6px 16px;border-radius:20px;background:var(--gold);color:#000;font-weight:700;font-size:13px;border:none;cursor:pointer;}.sr-section{margin-bottom:24px;}.sr-section h3{font-size:14px;font-weight:800;margin-bottom:10px;color:var(--gold);}.sr-item{background:var(--card);border-radius:10px;padding:14px 16px;margin-bottom:8px;cursor:pointer;border:1.5px solid var(--border);transition:.15s;}.sr-item:hover{border-color:var(--gold);}.sr-title{font-weight:700;font-size:14px;margin-bottom:4px;}.sr-meta{font-size:12px;color:var(--muted);}.sr-empty{text-align:center;padding:30px;color:var(--muted);font-size:13px;}
-/* ═══ MOBILE OVERFLOW FIX FINAL v6 (must be last) ═══ */
+/* ═══ MOBILE OVERFLOW FIX FINAL v7 (must be last) ═══ */
 
-/* 두 번째 헤더 줄 - 기본 숨김 */
 .hdr-sub{display:none;}
 
 @media(max-width:900px){
@@ -855,7 +854,6 @@ body{top:0!important;}
   header{overflow:visible!important;width:100%!important;max-width:100%!important;}
   .hdr{overflow:hidden!important;width:100%!important;max-width:100%!important;}
   .hdr-r{flex-shrink:1!important;min-width:0!important;overflow:hidden!important;}
-  /* 1번 줄에서 lang-sw 숨김 (2번 줄로 이동) */
   .lang-sw{display:none!important;}
   #google_translate_element{display:none!important;}
   .main{width:100%!important;max-width:100%!important;overflow-x:hidden!important;box-sizing:border-box!important;}
@@ -870,17 +868,17 @@ body{top:0!important;}
   .quick-bar,.quick-in{max-width:100%!important;overflow-x:hidden!important;}
   .cats,.cat-g{max-width:100%!important;overflow:hidden!important;}
   .ad-top-banner{max-width:100%!important;overflow:hidden!important;}
-  /* ── 2번 줄 스타일 ── */
-  .hdr-sub{display:flex!important;align-items:center!important;gap:7px!important;padding:5px 14px 6px!important;background:var(--dark)!important;border-top:1px solid rgba(255,255,255,0.08)!important;box-sizing:border-box!important;width:100%!important;}
+  /* ── 2번째 헤더 줄 ── */
+  .hdr-sub{display:flex!important;align-items:center!important;gap:6px!important;padding:5px 14px 6px!important;background:var(--dark)!important;border-top:1px solid rgba(255,255,255,0.08)!important;box-sizing:border-box!important;width:100%!important;}
   .hdr-sub-search{flex:1!important;position:relative!important;display:flex!important;align-items:center!important;min-width:0!important;}
   .hdr-sub-icon{position:absolute!important;left:9px!important;font-size:13px!important;pointer-events:none!important;z-index:1!important;}
   .hdr-sub-search input{width:100%!important;background:rgba(255,255,255,0.08)!important;border:1.5px solid rgba(255,255,255,0.15)!important;border-radius:7px!important;padding:7px 10px 7px 30px!important;font-size:13px!important;color:#fff!important;font-family:"Noto Sans KR",sans-serif!important;outline:none!important;box-sizing:border-box!important;}
   .hdr-sub-search input:focus{border-color:var(--gold)!important;}
   .hdr-sub-lang{display:flex!important;gap:2px!important;flex-shrink:0!important;}
-  .hdr-sub-lang .lang-btn{padding:3px 6px!important;font-size:10px!important;}
-  .hdr-sub-auth{display:flex!important;gap:6px!important;flex-shrink:0!important;}
+  .hdr-sub-lang .lang-btn{padding:3px 7px!important;font-size:10px!important;}
+  .hdr-sub-auth{display:flex!important;gap:5px!important;flex-shrink:0!important;}
   header:has(.user-chip) .hdr-sub-auth{display:none!important;}
-  .hdr-sub .btn{padding:6px 12px!important;font-size:12px!important;white-space:nowrap!important;}
+  .hdr-sub-auth .btn{padding:5px 10px!important;font-size:11px!important;white-space:nowrap!important;}
 }
 @media(max-width:480px){
   .user-chip span{display:none!important;}
@@ -890,7 +888,7 @@ body{top:0!important;}
   .btn-gold{padding:6px 10px!important;font-size:12px!important;}
   .hdr-sub{padding:5px 12px 6px!important;gap:5px!important;}
   .hdr-sub-lang .lang-btn{padding:2px 5px!important;font-size:10px!important;}
-  .hdr-sub .btn{padding:5px 10px!important;font-size:11px!important;}
+  .hdr-sub-auth .btn{padding:4px 9px!important;font-size:11px!important;}
 }
 
 </style>
@@ -949,15 +947,15 @@ document.addEventListener('DOMContentLoaded',function(){var m=document.cookie.ma
       <span class="hdr-sub-icon">🔍</span>
       <input type="text" id="mSearch" placeholder="글 검색..." autocomplete="off">
     </div>
-    <div class="hdr-sub-lang">
-      <button class="lang-btn" onclick="setLang('ko')">한</button>
-      <button class="lang-btn" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('zh-CN')">中</button>
-      <button class="lang-btn" onclick="setLang('ja')">日</button>
+    <div class="hdr-sub-lang" translate="no">
+      <button class="lang-btn notranslate" onclick="setLang('ko')">한</button>
+      <button class="lang-btn notranslate" onclick="setLang('en')">EN</button>
+      <button class="lang-btn notranslate" onclick="setLang('zh-CN')">中</button>
+      <button class="lang-btn notranslate" onclick="setLang('ja')">日</button>
     </div>
     <div class="hdr-sub-auth" id="hdrSubAuth">
-      <button class="btn btn-ghost" onclick="openMd('lgMd')">로그인</button>
-      <button class="btn btn-gold" onclick="openMd('rgMd')">회원가입</button>
+      <button class="btn btn-ghost notranslate" onclick="openMd('lgMd')">로그인</button>
+      <button class="btn btn-gold notranslate" onclick="openMd('rgMd')">가입</button>
     </div>
   </div>
 </header><!-- ═══ TOP BANNER AD ═══ -->
