@@ -877,7 +877,8 @@ body{top:0!important;}
   .hdr-sub-lang{display:flex!important;gap:2px!important;flex-shrink:0!important;}
   .hdr-sub-lang .lang-btn{padding:3px 7px!important;font-size:10px!important;}
   .hdr-sub-auth{display:flex!important;gap:5px!important;flex-shrink:0!important;}
-  header:has(.user-chip) .hdr-sub-auth{display:none!important;}
+  header:has(.user-chip) .hdr-sub{display:flex!important;}
+       header:has(.user-chip) .hdr-sub-auth{display:none!important;}
   .hdr-sub-auth .btn{padding:5px 10px!important;font-size:11px!important;white-space:nowrap!important;}
 }
 @media(max-width:480px){
@@ -2668,6 +2669,28 @@ window.hideSDrop = hideSDrop;
       if(gs){ gs.value=this.value; gs.dispatchEvent(new KeyboardEvent('keyup',{key:'Enter',bubbles:true})); }
     }
   });
+})();
+(function(){
+  // ─── 로그인 후 두번째 헤더줄 유지 (JS fallback for :has() unsupported browsers) ───
+  function keepHdrSub(){
+    var sub = document.getElementById('hdrSub');
+    var auth = document.getElementById('hdrSubAuth');
+    if(!sub) return;
+    if(window.innerWidth <= 900){
+      sub.style.display = 'flex';
+    }
+    // hide auth buttons if user-chip exists
+    if(auth && document.querySelector('.user-chip')){
+      auth.style.display = 'none';
+    } else if(auth) {
+      auth.style.display = 'flex';
+    }
+  }
+  // watch for DOM changes (user-chip being added on login)
+  var obs = new MutationObserver(keepHdrSub);
+  var hdrR = document.querySelector('.hdr-r');
+  if(hdrR) obs.observe(hdrR, {childList:true, subtree:true, attributes:true});
+  keepHdrSub();
 })();
 </script>
 
