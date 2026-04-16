@@ -1040,14 +1040,14 @@ document.addEventListener('DOMContentLoaded',function(){var m=document.cookie.ma
                 <stop offset="0%" stop-color="#0a4060"/>
                 <stop offset="100%" stop-color="#040f1a"/>
               </linearGradient>
-              <linearGradient id="bldGrad" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id="skyFade" x1="0" y1="0" x2="0" y2="1"><stop offset="55%" stop-color="#000" stop-opacity="0"/><stop offset="100%" stop-color="#05101a" stop-opacity="0.9"/></linearGradient><linearGradient id="bldGrad" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stop-color="rgba(255,255,255,0.18)"/>
                 <stop offset="100%" stop-color="rgba(255,255,255,0.06)"/>
               </linearGradient>
             </defs>
 
             <!-- Sky -->
-            <rect width="480" height="280" fill="url(#skyGrad)"/>
+            <rect width="480" height="280" fill="url(#skyGrad)"/><image href="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=960&q=80" x="0" y="0" width="480" height="280" preserveAspectRatio="xMidYMid slice"/><rect width="480" height="280" fill="url(#skyFade)"/>
 
             <!-- Aurora --><path d="M-20,78 C40,55 120,72 210,62 S360,48 500,70" fill="none" stroke="rgba(0,230,140,0.22)" stroke-width="45" stroke-linecap="round"/><path d="M-20,82 C60,60 150,76 240,66 S390,52 500,74" fill="none" stroke="rgba(0,180,220,0.18)" stroke-width="35" stroke-linecap="round"/><path d="M-20,92 C80,70 170,88 260,76 S400,58 500,84" fill="none" stroke="rgba(120,80,255,0.16)" stroke-width="28" stroke-linecap="round"/><path d="M-20,86 C100,65 200,80 300,70 S420,56 500,78" fill="none" stroke="rgba(0,255,180,0.12)" stroke-width="55" stroke-linecap="round"/><!-- Stars -->
             <circle cx="30" cy="20" r="1.2" fill="rgba(255,240,200,.7)"/>
