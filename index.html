@@ -28,7 +28,8 @@
   --ad-top:#1e1a00;--ad-side:#0a1428;--ad-native:#001a0a;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Noto Sans KR','Nunito',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;transitio:background .2s,color .2s;}
+body{font-family:'Noto Sans KR','Nunito',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;transition:background .2s,color .2s;}
+
 /* ═══ AD COMPONENTS ═══ */
 /* 1. TOP BANNER — 헤더 바로 아래 풀 배너 */
 .ad-top-banner{background:var(--ad-top);border-bottom:2px solid var(--gold);padding:0;overflow:hidden;position:relative;}
@@ -161,7 +162,7 @@ nav button:hover,nav button.active{color:#fff;background:rgba(255,255,255,.12);}
 .btn-olw{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.35);font-weight:700;font-size:13px;cursor:pointer;border-radius:10px;padding:10px 22px;transition:.2s;font-family:'Noto Sans KR',sans-serif;}
 .btn-olw:hover{border-color:#fff;background:rgba(255,255,255,.07);}
 .hero-stats{display:flex;gap:24px;margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,.09);}
-.stn{font-family:'Nunito',sans-serif;font-size:23px;font-weight:90;color:#fff}
+.stn{font-family:'Nunito',sans-serif;font-size:23px;font-weight:90}
 .stl{font-size:10px;color:rgba(255,255,255,.45);margin-top:1px;}
 .hero-vis{position:relative;}
 .hero-skyline-wrap{position:relative;width:100%;}
@@ -1027,29 +1028,29 @@ document.addEventListener('DOMContentLoaded',function(){var m=document.cookie.ma
       </div>
       <div class="hero-vis">
         <!-- Brisbane Skyline SVG -->
-                    <div class="hero-skyline-wrap">
+        <div class="hero-skyline-wrap">
           <svg class="hero-svg" viewBox="0 0 480 280" xmlns="http://www.w3.org/2000/svg">
             <!-- Sky gradient -->
             <defs>
               <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#020a18"/>
-                <stop offset="60%" stop-color="#0d1f50"
-                <stop offset="100%" stop-color="#071a30"/>
+                <stop offset="0%" stop-color="#0d0528"/>
+                <stop offset="60%" stop-color="#3a1060"/>
+                <stop offset="100%" stop-color="#c0440a"/>
               </linearGradient>
               <linearGradient id="riverGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#0a4060"/>
-                <stop offset="100%" stop-color="#040f1a"/>
+                <stop offset="0%" stop-color="#1a4a6e"/>
+                <stop offset="100%" stop-color="#0d2a40"/>
               </linearGradient>
-              <linearGradient id="skyFade" x1="0" y1="0" x2="0" y2="1"><stop offset="55%" stop-color="#000" stop-opacity="0"/><stop offset="100%" stop-color="#05101a" stop-opacity="0.9"/></linearGradient><linearGradient id="bldGrad" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id="bldGrad" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stop-color="rgba(255,255,255,0.18)"/>
                 <stop offset="100%" stop-color="rgba(255,255,255,0.06)"/>
               </linearGradient>
             </defs>
 
             <!-- Sky -->
-            <rect width="480" height="280" fill="url(#skyGrad)"/><image href="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=960&q=80" x="0" y="0" width="480" height="280" preserveAspectRatio="xMidYMid slice"/><rect width="480" height="280" fill="url(#skyFade)"/>
+            <rect width="480" height="280" fill="url(#skyGrad)"/>
 
-            <!-- Aurora --><path d="M-20,78 C40,55 120,72 210,62 S360,48 500,70" fill="none" stroke="rgba(0,230,140,0.22)" stroke-width="45" stroke-linecap="round"/><path d="M-20,82 C60,60 150,76 240,66 S390,52 500,74" fill="none" stroke="rgba(0,180,220,0.18)" stroke-width="35" stroke-linecap="round"/><path d="M-20,92 C80,70 170,88 260,76 S400,58 500,84" fill="none" stroke="rgba(120,80,255,0.16)" stroke-width="28" stroke-linecap="round"/><path d="M-20,86 C100,65 200,80 300,70 S420,56 500,78" fill="none" stroke="rgba(0,255,180,0.12)" stroke-width="55" stroke-linecap="round"/><!-- Stars -->
+            <!-- Stars -->
             <circle cx="30" cy="20" r="1.2" fill="rgba(255,240,200,.7)"/>
             <circle cx="80" cy="35" r="0.8" fill="rgba(255,240,200,.5)"/>
             <circle cx="140" cy="15" r="1.0" fill="rgba(255,240,200,.6)"/>
@@ -1063,7 +1064,7 @@ document.addEventListener('DOMContentLoaded',function(){var m=document.cookie.ma
 
             <!-- Moon -->
             <circle cx="420" cy="38" r="18" fill="#FFF5CC"/>
-            <circle cx="428" cy="32" r="14" fill="#020a18"/>
+            <circle cx="428" cy="32" r="14" fill="#3a1060"/>
 
             <!-- Horizon glow -->
             <ellipse cx="240" cy="200" rx="200" ry="30" fill="rgba(255,120,40,0.25)"/>
@@ -1588,7 +1589,8 @@ document.addEventListener('DOMContentLoaded',function(){var m=document.cookie.ma
     <div class="fg"><label class="fl">카테고리</label>
       <div class="cat-sel-g">
         <div class="csi sel" onclick="selCat(this)">🛂 비자/이민</div>
-        <div class="csi" onclick="selCat(this)">💼 구인구직</div>
+        <div class="csi" onclick="selCat(this)">💼 구인구직</div
+          <div class="csi" onclick="selCat(this)">🛍️ 벼룩시장</div>
         <div class="csi" onclick="selCat(this)">🏡 생활정보</div>
         <div class="csi" onclick="selCat(this)">🤝 모임</div>
         <div class="csi" onclick="selCat(this)">📚 어학</div>
@@ -1611,6 +1613,7 @@ document.addEventListener('DOMContentLoaded',function(){var m=document.cookie.ma
     <button class="mn-btn" id="mn-community" onclick="mobileNav('community',this)"><span class="mn-ic">💬</span>커뮤니티</button>
     <button class="mn-btn" id="mn-yellowpage" onclick="mobileNav('yellowpage',this)"><span class="mn-ic">📒</span>업소록</button>
     <button class="mn-btn" id="mn-jobs" onclick="mobileNav('jobs',this)"><span class="mn-ic">💼</span>일자리</button>
+    <button class="mn-btn" id="mn-flea" onclick="mobileNav('flea',this)"><span class="mn-ic">🛍️</span>벼룩</button>
     <button class="mn-btn" id="mn-profile" onclick="mobileNav('profile',this)"><span class="mn-ic">👤</span>프로필</button>
   </div>
 </div>
@@ -1865,6 +1868,7 @@ const jobs=[
 
 // ═══ NAV ═══
 function navTo(pg,btn){
+  if(pg==='flea'){pg='community';setTimeout(()=>renderComm('flea'),50);}
   document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
   if(btn) btn.classList.add('active');
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -2263,7 +2267,7 @@ function renderComm(f){
 }
 function renderCommCatBtns(){
   const c=document.getElementById('commCatBtns');if(!c)return;
-  const cats=[['all','🏠 전체'],['visa','🛂 비자/이민'],['job','💼 구인구직'],['life','🏡 생활정보'],['meet','🤝 모임/동호회'],['study','📚 어학/공부']];
+  const cats=[['all','전체'],['visa','🌐 비자/이민'],['job','💼 구인구직'],['flea','🛍️ 벼룩시장'],['life','🏡 생활정보'],['meet','🤝 모임/동호회'],['study','📚 어학/공부']];
   c.innerHTML=cats.map(([cat,lbl])=>`<button data-cat="${cat}" onclick="renderComm('${cat}')" style="text-align:left;padding:7px 10px;border-radius:7px;border:1.5px solid var(--border);background:var(--card);font-size:12px;font-weight:700;cursor:pointer;font-family:'Noto Sans KR',sans-serif;color:var(--text);transition:.2s;">${lbl}</button>`).join('');
 }
 
@@ -2290,9 +2294,9 @@ async function submitPost(){
   if(!c){showToast('내용을 입력해주세요');return;}
   const catEl=document.querySelector('.csi.sel');
   const catTxt=catEl?catEl.textContent.replace(/[🛂💼🏡🤝📚❓]/g,'').trim():'생활정보';
-  const catMap={'비자/이민':'visa','구인구직':'job','생활정보':'life','모임':'meet','어학':'study','질문':'study'};
+  const catMap={'비자/이민':'visa','구인구직':'job','벼룩시장':'flea','생활정보':'life','모임':'meet','어학':'study','질문':'study'};
   const tgs=document.getElementById('pTags').value.split(',').map(x=>x.trim()).filter(Boolean);
-  const badgeColors={'비자/이민':['#EFF6FF','#1D4ED8'],'구인구직':['#F0FDF4','#166534'],'생활정보':['#FFFBEB','#92400E'],'모임':['#FDF4FF','#7E22CE'],'어학':['#FFF1F2','#9F1239'],'질문':['#FFF1F2','#9F1239']};
+  const badgeColors={'비자/이민':['#EFF6FF','#1D4ED8'],'구인구직':['#F0FDF4','#166534'],'생활정보':['#FFFBEB','#92400E'],'모임':['#FDF4FF','#7E22CE'],'어학':['#FFF1F2','#9F1239'],'질문':['#FFF1F2','#9F1239'],'벼룩시장':['#FFF8F0','#C2410C']};
   const [bc,bt]=badgeColors[catTxt]||['#FFFBEB','#92400E'];
 
   showToast('게시글 등록 중... ⏳');
