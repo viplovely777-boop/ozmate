@@ -892,7 +892,7 @@ body{top:0!important;}
   .hdr-sub-auth .btn{padding:4px 9px!important;font-size:11px!important;}
 }
 
-</style>
+.rgn-bar{display:flex;gap:6px;overflow-x:auto;padding:6px 0 8px;scrollbar-width:none;margin-bottom:4px}.rgn-bar::-webkit-scrollbar{display:none}.rgn-c{flex-shrink:0;padding:5px 12px;border-radius:20px;border:1.5px solid var(--border);background:var(--card);font-size:12px;font-weight:600;cursor:pointer;color:var(--text);white-space:nowrap;transition:.2s}.rgn-c.active{background:var(--sky);color:#fff;border-color:var(--sky)}</style>
 <script>
 function googleTranslateElementInit(){new google.translate.TranslateElement({pageLanguage:'ko',includedLanguages:'en,zh-CN,ja',autoDisplay:false},'google_translate_element');}
 function setLang(l){if(l==='ko'){document.cookie='googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/';document.cookie='googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=.'+location.hostname;}else{var e=new Date(Date.now()+31536000000).toUTCString();document.cookie='googtrans=/ko/'+l+';expires='+e+';path=/';document.cookie='googtrans=/ko/'+l+';expires='+e+';path=/;domain=.'+location.hostname;}location.reload();}
@@ -1323,7 +1323,7 @@ document.addEventListener('DOMContentLoaded',function(){var m=document.cookie.ma
         <div class="sponsor-bar-hdr"><span class="sponsor-bar-title">⭐ 스폰서 링크</span><span style="font-size:10px;color:var(--sky);cursor:pointer;font-weight:700" onclick="navTo('adpage',null)">광고 등록 →</span></div>
         <div class="sponsor-links" id="sponsorLinks2"></div>
       </div>
-      <div id="commList"></div>
+      <div class="rgn-bar" id="rgnBar"><button class="rgn-c active" onclick="filterRegion('all',this)">🗺️ 전체</button><button class="rgn-c" onclick="filterRegion('브리즈번',this)">📍 브리즈번</button><button class="rgn-c" onclick="filterRegion('골드코스트',this)">🏖️ 골드코스트</button><button class="rgn-c" onclick="filterRegion('선샤인코스트',this)">☀️ 선샤인코스트</button><button class="rgn-c" onclick="filterRegion('케언즈',this)">🌿 케언즈</button><button class="rgn-c" onclick="filterRegion('기타 QLD',this)">🗺️ 기타</button></div><div id="commList"></div>
     </div>
     <div class="sidebar">
       <div class="widget">
@@ -1687,7 +1687,7 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 const sb = createClient('https://rcfzijqwpajvnvbyvnly.supabase.co', 'sb_publishable_1W1nqtIqNpdOenBTGuzx6w_E4WhchVv');
 
 // ═══ STATE ═══
-let user=null, curFilter='all', likedP=new Set(), likedC=new Set(), dark=false, npOpen=false;
+let user=null, curFilter='all', curRegion='all', likedP=new Set(), likedC=new Set(), dark=false, npOpen=false;
 let postsCache=null;
 const AVC=['#E8392A','#009DC4','#00843D','#8B5CF6','#F59E0B','#EC4899'];
 const rC=s=>AVC[s.charCodeAt(0)%AVC.length];
@@ -2261,14 +2261,14 @@ function renderPosts(filter='all'){loadAndRenderPosts(filter);}
 
 function renderComm(f){
   const list=document.getElementById('commList');if(!list)return;
-  const arr=f==='all'?posts:posts.filter(p=>p.cat===f);
+  const arr=(f==='all'?posts:posts.filter(p=>p.cat===f)).filter(p=>curRegion==='all'||!p.author_region||p.author_region===curRegion);
   list.innerHTML='';
   arr.forEach((p,i)=>{
     list.appendChild(mkCard(p,i));
     if(i===2) list.appendChild(mkNativeAd(0));
   });
 }
-function renderCommCatBtns(){
+function filterRegion(r,el){curRegion=r;document.querySelectorAll('.rgn-c').forEach(c=>c.classList.remove('active'));if(el)el.classList.add('active');renderComm(curFilter);}function renderCommCatBtns(){
   const c=document.getElementById('commCatBtns');if(!c)return;
           const cats=[['all','전체'],['visa','🌐 비자/이민'],['job','💼 구인구직'],['flea','🛍️ 벼룩시장'],['farm','🌾 팜잡/농장'],['house','🏠 부동산/숙소'],['carpool','🚗 동행/카풀'],['life','🏡 생활정보'],['meet','🤝 모임/동호회'],['study','📚 어학/공부']];
   c.innerHTML=cats.map(([cat,lbl])=>`<button data-cat="${cat}" onclick="renderComm('${cat}')" style="text-align:left;padding:7px 10px;border-radius:7px;border:1.5px solid var(--border);background:var(--card);font-size:12px;font-weight:700;cursor:pointer;font-family:'Noto Sans KR',sans-serif;color:var(--text);transition:.2s;">${lbl}</button>`).join('');
@@ -2304,7 +2304,7 @@ async function submitPost(){
 
   showToast('게시글 등록 중... ⏳');
   const {data,error}=await sb.from('posts').insert({
-    author_id:user.id, author_name:user.name, author_color:user.color,
+    author_id:user.id, author_name:user.name, author_color:user.color, author_region:user?.city||null,
     category:catMap[catTxt]||'life', badge:catTxt, badge_bg:bc, badge_color:bt,
     title:t, body:c, tags:tgs.length?tgs:['새글']
   }).select().single();
