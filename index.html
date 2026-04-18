@@ -2150,7 +2150,7 @@ function mkCardFromDB(p, i){
       <button class="p-act ${liked?'liked':''}" onclick="tLikeDB(event,${id},this)">${liked?'❤️':'🤍'} <span>${p.likes||0}</span></button>
       <button class="p-act" onclick="event.stopPropagation();openDetailDB(${id})">💬 <span>0</span></button>
       <button class="p-act" onclick="event.stopPropagation();cpLink()">🔗 공유</button>
-      <span style="margin-left:auto;font-size:10px;color:var(--muted)">👁 ${p.views||0}</span><button onclick="event.stopPropagation();sharePost('${p.id}')" style="background:none;border:none;cursor:pointer;padding:2px 6px;font-size:13px;color:var(--muted)" title="공유">📤</button>
+      <span style="margin-left:auto;font-size:10px;color:var(--muted)">👁 ${p.views||0}</span>
     </div>`;
   d.onclick=e=>{if(e.target.closest('.p-act'))return;openDetailDB(id);};
   return d;
@@ -2261,7 +2261,7 @@ function renderPosts(filter='all'){loadAndRenderPosts(filter);}
 
 function renderComm(f){
   const list=document.getElementById('commList');if(!list)return;
-  const arr=(f==='all'?posts:posts.filter(p=>p.cat===f)).filter(p=>curRegion==='all'||!p.author_region||p.author_region===curRegion).sort((a,b)=>(b.cat==='notice')-(a.cat==='notice'));
+  const arr=(f==='all'?posts:posts.filter(p=>p.cat===f)).filter(p=>curRegion==='all'||!p.author_region||p.author_region===curRegion);
   list.innerHTML='';
   arr.forEach((p,i)=>{
     list.appendChild(mkCard(p,i));
@@ -2270,7 +2270,7 @@ function renderComm(f){
 }
 function filterRegion(r,el){curRegion=r;document.querySelectorAll('.rgn-c').forEach(c=>c.classList.remove('active'));if(el)el.classList.add('active');renderComm(curFilter);}function renderCommCatBtns(){
   const c=document.getElementById('commCatBtns');if(!c)return;
-          const cats=[['all','전체'],['visa','🌐 비자/이민'],['job','💼 구인구직'],['flea','🛍️ 벼룩시장'],['farm','🌾 팜잡/농장'],['house','🏠 부동산/숙소'],['carpool','🚗 동행/카풀'],['life','🏡 생활정보'],['meet','🤝 모임/동호회'],['study','📚 어학/공부'],['qa','❓ 질문/답변'],['notice','📢 공지사항']];
+          const cats=[['all','전체'],['visa','🌐 비자/이민'],['job','💼 구인구직'],['flea','🛍️ 벼룩시장'],['farm','🌾 팜잡/농장'],['house','🏠 부동산/숙소'],['carpool','🚗 동행/카풀'],['life','🏡 생활정보'],['meet','🤝 모임/동호회'],['study','📚 어학/공부']];
   c.innerHTML=cats.map(([cat,lbl])=>`<button data-cat="${cat}" onclick="renderComm('${cat}')" style="text-align:left;padding:7px 10px;border-radius:7px;border:1.5px solid var(--border);background:var(--card);font-size:12px;font-weight:700;cursor:pointer;font-family:'Noto Sans KR',sans-serif;color:var(--text);transition:.2s;">${lbl}</button>`).join('');
 }
 
@@ -2291,16 +2291,15 @@ function swTab(tab,el){
 // ═══ POST WRITE ═══
 function selCat(el){document.querySelectorAll('.csi').forEach(c=>c.classList.remove('sel'));el.classList.add('sel');}
 // ── 게시글 작성 (DB 저장) ──
-async function sharePost(id){const p=posts.find(x=>x.id===id)||{};const url=location.origin+'/?p='+id;const ttl=p.title||'OzLive';if(navigator.share){navigator.share({title:ttl,text:ttl,url:url}).catch(()=>{});}else{navigator.clipboard.writeText(url).then(()=>alert('링크 복사되었어요!')).catch(()=>prompt('복사',url));}}
-function submitPost(){
+async function submitPost(){
   const t=document.getElementById('pTitle').value.trim(), c=document.getElementById('pContent').value.trim();
   if(!t){showToast('제목을 입력해주세요');return;}
   if(!c){showToast('내용을 입력해주세요');return;}
   const catEl=document.querySelector('.csi.sel');
   const catTxt=catEl?catEl.textContent.replace(/[🛂💼🏡🤝📚❓]/g,'').trim():'생활정보';
-          const catMap={'비자/이민':'visa','구인구직':'job','벼룩시장':'flea','팜잡/농장':'farm','팜잡':'farm','농장':'farm','부동산/숙소':'house','부동산':'house','숙소':'house','동행/카풀':'carpool','동행':'carpool','카풀':'carpool','생활정보':'life','모임':'meet','어학':'study','질문':'qa','질문/답변':'qa','공지':'notice','공지사항':'notice'};
+          const catMap={'비자/이민':'visa','구인구직':'job','벼룩시장':'flea','팜잡/농장':'farm','팜잡':'farm','농장':'farm','부동산/숙소':'house','부동산':'house','숙소':'house','동행/카풀':'carpool','동행':'carpool','카풀':'carpool','생활정보':'life','모임':'meet','어학':'study','질문':'study'};
   const tgs=document.getElementById('pTags').value.split(',').map(x=>x.trim()).filter(Boolean);
-          const badgeColors={'비자/이민':['#EFF6FF','#1D4ED8'],'구인구직':['#F0FDF4','#166534'],'생활정보':['#FFFBEB','#92400E'],'모임':['#FDF4FF','#7E22CE'],'어학':['#FFF1F2','#9F1239'],'질문':['#FFF1F2','#9F1239'],'벼룩시장':['#FFF8F0','#C2410C'],'팜잡/농장':['#ECFDF5','#166534'],'부동산/숙소':['#EFF6FF','#1D4ED8'],'동행/카풀':['#FFF7ED','#9A3412'],'질문/답변':['#F0F9FF','#0369A1'],'공지사항':['#FFF1F2','#9F1239']};
+          const badgeColors={'비자/이민':['#EFF6FF','#1D4ED8'],'구인구직':['#F0FDF4','#166534'],'생활정보':['#FFFBEB','#92400E'],'모임':['#FDF4FF','#7E22CE'],'어학':['#FFF1F2','#9F1239'],'질문':['#FFF1F2','#9F1239'],'벼룩시장':['#FFF8F0','#C2410C'],'팜잡/농장':['#ECFDF5','#166534'],'부동산/숙소':['#EFF6FF','#1D4ED8'],'동행/카풀':['#FFF7ED','#9A3412']};
   const [bc,bt]=badgeColors[catTxt]||['#FFFBEB','#92400E'];
 
   showToast('게시글 등록 중... ⏳');
